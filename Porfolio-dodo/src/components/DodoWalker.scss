@@ -1,0 +1,17 @@
+.dodo-walker {
+  // Occupe tout l'espace entre le logo et les liens (position relative pour le sprite absolu)
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; // même hauteur que la navbar
+  pointer-events: none; // ne bloque pas les clics sur les liens
+  overflow: hidden;
+  z-index: 0;
+
+  &__sprite {
+    position: absolute;
+    top: 0;
+    transition: left 0.12s linear, top 0.12s linear;
+  }
+}

@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import DodoWalker from './DodoWalker'
 import './Navbar.scss'
 
 const Navbar = () => {
@@ -11,7 +12,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <span className="navbar__logo">🦤 dodo</span>
+      <DodoWalker />
+
+      <span className="navbar__logo">Dorian Jacolin 🦤</span>
       <ul className="navbar__links">
         <li>
           <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>
