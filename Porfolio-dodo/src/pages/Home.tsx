@@ -1,8 +1,12 @@
+import { useTranslation } from 'react-i18next'
+
 const Home = () => {
+  const { t } = useTranslation()
+
   return (
     <main className="page page--home">
-      <h1>Bienvenue sur mon portfolio</h1>
-      <p className="text-muted">Développeur passionné — thème dodo 🦤</p>
+      <h1>{t('home.title')}</h1>
+      <p className="text-muted">{t('home.subtitle')}</p>
     </main>
   )
 }

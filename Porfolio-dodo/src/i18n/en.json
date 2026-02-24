@@ -1,0 +1,27 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Welcome to my portfolio",
+    "subtitle": "Passionate developer — dodo theme 🦤"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Presentation, skills, background…"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "My projects and achievements…"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Want to get in touch? Find me here:",
+    "email": "Email",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
+  }
+}
