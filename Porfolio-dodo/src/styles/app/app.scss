@@ -1,8 +1,86 @@
 @use '../colors/colors' as *;
 
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+// Layout principal
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Pages
+.page {
+  flex: 1;
+  padding: 3rem 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+// Page Contact
+.contact__links {
+  list-style: none;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.contact__label {
+  min-width: 80px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.contact__value {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--dodo-beak);
+    text-decoration: underline;
+  }
+
+
+  &[href*="linkedin"] {
+    color: var(--accent-secondary);
+    &:hover {
+      color: var(--dodo-lavender);
+    }
+  }
 }

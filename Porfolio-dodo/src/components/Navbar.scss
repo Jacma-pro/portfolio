@@ -1,0 +1,46 @@
+@use '../styles/colors/colors' as *;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-primary); // dodo-teal
+    letter-spacing: 0.03em;
+  }
+
+  &__links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+
+      &.active {
+        color: var(--accent-primary); // dodo-teal pour le lien actif
+        border-bottom-color: var(--accent-primary);
+      }
+    }
+  }
+}
