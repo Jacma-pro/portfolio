@@ -1,0 +1,117 @@
+// Import Google Fonts — Poppins
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+// --- Familly ---
+$font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
+
+// --- Sizes ---
+$fs-xs:   0.75rem;   // 12px — labels, badges
+$fs-sm:   0.875rem;  // 14px — secondary
+$fs-base: 1rem;      // 16px — body text (p)
+$fs-md:   1.125rem;  // 18px — highlighted text
+$fs-lg:   1.5rem;    // 24px — h3, subtitles
+$fs-xl:   2rem;      // 32px — h2
+$fs-2xl:  2.75rem;   // 44px — h1
+$fs-3xl:  3.5rem;    // 56px — hero title
+
+// --- Font weights ---
+$fw-light:     300;
+$fw-regular:   400;
+$fw-medium:    500;
+$fw-semibold:  600;
+$fw-bold:      700;
+$fw-extrabold: 800;
+
+// --- Line-heights ---
+$lh-tight:  1.2;
+$lh-normal: 1.5;
+$lh-loose:  1.75;
+
+// --- Letter-spacing ---
+$ls-tight:  -0.02em;
+$ls-normal: 0em;
+$ls-wide:   0.05em;
+$ls-wider:  0.1em;
+
+// --- Export CSS variables ---
+:root {
+  --font-primary: #{$font-primary};
+
+  --fs-xs:   #{$fs-xs};
+  --fs-sm:   #{$fs-sm};
+  --fs-base: #{$fs-base};
+  --fs-md:   #{$fs-md};
+  --fs-lg:   #{$fs-lg};
+  --fs-xl:   #{$fs-xl};
+  --fs-2xl:  #{$fs-2xl};
+  --fs-3xl:  #{$fs-3xl};
+
+  --fw-light:     #{$fw-light};
+  --fw-regular:   #{$fw-regular};
+  --fw-medium:    #{$fw-medium};
+  --fw-semibold:  #{$fw-semibold};
+  --fw-bold:      #{$fw-bold};
+  --fw-extrabold: #{$fw-extrabold};
+}
+
+// --- Mixins typographiques ---
+@mixin font-hero-title {
+  font-family: var(--font-primary);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-extrabold);
+  line-height: #{$lh-tight};
+  letter-spacing: #{$ls-tight};
+}
+
+@mixin font-h1 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  line-height: #{$lh-tight};
+  letter-spacing: #{$ls-tight};
+}
+
+@mixin font-h2 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  line-height: #{$lh-tight};
+}
+
+@mixin font-h3 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  line-height: #{$lh-normal};
+}
+
+@mixin font-subtitle {
+  font-family: var(--font-primary);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  line-height: #{$lh-normal};
+}
+
+@mixin font-body {
+  font-family: var(--font-primary);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: #{$lh-loose};
+}
+
+@mixin font-caption {
+  font-family: var(--font-primary);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-regular);
+  line-height: #{$lh-normal};
+  letter-spacing: #{$ls-wide};
+}
+
+@mixin font-label {
+  font-family: var(--font-primary);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  line-height: #{$lh-normal};
+  letter-spacing: #{$ls-wider};
+  text-transform: uppercase;
+}
