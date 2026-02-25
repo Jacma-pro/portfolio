@@ -42,6 +42,7 @@ const Navbar = () => {
       <button type="button" className="navbar__lang" onClick={toggleLang} aria-label="Switch language">
         <img
           src={i18n.language.startsWith('fr') ? frFlag : gbFlag}
+          alt=''
           className="navbar__lang-flag"
         />
         <span className="navbar__lang-code">
