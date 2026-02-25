@@ -65,8 +65,8 @@ body {
 
 .contact__label {
   min-width: 80px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -75,7 +75,7 @@ body {
 .contact__value {
   color: var(--accent-primary);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   transition: color 0.2s ease;
 
   &:hover {

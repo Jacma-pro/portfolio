@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import DodoWalker from './DodoWalker'
+import frFlag from '../assets/flags/fr.webp'
+import gbFlag from '../assets/flags/gb.webp'
 import './Navbar.scss'
 
 const Navbar = () => {
@@ -14,7 +16,7 @@ const Navbar = () => {
     <nav className="navbar">
       <DodoWalker />
 
-      <span className="navbar__logo">Dorian Jacolin 🦤</span>
+      <span className="navbar__logo">Dorian Jacolin</span>
       <ul className="navbar__links">
         <li>
           <NavLink to="/" end className={({ isActive }) => isActive ? 'active' : ''}>
@@ -37,8 +39,14 @@ const Navbar = () => {
           </NavLink>
         </li>
       </ul>
-      <button className="navbar__lang" onClick={toggleLang} aria-label="Switch language">
-        {i18n.language.startsWith('fr') ? '🇫🇷 FR' : '🇬🇧 EN'  }
+      <button type="button" className="navbar__lang" onClick={toggleLang} aria-label="Switch language">
+        <img
+          src={i18n.language.startsWith('fr') ? frFlag : gbFlag}
+          className="navbar__lang-flag"
+        />
+        <span className="navbar__lang-code">
+          {i18n.language.startsWith('fr') ? 'FR' : 'EN'}
+        </span>
       </button>
     </nav>
   )
