@@ -12,7 +12,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-primary);
   font-size: var(--fs-base);
-  font-weight: var(--fw-regular);
+  font-weight: $fw-regular;
   min-height: 100vh;
 }
 

@@ -3,6 +3,7 @@
 
 // --- Familly ---
 $font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
+$font-mono: 'Courier New', monospace;
 
 // --- Sizes ---
 $fs-xs:   0.75rem;   // 12px — labels, badges
@@ -36,6 +37,7 @@ $ls-wider:  0.1em;
 // --- Export CSS variables ---
 :root {
   --font-primary: #{$font-primary};
+  --font-mono: #{$font-mono};
 
   --fs-xs:   #{$fs-xs};
   --fs-sm:   #{$fs-sm};
@@ -105,6 +107,10 @@ $ls-wider:  0.1em;
   font-weight: var(--fw-regular);
   line-height: #{$lh-normal};
   letter-spacing: #{$ls-wide};
+}
+
+@mixin font-mono {
+  font-family: var(--font-mono);
 }
 
 @mixin font-label {

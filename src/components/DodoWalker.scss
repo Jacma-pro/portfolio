@@ -1,3 +1,6 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
 .dodo-walker {
   // Occupe tout l'espace entre le logo et les liens (position relative pour le sprite absolu)
   position: absolute;

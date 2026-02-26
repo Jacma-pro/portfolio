@@ -1,4 +1,5 @@
 @use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
 
 .dodo-game {
   position: fixed;
@@ -51,7 +52,7 @@
   }
 
   &__title {
-    font-family: 'Courier New', monospace;
+    font-family: $font-mono;
     color: $dodo-teal;
     letter-spacing: 10px;
     font-size: 1.8rem;
@@ -63,7 +64,7 @@
   &__hud {
     display: flex;
     gap: 32px;
-    font-family: 'Courier New', monospace;
+    font-family: $font-mono;
     font-size: 0.9rem;
     color: $text-secondary;
 
@@ -83,7 +84,7 @@
   }
 
   &__hint {
-    font-family: 'Courier New', monospace;
+    font-family: $font-mono;
     font-size: 0.72rem;
     color: $text-muted;
     margin: 0;

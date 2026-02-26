@@ -16,7 +16,7 @@
   &__logo {
     justify-self: start;
     font-size: var(--fs-md);
-    font-weight: var(--fw-bold);
+    font-weight: $fw-bold;
     color: var(--accent-primary);
     letter-spacing: 0.03em;
     position: relative;
@@ -34,7 +34,7 @@
       text-decoration: none;
       color: var(--text-secondary);
       font-size: var(--fs-base);
-      font-weight: var(--fw-medium);
+      font-weight: $fw-medium;
       transition: color 0.2s ease;
       padding-bottom: 2px;
       border-bottom: 2px solid transparent;
@@ -64,7 +64,7 @@
     align-items: center;
     color: var(--text-primary);
     font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
+    font-weight: $fw-semibold;
 
     &:hover {
       border-color: var(--accent-primary);
