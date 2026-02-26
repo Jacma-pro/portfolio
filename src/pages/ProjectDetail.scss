@@ -1,0 +1,133 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
+.project-detail {
+  max-width: 800px;
+
+  &__back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: $dodo-teal;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: $font-mono;
+    transition: opacity 0.15s;
+
+    &:hover { opacity: 0.7; }
+  }
+
+  // ── Cover ──────────────────────────────────────────────────────────────────
+  &__cover-wrap {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid $border-color;
+    margin-bottom: 2rem;
+  }
+
+  &__cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 380px;
+  }
+
+  // ── Header ─────────────────────────────────────────────────────────────────
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+
+  &__category {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: $fw-bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $dodo-teal;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: $fw-extrabold;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__desc {
+    color: $text-secondary;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0;
+  }
+
+  // ── Sections ───────────────────────────────────────────────────────────────
+  &__section {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 0.75rem;
+      font-family: $font-mono;
+      font-weight: $fw-bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: $text-muted;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__tech {
+    font-size: 0.78rem;
+    font-family: $font-mono;
+    background: rgba($dodo-teal, 0.08);
+    border: 1px solid rgba($dodo-teal, 0.3);
+    color: $dodo-teal;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  // ── Links ──────────────────────────────────────────────────────────────────
+  &__links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: $fw-semibold;
+    text-decoration: none;
+    transition: opacity 0.15s, transform 0.15s;
+
+    &:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    &--github {
+      background: $bg-secondary;
+      border: 1px solid $border-color;
+      color: $text-primary;
+    }
+
+    &--demo {
+      background: $dodo-teal;
+      border: 1px solid $dodo-teal;
+      color: $bg-primary;
+      font-weight: $fw-bold;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
 
 // ── Header ────────────────────────────────────────────────────────────────────
 .contact__header {
@@ -18,7 +19,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: var(--fs-xs);
-  font-weight: var(--fw-semibold);
+  font-weight: $fw-semibold;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: $dodo-teal;
@@ -60,7 +61,7 @@
 // ── Section titles ─────────────────────────────────────────────────────────────
 .contact__section-title {
   font-size: var(--fs-base);
-  font-weight: var(--fw-semibold);
+  font-weight: $fw-semibold;
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
@@ -125,7 +126,7 @@
 .contact__card-label {
   display: block;
   font-size: var(--fs-xs);
-  font-weight: var(--fw-semibold);
+  font-weight: $fw-semibold;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
@@ -135,7 +136,7 @@
 .contact__card-value {
   display: block;
   font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
+  font-weight: $fw-medium;
   color: $dodo-teal;
 
   .contact__card--github & {
@@ -161,7 +162,7 @@
 
   label {
     font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
+    font-weight: $fw-semibold;
     color: var(--text-secondary);
   }
 
@@ -198,7 +199,7 @@
   cursor: pointer;
   font-family: var(--font-primary);
   font-size: var(--fs-sm);
-  font-weight: var(--fw-bold);
+  font-weight: $fw-bold;
   letter-spacing: 0.05em;
   padding: 0.7rem 1.75rem;
   text-transform: uppercase;

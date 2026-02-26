@@ -1,0 +1,60 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
+.projects-library {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.projects-category {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+  }
+
+  &__label {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    font-weight: $fw-bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $dodo-teal;
+    white-space: nowrap;
+  }
+
+  &__line {
+    flex: 1;
+    height: 1px;
+    background: $border-color;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: $fw-bold;
+    color: $text-primary;
+    margin: 0 0 0.25rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 860px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 520px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Make projects page a bit wider than default 960px
+.page--projects {
+  max-width: 1100px;
+}

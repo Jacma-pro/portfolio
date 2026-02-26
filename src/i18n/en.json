@@ -15,7 +15,25 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "My projects and achievements…"
+    "subtitle": "My projects and achievements…",
+    "back": "Back to projects",
+    "not_found": "Project not found.",
+    "categories": {
+      "front": "Front-end",
+      "back": "Back-end",
+      "divers": "Various"
+    },
+    "detail": {
+      "techs": "Technologies",
+      "demo": "Live demo"
+    },
+    "items": {
+      "test": {
+        "title": "Test Project",
+        "short": "A test project for demonstration purposes.",
+        "desc": "This is a sample project description for testing and demonstration."
+      }
+    }
   },
   "contact": {
     "title": "Contact",

@@ -15,7 +15,25 @@
   },
   "projects": {
     "title": "Projets",
-    "subtitle": "Mes projets et réalisations…"
+    "subtitle": "Mes projets et réalisations…",
+    "back": "Retour aux projets",
+    "not_found": "Projet introuvable.",
+    "categories": {
+      "front": "Front-end",
+      "back": "Back-end",
+      "divers": "Divers"
+    },
+    "detail": {
+      "techs": "Technologies",
+      "demo": "Voir la démo"
+    },
+    "items": {
+      "test": {
+        "title": "Test Project",
+        "short": "Un projet de test à des fins de démonstration.",
+        "desc": "Description d'un projet de test pour les besoins de démonstration."
+      }
+    }
   },
   "contact": {
     "title": "Contact",
