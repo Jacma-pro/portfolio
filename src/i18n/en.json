@@ -27,7 +27,7 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "form": {
-      "title": "Send a message",
+      "title": "Send me an email",
       "name": "Name",
       "name_placeholder": "John Doe",
       "email": "Email",

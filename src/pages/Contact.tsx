@@ -36,7 +36,7 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio — ${form.name}`)
+    const subject = encodeURIComponent(`Portfolio : ${form.name}`)
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
     window.location.href = `mailto:dorianjacolin@gmail.com?subject=${subject}&body=${body}`
     setStatus('sent')

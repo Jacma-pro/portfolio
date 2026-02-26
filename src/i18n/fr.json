@@ -27,7 +27,7 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "form": {
-      "title": "Envoie-moi un message",
+      "title": "Envoie-moi un email",
       "name": "Nom",
       "name_placeholder": "Jean Dupont",
       "email": "Email",
