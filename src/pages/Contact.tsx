@@ -49,6 +49,7 @@ const Contact = () => {
         <h1>{t('contact.title')}</h1>
         <p className="text-muted">{t('contact.subtitle')}</p>
         <span className="contact__badge">{t('contact.available')}</span>
+        <p className="text-muted">{t('contact.location')}</p>
       </div>
 
       <div className="contact__body">
