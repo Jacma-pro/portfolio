@@ -19,9 +19,23 @@
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Tu veux me contacter ? Retrouve-moi ici :",
+    "subtitle": "Un projet, une idée, ou juste envie de dire bonjour ?",
+    "available": "Actuellement en alternance chez Equans Digital",
+    "links_label": "Liens de contact",
+    "links_title": "Retrouve-moi ici",
     "email": "Email",
     "github": "GitHub",
-    "linkedin": "LinkedIn"
+    "linkedin": "LinkedIn",
+    "form": {
+      "title": "Envoie-moi un message",
+      "name": "Nom",
+      "name_placeholder": "Jean Dupont",
+      "email": "Email",
+      "message": "Message",
+      "message_placeholder": "Parle-moi de ton projet…",
+      "send": "Envoyer le message",
+      "sent": "Envoyé !",
+      "success": "Merci ! Ton client mail devrait s'ouvrir dans quelques instants."
+    }
   }
 }

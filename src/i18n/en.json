@@ -19,9 +19,23 @@
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Want to get in touch? Find me here:",
+    "subtitle": "Got a project, an idea, or just want to say hi?",
+    "available": "Currently in apprenticeship at Equans Digital",
+    "links_label": "Contact links",
+    "links_title": "Find me here",
     "email": "Email",
     "github": "GitHub",
-    "linkedin": "LinkedIn"
+    "linkedin": "LinkedIn",
+    "form": {
+      "title": "Send a message",
+      "name": "Name",
+      "name_placeholder": "John Doe",
+      "email": "Email",
+      "message": "Message",
+      "message_placeholder": "Tell me about your project…",
+      "send": "Send message",
+      "sent": "Sent!",
+      "success": "Thanks! Your email client should open shortly."
+    }
   }
 }
