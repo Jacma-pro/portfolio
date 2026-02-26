@@ -38,5 +38,11 @@
       "sent": "Sent!",
       "success": "Thanks! Your email client should open shortly."
     }
+  },
+  "game": {
+    "idle": "Space / Click to start · Esc to quit",
+    "playing": "Space / Click to jump · Esc to quit",
+    "dead": "Space / Click to replay · Esc to quit",
+    "gameover": "GAME OVER"
   }
 }

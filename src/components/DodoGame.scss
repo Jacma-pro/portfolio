@@ -1,0 +1,97 @@
+@use '../styles/colors/colors' as *;
+
+.dodo-game {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  animation: dodo-game-fadein 0.2s ease;
+
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: transparent;
+    border: 2px solid $dodo-teal;
+    color: $dodo-teal;
+    font-size: 1rem;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1;
+
+    &:hover {
+      background: $dodo-teal;
+      color: $bg-primary;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid $border-color;
+    border-radius: 6px;
+    padding: 24px 32px;
+    background: $bg-primary;
+    box-shadow: 0 0 40px rgba($dodo-teal, 0.15);
+    max-width: 96vw;
+  }
+
+  &__title {
+    font-family: 'Courier New', monospace;
+    color: $dodo-teal;
+    letter-spacing: 10px;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 0 0 14px rgba($dodo-teal, 0.6);
+    text-transform: uppercase;
+  }
+
+  &__hud {
+    display: flex;
+    gap: 32px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: $text-secondary;
+
+    strong {
+      color: $text-primary;
+    }
+  }
+
+  &__canvas {
+    display: block;
+    image-rendering: pixelated;
+    max-width: min(800px, 90vw);
+    width: min(800px, 90vw);
+    height: auto;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+  }
+
+  &__hint {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: $text-muted;
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+}
+
+@keyframes dodo-game-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

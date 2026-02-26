@@ -13,5 +13,7 @@
     position: absolute;
     top: 0;
     transition: left 0.12s linear, top 0.12s linear;
+    pointer-events: auto;
+    cursor: pointer;
   }
 }

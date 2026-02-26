@@ -38,5 +38,11 @@
       "sent": "Envoyé !",
       "success": "Merci ! Ton client mail devrait s'ouvrir dans quelques instants."
     }
+  },
+  "game": {
+    "idle": "Espace / Clic pour démarrer · Échap pour quitter",
+    "playing": "Espace / Clic pour sauter · Échap pour quitter",
+    "dead": "Espace / Clic pour rejouer · Échap pour quitter",
+    "gameover": "GAME OVER"
   }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './DodoWalker.scss'
+import DodoGame from './DodoGame'
 
 import left0  from '../assets/dodo-frame/walk_left_0.png'
 import left1  from '../assets/dodo-frame/walk_left_1.png'
@@ -50,6 +51,7 @@ const DodoWalker = () => {
   const [dir,   setDir]     = useState<Direction>('right')
   const [paused,    setPaused]    = useState(false)
   const [pauseLeft, setPauseLeft] = useState(0)
+  const [gameOpen,  setGameOpen]  = useState(false)
 
   const segRef   = useRef<{ dir: Direction; remaining: number }>(
     { dir: 'right', remaining: 80 }
@@ -153,20 +155,24 @@ const DodoWalker = () => {
   const src = FRAMES[dir][paused ? 1 : frame]
 
   return (
-    <div className="dodo-walker" ref={containerRef} aria-hidden="true">
-      <img
-        className="dodo-walker__sprite"
-        src={src}
-        alt=""
-        style={{
-          left: `${x}px`,
-          top:  `${y}px`,
-          width:  `${DODO_SIZE_X}px`,
-          height: `${DODO_SIZE_Y}px`,
-          imageRendering: 'pixelated',
-        }}
-      />
-    </div>
+    <>
+      <div className="dodo-walker" ref={containerRef} aria-hidden="true">
+        <img
+          className="dodo-walker__sprite"
+          src={src}
+          alt=""
+          onClick={() => setGameOpen(true)}
+          style={{
+            left: `${x}px`,
+            top:  `${y}px`,
+            width:  `${DODO_SIZE_X}px`,
+            height: `${DODO_SIZE_Y}px`,
+            imageRendering: 'pixelated',
+          }}
+        />
+      </div>
+      {gameOpen && <DodoGame onClose={() => setGameOpen(false)} />}
+    </>
   )
 }
 
