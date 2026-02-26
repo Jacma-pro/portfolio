@@ -23,14 +23,15 @@ const FRAMES = {
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
-const DODO_SIZE    = 32
+const DODO_SIZE_X    = 30
+const DODO_SIZE_Y    = 41
 const SPEED_H      = 2 
 const SPEED_V      = 1
 const TICK_MS      = 120
 const PAUSE_CHANCE = 0.004
 
 function nextSegment(): { dir: Direction; dist: number } {
-  const horizontal = Math.random() < 0.60
+  const horizontal = Math.random() < 0.550
   const dist = 40 + Math.random() * 120
   if (horizontal) {
     return { dir: Math.random() < 0.5 ? 'right' : 'left', dist }
@@ -66,8 +67,8 @@ const DodoWalker = () => {
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
-    const maxX = container.clientWidth  - DODO_SIZE
-    const maxY = container.clientHeight - DODO_SIZE
+    const maxX = container.clientWidth  - DODO_SIZE_X
+    const maxY = container.clientHeight - DODO_SIZE_Y
     const startX = Math.random() * maxX
     const startY = Math.random() * Math.max(maxY, 0)
     xRef.current = startX
@@ -86,8 +87,8 @@ const DodoWalker = () => {
     const interval = setInterval(() => {
       const container = containerRef.current
       if (!container) return
-      const maxX = container.clientWidth  - DODO_SIZE
-      const maxY = container.clientHeight - DODO_SIZE
+      const maxX = container.clientWidth  - DODO_SIZE_X
+      const maxY = container.clientHeight - DODO_SIZE_Y
 
       if (pausedRef.current) {
         setPauseLeft(p => {
@@ -160,8 +161,8 @@ const DodoWalker = () => {
         style={{
           left: `${x}px`,
           top:  `${y}px`,
-          width:  `${DODO_SIZE}px`,
-          height: `${DODO_SIZE}px`,
+          width:  `${DODO_SIZE_X}px`,
+          height: `${DODO_SIZE_Y}px`,
           imageRendering: 'pixelated',
         }}
       />
