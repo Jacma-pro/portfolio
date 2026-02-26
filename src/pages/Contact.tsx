@@ -49,13 +49,13 @@ const Contact = () => {
         <h1>{t('contact.title')}</h1>
         <p className="text-muted">{t('contact.subtitle')}</p>
         <span className="contact__badge">{t('contact.available')}</span>
-        <p className="text-muted">{t('contact.location')}</p>
       </div>
 
       <div className="contact__body">
 
         <section className="contact__cards" aria-label={t('contact.links_label')}>
           <h2 className="contact__section-title">{t('contact.links_title')}</h2>
+
 
           <ContactCard
             href="mailto:dorianjacolin@gmail.com"
@@ -79,6 +79,7 @@ const Contact = () => {
             variant="linkedin"
             external
           />
+          <p className="text-muted">{t('contact.location')}</p>
         </section>
 
         <form className="contact__form" onSubmit={handleSubmit} noValidate>
