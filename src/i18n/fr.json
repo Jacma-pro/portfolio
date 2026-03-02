@@ -7,7 +7,7 @@
   },
   "home": {
     "title": "Bienvenue sur mon portfolio",
-    "subtitle": "Développeur passionné — thème dodo 🦤"
+    "subtitle": "Développeur passionné - thème dodo"
   },
   "about": {
     "title": "À propos",
@@ -57,6 +57,24 @@
           "Interface responsive avec animations fluides (TransitionGroup)"
         ],
         "learnings": "Ce projet m'a permis de comprendre en profondeur la réactivité de Vue 3, notamment les ref, computed et watch avec l'option deep. J'ai aussi appris à structurer une application front-end de manière modulaire, à gérer la persistance côté client et à implémenter un système de thème élégant avec les variables CSS."
+      },
+      "api-auth": {
+        "title": "API Auth Favorites",
+        "short": "Une API REST sécurisée avec authentification JWT, hachage bcrypt et routes protégées.",
+        "desc": "API REST backend construite avec Node.js et Express, centrée sur l'authentification sécurisée. Le projet implémente un cycle JWT complet, le stockage sécurisé des mots de passe avec bcrypt, des middlewares de protection des routes, et une base de données légère SQLite - le tout avec une interface de test intégrée dans le navigateur.",
+        "context": "Ce projet est né de la curiosité et de l'expérience acquise en alternance - j'avais rencontré des concepts d'authentification en entreprise (JWT, bcrypt, middlewares) sans avoir eu l'occasion de les implémenter moi-même de zéro. J'ai donc décidé de construire cette API pour comprendre réellement ces mécanismes, sans support de cours.",
+        "objective": "Comprendre et maîtriser le cycle complet d'authentification côté serveur : inscription, connexion, génération et vérification d'un token JWT, protection de routes via middleware, et stockage sécurisé des mots de passe. Le résultat devait être une API fonctionnelle, testable et proprement structurée.",
+        "approach": "L'architecture suit une séparation claire des responsabilités : routes, contrôleurs, middlewares et base de données sont isolés. Les mots de passe sont hachés avec bcryptjs (salt + hash), les tokens JWT expirent après 24h et sont vérifiés par un middleware injecté sur les routes protégées. Helmet sécurise les en-têtes HTTP. Une interface HTML/JS est servie directement à la racine pour tester l'API sans outil externe.",
+        "features": [
+          "Inscription avec hachage bcrypt du mot de passe (salt + hash)",
+          "Connexion avec génération d'un token JWT signé (TTL 24h)",
+          "Route protégée /api/users/profile avec vérification du Bearer token",
+          "Middleware d'authentification réutilisable et injectable",
+          "Base de données SQLite légère, sans serveur",
+          "Interface de test intégrée accessible directement dans le navigateur",
+          "Sécurisation des en-têtes HTTP avec Helmet"
+        ],
+        "learnings": "Ce projet m'a permis de vraiment saisir comment fonctionne l'authentification JWT de bout en bout : génération, transmission dans les en-têtes, vérification middleware. J'ai aussi compris pourquoi bcrypt est incontournable (le salt empêche les attaques par rainbow table) et comment structurer une API Node.js proprement avec une séparation routes / contrôleurs / middlewares."
       }
     }
   },

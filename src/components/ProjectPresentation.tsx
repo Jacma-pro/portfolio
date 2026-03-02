@@ -153,7 +153,7 @@ const ProjectPresentation = ({ project }: Props) => {
               <img
                 key={i}
                 src={src}
-                alt={`${t(`projects.items.${id}.title`)} — ${i + 1}`}
+                alt={`${t(`projects.items.${id}.title`)} - ${i + 1}`}
                 className="project-pres__gallery-img"
                 onClick={() => openLightbox(i)}
               />
@@ -195,7 +195,7 @@ const ProjectPresentation = ({ project }: Props) => {
 
           <img
             src={images[lightboxIndex]}
-            alt={`${t(`projects.items.${id}.title`)} — ${lightboxIndex + 1}`}
+            alt={`${t(`projects.items.${id}.title`)} - ${lightboxIndex + 1}`}
             className="project-pres__lightbox-img"
             onClick={e => e.stopPropagation()}
           />

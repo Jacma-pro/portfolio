@@ -1,8 +1,16 @@
-import thermobreakCover from '../assets/projet-cover/thermobreak.png'
+// ── Todo ──────────────────────────────────────────────────────────────────────
 import superTodoCover from '../assets/projects/super-todo/home-screen.png'
-import img1 from '../assets/projects/super-todo/football.png'
-import img2 from '../assets/projects/super-todo/basketball.png'
-import img3 from '../assets/projects/super-todo/localhost.png'
+import todo1 from '../assets/projects/super-todo/football.png'
+import todo2 from '../assets/projects/super-todo/basketball.png'
+import todo3 from '../assets/projects/super-todo/localhost.png'
+
+// ── api auth ───────────────────────────────────────────────────────────────────
+import apiAuthCover from '../assets/projects/api-auth/sing.png'
+import apiAuth1 from '../assets/projects/api-auth/failed.png'
+import apiAuth2 from '../assets/projects/api-auth/profil.png'
+import apiAuth3 from '../assets/projects/api-auth/logout.png'
+import apiAuth4 from '../assets/projects/api-auth/request.png'
+import apiAuth5 from '../assets/projects/api-auth/success.png'
 
 export type Category = 'front' | 'back' | 'divers'
 
@@ -25,25 +33,26 @@ export const PROJECTS: Project[] = [
     techs: ["Vue 3", "Vite", "CSS3", "LocalStorage"],
     github: "https://github.com/Jacma-pro/FRONT_Superb-To-Do",
     demo: "https://super-to-do-five.vercel.app/",
-    images: [img1, img2, img3]
+    images: [todo1, todo2, todo3]
   },
   {
     id: "test",
     category: "front",
-    cover: thermobreakCover,
     techs: ["tech1", "tech2", "tech3"],
   },
   {
     id: "test",
-     category: "front",
-      techs: ["tech1", "tech2", "tech3"]
+    category: "front",
+    techs: ["tech1", "tech2", "tech3"]
 },
 
   // ── Back ───────────────────────────────────────────────────────────────────
   {
-    id: "test",
+    id: "api-auth",
     category: "back",
-    techs: ["tech1", "tech2", "tech3"],
+    cover: apiAuthCover,
+    techs: ["Node.js", "Express.js", "SQLite3", "bcryptjs", "JWT", "Helmet"],
+    images: [apiAuthCover, apiAuth5, apiAuth1, apiAuth2, apiAuth3, apiAuth4]
   },
   {
     id: "test",

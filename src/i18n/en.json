@@ -7,7 +7,7 @@
   },
   "home": {
     "title": "Welcome to my portfolio",
-    "subtitle": "Passionate developer — dodo theme 🦤"
+    "subtitle": "Passionate developer - dodo theme 🦤"
   },
   "about": {
     "title": "About",
@@ -57,6 +57,24 @@
           "Responsive interface with smooth animations (TransitionGroup)"
         ],
         "learnings": "This project allowed me to deeply understand Vue 3 reactivity, particularly ref, computed, and watch with the deep option. I also learned to structure a front-end application in a modular way, handle client-side persistence, and implement an elegant theming system with CSS variables."
+      },
+      "api-auth": {
+        "title": "API Auth Favorites",
+        "short": "A secure REST API with JWT authentication, bcrypt hashing, and protected routes.",
+        "desc": "A backend REST API built with Node.js and Express, focused on secure authentication. The project implements a full JWT cycle, secure password storage with bcrypt, route-protection middleware, and a lightweight SQLite database - all with a built-in browser test interface.",
+        "context": "This project grew out of curiosity and experience gained during my apprenticeship - I had encountered authentication concepts at work (JWT, bcrypt, middlewares) without having had the chance to implement them from scratch myself. I decided to build this API to truly understand these mechanisms, with no coursework involved.",
+        "objective": "Understand and master the full server-side authentication cycle: registration, login, JWT generation and verification, route protection via middleware, and secure password storage. The result had to be a functional, testable, and cleanly structured API.",
+        "approach": "The architecture follows a clear separation of concerns: routes, controllers, middlewares, and the database are isolated. Passwords are hashed with bcryptjs (salt + hash), JWT tokens expire after 24 hours and are verified by a middleware injected on protected routes. Helmet secures HTTP headers. An HTML/JS interface is served at the root to test the API without any external tools.",
+        "features": [
+          "Registration with bcrypt password hashing (salt + hash)",
+          "Login with signed JWT token generation (24h TTL)",
+          "Protected route /api/users/profile with Bearer token verification",
+          "Reusable and injectable authentication middleware",
+          "Lightweight serverless SQLite database",
+          "Built-in test interface accessible directly in the browser",
+          "HTTP header security with Helmet"
+        ],
+        "learnings": "This project allowed me to truly grasp how JWT authentication works end-to-end: generation, transmission in headers, middleware verification. I also understood why bcrypt is essential (salt prevents rainbow table attacks) and how to cleanly structure a Node.js API with a proper routes / controllers / middlewares separation."
       }
     }
   },
