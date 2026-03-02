@@ -25,13 +25,38 @@
     },
     "detail": {
       "techs": "Technologies",
-      "demo": "Live demo"
+      "demo": "Live demo",
+      "context_title": "Context & Motivation",
+      "objective_title": "Expected Result",
+      "approach_title": "Technical Approach",
+      "features_title": "Key Features",
+      "gallery_title": "Gallery",
+      "learnings_title": "What I Learned",
+      "links_title": "Links",
+      "gallery_placeholder": "Screenshots coming soon…"
     },
     "items": {
       "test": {
         "title": "Test Project",
         "short": "A test project for demonstration purposes.",
         "desc": "This is a sample project description for testing and demonstration."
+      },
+      "super-todo": {
+        "title": "Superb Todo List",
+        "short": "A complete task management app with priorities, deadlines, and dark mode.",
+        "desc": "A modern task management application built with Vue 3, going well beyond a simple list with a priority system, deadlines with visual alerts, dark mode, multilingual support, and a fully responsive interface.",
+        "context": "This project was created as part of a course on JavaScript frameworks. The goal was to discover Vue.js and its Composition API by building a practical, functional application. I chose a Todo List because it's a classic that allows exploring many concepts: state management, reactivity, data persistence, and user interactions.",
+        "objective": "Build a complete and modern task management application, going well beyond a simple list. The expected result had to include a priority system, deadlines with visual alerts, a dark mode, multilingual support, and a responsive mobile-friendly interface.",
+        "approach": "I adopted a modular architecture with Vue 3 and the Composition API (<script setup>). Each component has a single responsibility: input (TodoInput), display (TodoList), filters (TodoFilters), and statistics (TodoStats). Persistence is handled via LocalStorage with deep watchers, and the dark theme uses CSS variables for instant switching. All styling is in native CSS3, without any framework.",
+        "features": [
+          "Priority management (high, medium, low) with smart sorting",
+          "Deadlines with red visual alert when overdue",
+          "Dark/light mode with user preference persistence",
+          "Internationalization (French/English) including priority badges",
+          "Inline editing of text and date directly in the list",
+          "Responsive interface with smooth animations (TransitionGroup)"
+        ],
+        "learnings": "This project allowed me to deeply understand Vue 3 reactivity, particularly ref, computed, and watch with the deep option. I also learned to structure a front-end application in a modular way, handle client-side persistence, and implement an elegant theming system with CSS variables."
       }
     }
   },

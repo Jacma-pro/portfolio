@@ -25,13 +25,38 @@
     },
     "detail": {
       "techs": "Technologies",
-      "demo": "Voir la démo"
+      "demo": "Voir la démo",
+      "context_title": "Contexte & Motivation",
+      "objective_title": "Résultat attendu",
+      "approach_title": "Approche technique",
+      "features_title": "Fonctionnalités clés",
+      "gallery_title": "Galerie",
+      "learnings_title": "Ce que j'ai appris",
+      "links_title": "Liens",
+      "gallery_placeholder": "Les captures d'écran arrivent bientôt…"
     },
     "items": {
       "test": {
         "title": "Test Project",
         "short": "Un projet de test à des fins de démonstration.",
         "desc": "Description d'un projet de test pour les besoins de démonstration."
+      },
+      "super-todo": {
+        "title": "Superb Todo List",
+        "short": "Une application de gestion de tâches complète avec priorités, deadlines et mode sombre.",
+        "desc": "Application de gestion de tâches moderne construite avec Vue 3, allant bien au-delà d'une simple liste grâce à un système de priorités, des dates limites avec alertes visuelles, un mode sombre, le multilinguisme et une interface entièrement responsive.",
+        "context": "Ce projet a été réalisé dans le cadre d'un cours sur les frameworks JavaScript. L'objectif était de découvrir Vue.js et sa Composition API en construisant une application concrète et fonctionnelle. J'ai choisi une Todo List car c'est un classique qui permet d'explorer de nombreux concepts : gestion d'état, réactivité, persistance des données et interactions utilisateur.",
+        "objective": "Créer une application de gestion de tâches complète et moderne, allant bien au-delà d'une simple liste. Le résultat attendu devait inclure un système de priorités, des dates limites avec alertes visuelles, un mode sombre, le multilinguisme et une interface responsive adaptée au mobile.",
+        "approach": "J'ai adopté une architecture modulaire avec Vue 3 et la Composition API (<script setup>). Chaque composant a une responsabilité unique : saisie (TodoInput), affichage (TodoList), filtres (TodoFilters) et statistiques (TodoStats). La persistance est assurée via le LocalStorage avec des watchers profonds, et le thème sombre utilise des variables CSS pour un basculement instantané. Tout le style est en CSS3 natif, sans framework.",
+        "features": [
+          "Gestion des priorités (haute, moyenne, basse) avec tri intelligent",
+          "Dates limites avec alerte visuelle en rouge si dépassées",
+          "Mode sombre/clair avec persistance du choix utilisateur",
+          "Internationalisation (français/anglais) y compris les badges de priorité",
+          "Édition en ligne du texte et de la date directement dans la liste",
+          "Interface responsive avec animations fluides (TransitionGroup)"
+        ],
+        "learnings": "Ce projet m'a permis de comprendre en profondeur la réactivité de Vue 3, notamment les ref, computed et watch avec l'option deep. J'ai aussi appris à structurer une application front-end de manière modulaire, à gérer la persistance côté client et à implémenter un système de thème élégant avec les variables CSS."
       }
     }
   },
