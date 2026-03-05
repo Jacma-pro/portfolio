@@ -24,9 +24,9 @@ const CH         = 230
 const GROUND_Y   = 180
 
 // ── Dodo ─────────────────────────────────────────────────────────────────────
-const DODO_X     = 80
-const DODO_W     = 45
-const DODO_H     = 62
+const DODO_X     = 70
+const DODO_W     = 70
+const DODO_H     = 70
 const GRAVITY    = 0.70
 const JUMP_V     = -15
 const DODO_ANIM  = 7

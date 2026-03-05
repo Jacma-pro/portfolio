@@ -71,7 +71,7 @@ const ProjectPresentation = ({ project }: Props) => {
           </p>
 
           {/* Links */}
-          {(project.github || project.demo) && (
+          {(project.github || project.demo || project.figma || project.pdf) && (
             <div className="project-pres__hero-links">
               {project.github && (
                 <a
@@ -93,7 +93,33 @@ const ProjectPresentation = ({ project }: Props) => {
                   {t('projects.detail.demo')} ↗
                 </a>
               )}
+              {project.figma && (
+                <a
+                  href={project.figma}
+                  download
+                  className="project-pres__link project-pres__link--figma"
+                >
+                  {t('projects.detail.figma')} ↓
+                </a>
+              )}
+              {project.pdf && (
+                <a
+                  href={project.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-pres__link project-pres__link--pdf"
+                >
+                  {t('projects.detail.pdf')} ↗
+                </a>
+              )}
             </div>
+          )}
+
+          {/* Figma hint */}
+          {project.figma && (
+            <p className="project-pres__figma-hint">
+              {t('projects.detail.figma_hint')}
+            </p>
           )}
         </div>
       </header>

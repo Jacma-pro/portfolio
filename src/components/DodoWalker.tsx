@@ -11,9 +11,9 @@ import right2 from '../assets/dodo-frame/walk_right_2.png'
 import up0    from '../assets/dodo-frame/walk_top_0.png'
 import up1    from '../assets/dodo-frame/walk_top_1.png'
 import up2    from '../assets/dodo-frame/walk_top_2.png'
-import down0  from '../assets/dodo-frame/walk_down_.0.png'
+import down0  from '../assets/dodo-frame/walk_down_0.png'
 import down1  from '../assets/dodo-frame/walk_down_1.png'
-import down2  from '../assets/dodo-frame/walk_down_.2.png'
+import down2  from '../assets/dodo-frame/walk_down_2.png'
 
 const FRAMES = {
   left:  [left0,  left1,  left2],
@@ -25,7 +25,7 @@ const FRAMES = {
 type Direction = 'left' | 'right' | 'up' | 'down'
 
 const DODO_SIZE_X    = 30
-const DODO_SIZE_Y    = 41
+const DODO_SIZE_Y    = 30
 const SPEED_H      = 2 
 const SPEED_V      = 1
 const TICK_MS      = 120

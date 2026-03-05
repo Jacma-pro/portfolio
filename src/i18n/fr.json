@@ -26,6 +26,9 @@
     "detail": {
       "techs": "Technologies",
       "demo": "Voir la démo",
+      "figma": "Télécharger le .fig",
+      "pdf": "Voir la maquette (PDF)",
+      "figma_hint": "Téléchargez le fichier .fig pour inspecter la maquette et découvrir les animations dans Figma.",
       "context_title": "Contexte & Motivation",
       "objective_title": "Résultat attendu",
       "approach_title": "Approche technique",
@@ -75,6 +78,57 @@
           "Sécurisation des en-têtes HTTP avec Helmet"
         ],
         "learnings": "Ce projet m'a permis de vraiment saisir comment fonctionne l'authentification JWT de bout en bout : génération, transmission dans les en-têtes, vérification middleware. J'ai aussi compris pourquoi bcrypt est incontournable (le salt empêche les attaques par rainbow table) et comment structurer une API Node.js proprement avec une séparation routes / contrôleurs / middlewares."
+      },
+      "bike": {
+        "title": "ReCycle E-Bikes",
+        "short": "Maquette UI/UX d'un site vitrine pour une marque fictive de vélos électriques écoresponsables.",
+        "desc": "Maquette conçue dans Figma pour ReCycle E-Bikes, une marque fictive de vélos électriques écoresponsables. Le projet inclut un hero immersif, des sections impact, des cartes produit et un carrousel de témoignages, le tout avec des animations pensées dès la conception.",
+        "context": "Ce projet a été réalisé dans le cadre d'un exercice individuel de maquette UI/UX, à partir d'un brief client orienté « vélos électriques écoresponsables ». Le client demandait un site moderne mettant en avant l'impact écologique positif, le confort d'utilisation et l'innovation des e-bikes, tout en restant cohérent avec des références visuelles fournies dans Figma. L'objectif était de proposer une page d'accueil complète et convaincante pour ReCycle E-Bikes, en respectant les assets imposés et en intégrant une vraie réflexion sur les animations et la mise en scène du contenu.",
+        "objective": "Le livrable attendu était une maquette desktop pour un site vitrine structuré autour de plusieurs blocs clés : un hero fort avec le message « Revolutionize Your Commute with ReCycle E-Bikes », une section sur l'impact environnemental et économique, des arguments techniques et durables, une mise en avant de modèles de vélos (EcoBoost, Nature Ride, Urban Leaf), et un bloc de témoignages clients.",
+        "approach": "La maquette a été conçue dans Figma, en travaillant la composition générale (hero, impact, modèles, témoignages), la direction artistique (palette sobre mais moderne, typographie lisible), et les animations prévues matérialisées par des variantes : animation du header, effets de survol sur les cartes, transitions sur les modèles et le carrousel. L'objectif était purement UI/UX : penser le motion design au niveau de la maquette, sans passer par le code.",
+        "features": [
+          "Hero immersif avec le message « Revolutionize Your Commute » et double call-to-action",
+          "Section impact environnemental & économique avec données chiffrées",
+          "Arguments techniques (matériaux premium, technologie avancée, fabrication durable)",
+          "Présentation de 3 modèles (EcoBoost, Nature Ride, Urban Leaf) en cartes produit",
+          "Carrousel de témoignages clients avec navigation",
+          "Animations prévues (hover, apparition, transitions) matérialisées en variantes Figma"
+        ],
+        "learnings": "Sur ce projet, j'ai appris à suivre un brief tout en gardant une identité forte, à travailler les animations dès la maquette (imaginer le comportement du header, des cartes et du carrousel en variantes), à structurer une landing page orientée conversion (accroche, bénéfices, preuves, CTA), et à mettre en avant les valeurs d'une marque de manière claire et crédible."
+      },
+      "lkk": {
+        "title": "Lee Kum Kee - Refonte",
+        "short": "Maquette de refonte du site Lee Kum Kee réalisée en groupe, avec direction artistique et animations.",
+        "desc": "Projet de groupe de refonte du site de la marque Lee Kum Kee (sauces asiatiques). La maquette Figma propose une version plus moderne, lisible et appétissante du site, avec des sections produits, recettes, newsletter et des micro-interactions pensées au niveau design.",
+        "context": "Ce projet a été mené dans le cadre d'un devoir de groupe, avec un brief client autour de la refonte du site Lee Kum Kee (sauces asiatiques). Le client laissait une relative carte blanche sur le style, tant que nous respections la structure générale (qui sommes-nous, produits, recettes, newsletter) et l'utilisation de visuels produits / nourriture. L'objectif était de proposer une version plus moderne et appétissante du site, tout en apprenant à concevoir une maquette professionnelle en équipe.",
+        "objective": "Livrer une maquette complète du site vitrine, mettant en avant une page d'accueil forte avec le slogan « Là où commence la vraie saveur », des sections Produits, Qui sommes-nous, Recettes et Newsletter, avec des visuels appétissants et un footer professionnel. L'idée était de produire un design réaliste pouvant servir de base à une refonte : navigation cohérente, hiérarchie lisible, ton de marque respecté.",
+        "approach": "La maquette a été réalisée dans Figma, en travaillant le layout, la typographie, la colorimétrie et les animations prévues. Nous avons respecté les sections du brief, mis en place des blocs produits avec visuels et CTA, travaillé une palette inspirée de la marque (rouges profonds, dorés, tons crème) avec un guide chromatique détaillé, et conçu des micro-interactions (apparition des sauces, survol des cartes recettes, pop-in de la newsletter).",
+        "features": [
+          "Page d'accueil avec hero « Là où commence la vraie saveur » et mise en avant de produits",
+          "Section « Qui sommes-nous ? » avec sous-sections Racines, Qualité, Durabilité",
+          "Catalogue de recettes avec vignettes de plats et descriptions appétissantes",
+          "Bloc newsletter avec champ email, CTA et mention RGPD",
+          "Micro-interactions et animations conçues au niveau design (hover, pop-in, transitions)",
+          "Footer professionnel avec coordonnées complètes de Lee Kum Kee Europe"
+        ],
+        "learnings": "Sur ce projet, j'ai appris à travailler à partir d'un brief client en proposant une direction créative crédible, à collaborer en groupe sur une maquette (répartir les pages, garder une cohérence de style), à concevoir des animations au niveau design (hover, transitions...) et à structurer une expérience de marque cohérente à travers le contenu et les visuels."
+      },
+      "rl-wp": {
+        "title": "Fan Site Rocket League",
+        "short": "Maquette responsive d'un fan site Rocket League, pensée pour une intégration WordPress.",
+        "desc": "Maquette Figma responsive (desktop + mobile) d'un fan site non officiel Rocket League, conçue pour une future intégration WordPress. Le design inclut un accueil immersif, un blog de patch notes humoristiques, une page contact et une structure pensée en templates WordPress.",
+        "context": "Ce projet s'inscrit dans le cadre d'un devoir de cours d'intégration WordPress à My Digital School Grenoble. En tant que joueur passionné de Rocket League, j'ai choisi ce thème pour rendre l'exercice plus personnel : plutôt qu'un site générique, j'ai conçu un fan site non officiel dédié au jeu, avec ses codes, ses mèmes et sa culture esport. L'idée était de proposer un site que j'aimerais vraiment visiter en tant que joueur.",
+        "objective": "Produire une maquette responsive complète, prête à être intégrée dans un thème WordPress : une page d'accueil immersive avec la Saison 19, une section World Championship 2025, une partie éditoriale sur l'histoire du jeu, un blog de patch notes humoristiques, et une page contact avec formulaire. Le rendu devait être visuellement cohérent et structuré pour être transposé en templates WordPress.",
+        "approach": "La maquette a été réalisée entièrement sur Figma, en version desktop et mobile, sans animations, avec une attention particulière à la hiérarchie visuelle et à la future intégration WordPress. J'ai décomposé le site en sections réutilisables (hero, blocs d'actus, articles, contact, footer), travaillé une grille responsive, et mis en place des composants (boutons, cartes d'articles, blocs de patch notes). La maquette anticipe une intégration WordPress avec des templates page, blog et contact.",
+        "features": [
+          "Accueil immersif avec slogan humoristique et présentation de la Saison 19",
+          "Section World Championship 2025 à la LOLC Arena de Lyon",
+          "Rubrique « Qu'est-ce que Rocket League ? » avec l'histoire du jeu depuis SARPBC",
+          "Blog de patch notes humoristiques avec le ton communautaire du jeu",
+          "Page contact avec formulaire et informations (pseudo, réseaux sociaux)",
+          "Version desktop et mobile responsive, pensée pour l'intégration WordPress"
+        ],
+        "learnings": "Ce projet m'a permis de progresser sur le suivi d'un brief et la structuration d'un projet, la conception d'une maquette « intégrable » (sections, composants réutilisables, responsive dès le design), le travail d'un design centré sur un univers de jeu vidéo (humour et lisibilité), et la préparation de l'intégration WordPress (templates, contenus dynamiques vs statiques, formulaire, footer)."
       }
     }
   },

@@ -26,6 +26,9 @@
     "detail": {
       "techs": "Technologies",
       "demo": "Live demo",
+      "figma": "Download .fig file",
+      "pdf": "View mockup (PDF)",
+      "figma_hint": "Download the .fig file to inspect the mockup and explore animations in Figma.",
       "context_title": "Context & Motivation",
       "objective_title": "Expected Result",
       "approach_title": "Technical Approach",
@@ -75,6 +78,57 @@
           "HTTP header security with Helmet"
         ],
         "learnings": "This project allowed me to truly grasp how JWT authentication works end-to-end: generation, transmission in headers, middleware verification. I also understood why bcrypt is essential (salt prevents rainbow table attacks) and how to cleanly structure a Node.js API with a proper routes / controllers / middlewares separation."
+      },
+      "bike": {
+        "title": "ReCycle E-Bikes",
+        "short": "UI/UX mockup for a fictional eco-friendly electric bike brand showcase website.",
+        "desc": "Mockup designed in Figma for ReCycle E-Bikes, a fictional eco-friendly electric bike brand. The project includes an immersive hero, impact sections, product cards and a testimonials carousel, all with animations designed from the conception stage.",
+        "context": "This project was completed as part of an individual UI/UX mockup exercise, based on a client brief focused on 'eco-friendly electric bikes'. The client wanted a modern website highlighting the positive ecological impact, riding comfort and e-bike innovation, while staying consistent with visual references provided in Figma. The goal was to design a complete and convincing homepage for ReCycle E-Bikes, respecting the provided assets and incorporating a real reflection on animations and content presentation.",
+        "objective": "The expected deliverable was a desktop mockup for a showcase website structured around several key blocks: a strong hero with the message 'Revolutionize Your Commute with ReCycle E-Bikes', an environmental and economic impact section, technical and sustainable arguments, a showcase of bike models (EcoBoost, Nature Ride, Urban Leaf), and a customer testimonials block.",
+        "approach": "The mockup was designed in Figma, working on the overall composition (hero, impact, models, testimonials), art direction (sober yet modern palette, readable typography), and planned animations materialized through variants: header animation, hover effects on cards, transitions on models and the carousel. The goal was purely UI/UX: thinking about motion design at the mockup level, without writing any code.",
+        "features": [
+          "Immersive hero with 'Revolutionize Your Commute' message and dual call-to-action",
+          "Environmental & economic impact section with key figures",
+          "Technical arguments (premium materials, advanced technology, sustainable manufacturing)",
+          "Showcase of 3 bike models (EcoBoost, Nature Ride, Urban Leaf) as product cards",
+          "Customer testimonials carousel with navigation",
+          "Planned animations (hover, reveal, transitions) materialized as Figma variants"
+        ],
+        "learnings": "On this project, I learned to follow a brief while maintaining a strong identity, to work on animations from the mockup stage (imagining header, cards and carousel behavior as variants), to structure a conversion-oriented landing page (hook, benefits, proof, CTA), and to highlight brand values in a clear and credible way."
+      },
+      "lkk": {
+        "title": "Lee Kum Kee - Redesign",
+        "short": "Group project redesigning the Lee Kum Kee website with art direction and animations.",
+        "desc": "Group project redesigning the Lee Kum Kee website (Asian sauces). The Figma mockup proposes a more modern, readable and appetizing version of the site, with product sections, recipes, newsletter and micro-interactions designed at the design level.",
+        "context": "This project was carried out as part of a group assignment, with a client brief centered on redesigning the Lee Kum Kee website (Asian sauces). The client gave relative creative freedom on style, as long as we respected the general structure (about us, products, recipes, newsletter) and used product/food visuals. The goal was to propose a more modern and appetizing version of the site, while learning to create a professional mockup as a team.",
+        "objective": "Deliver a complete showcase website mockup, featuring a strong homepage with the tagline 'Where True Flavor Begins', Products, About Us, Recipes and Newsletter sections, with appetizing visuals and a professional footer. The idea was to produce a realistic design that could serve as a foundation for a website redesign: coherent navigation, readable hierarchy, respected brand tone.",
+        "approach": "The mockup was created in Figma, working on layout, typography, color scheme and planned animations. We respected the brief's sections, set up product blocks with visuals and CTAs, developed a brand-inspired color palette (deep reds, golds, cream tones) with a detailed color guide, and designed micro-interactions (sauce reveals, recipe card hovers, newsletter pop-in).",
+        "features": [
+          "Homepage with 'Where True Flavor Begins' hero and featured products",
+          "'About Us' section with sub-sections: Roots, Quality, Sustainability",
+          "Recipe catalog with dish thumbnails and appetizing descriptions",
+          "Newsletter block with email field, CTA and GDPR notice",
+          "Micro-interactions and animations designed at the design level (hover, pop-in, transitions)",
+          "Professional footer with full Lee Kum Kee Europe contact information"
+        ],
+        "learnings": "On this project, I learned to work from a client brief while proposing a credible creative direction, to collaborate as a group on a mockup (splitting pages, maintaining style consistency), to design animations at the design level (hover, transitions...) and to structure a coherent brand experience through content and visuals."
+      },
+      "rl-wp": {
+        "title": "Rocket League Fan Site",
+        "short": "Responsive mockup of a Rocket League fan site, designed for WordPress integration.",
+        "desc": "Responsive Figma mockup (desktop + mobile) for an unofficial Rocket League fan site, designed for future WordPress integration. The design includes an immersive homepage, a humorous patch notes blog, a contact page and a structure designed as WordPress templates.",
+        "context": "This project was completed as part of a WordPress integration course at My Digital School in Grenoble. As a passionate Rocket League player, I chose this theme to make the exercise more personal: rather than a generic website, I designed an unofficial fan site dedicated to the game, with its codes, memes and esports culture. The idea was to create a site I would genuinely enjoy visiting as a player.",
+        "objective": "Produce a complete responsive mockup, ready to be integrated into a WordPress theme: an immersive homepage featuring Season 19, a World Championship 2025 section, an editorial section on the game's history, a humorous patch notes blog, and a contact page with form. The result had to be visually coherent and structured for transposition into WordPress templates.",
+        "approach": "The mockup was entirely created in Figma, in both desktop and mobile versions, without animations, with particular attention to visual hierarchy and future WordPress integration. I broke down the site into reusable sections (hero, news blocks, articles, contact, footer), worked on a responsive grid, and set up components (buttons, article cards, patch notes blocks). The mockup anticipates WordPress integration with page, blog and contact templates.",
+        "features": [
+          "Immersive homepage with humorous tagline and Season 19 showcase",
+          "World Championship 2025 section at the LOLC Arena in Lyon",
+          "'What is Rocket League?' section with the game's history from SARPBC",
+          "Humorous patch notes blog with the game's community tone",
+          "Contact page with form and info (username, social media)",
+          "Desktop and mobile responsive design, prepared for WordPress integration"
+        ],
+        "learnings": "This project helped me improve on following a brief and structuring a project, designing an 'integrable' mockup (sections, reusable components, responsive from the design stage), working on a design centered on a video game universe (humor and readability), and preparing for WordPress integration (templates, dynamic vs static content, form, footer)."
       }
     }
   },

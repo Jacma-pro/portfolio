@@ -98,6 +98,25 @@
       color: $bg-primary;
       font-weight: $fw-bold;
     }
+
+    &--figma {
+      background: $bg-secondary;
+      border: 1px solid $border-color;
+      color: $text-primary;
+    }
+
+    &--pdf {
+      background: $bg-secondary;
+      border: 1px solid $border-color;
+      color: $text-primary;
+    }
+  }
+
+  &__figma-hint {
+    font-size: $fs-xs;
+    color: $text-muted;
+    margin-top: 0.4rem;
+    font-style: italic;
   }
 
   // ── Sections ──────────────────────────────────────────────────────────────
