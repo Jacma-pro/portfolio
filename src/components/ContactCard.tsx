@@ -5,7 +5,7 @@ interface ContactCardProps {
   icon: ReactNode
   label: string
   value: string
-  variant?: 'default' | 'github' | 'linkedin'
+  variant?: 'default' | 'email'| 'github' | 'linkedin'
   external?: boolean
 }
 

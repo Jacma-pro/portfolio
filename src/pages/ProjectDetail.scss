@@ -7,7 +7,7 @@
   &__back {
     display: inline-block;
     margin-bottom: 2rem;
-    color: $dodo-teal;
+    color: $dodo-blue;
     text-decoration: none;
     font-size: 0.85rem;
     font-family: $font-mono;
@@ -47,7 +47,7 @@
     font-weight: $fw-bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: $dodo-teal;
+    color: $dodo-blue;
   }
 
   &__title {
@@ -91,9 +91,9 @@
   &__tech {
     font-size: 0.78rem;
     font-family: $font-mono;
-    background: rgba($dodo-teal, 0.08);
-    border: 1px solid rgba($dodo-teal, 0.3);
-    color: $dodo-teal;
+    background: rgba($dodo-blue, 0.08);
+    border: 1px solid rgba($dodo-blue, 0.3);
+    color: $dodo-blue;
     padding: 4px 12px;
     border-radius: 4px;
   }
@@ -124,8 +124,8 @@
     }
 
     &--demo {
-      background: $dodo-teal;
-      border: 1px solid $dodo-teal;
+      background: $dodo-blue;
+      border: 1px solid $dodo-blue;
       color: $bg-primary;
       font-weight: $fw-bold;
     }

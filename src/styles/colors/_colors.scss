@@ -1,9 +1,9 @@
 
 // Dodo colors
+$dodo-blue:   #69e3ff;
 $dodo-teal:   #6FC3A9;
-$dodo-blue:   #68A9D9;
-$dodo-lavender: #B28CFF;
-$dodo-beak:   #FFB24D;
+$dodo-pink: #F49CBB;
+$dodo-yellow: #F7FF00;
 
 // Dark theme colors
 $bg-primary: #121212;
@@ -11,7 +11,7 @@ $bg-secondary: #1A1A1A;
 $text-primary: #E0E0E0;
 $text-secondary: #B0B0B0;
 $text-muted: #888888;
-$accent-primary: $dodo-teal;
+$accent-primary: $dodo-blue;
 $accent-secondary: $dodo-blue;
 $border-color: #444444;
 
@@ -26,8 +26,8 @@ $border-color: #444444;
   --accent-secondary: #{$accent-secondary};
   --border-color: #{$border-color};
 
-  --dodo-teal: #{$dodo-teal};
   --dodo-blue: #{$dodo-blue};
-  --dodo-lavender: #{$dodo-lavender};
-  --dodo-beak: #{$dodo-beak};
+  --dodo-teal: #{$dodo-teal};
+  --dodo-pink: #{$dodo-pink};
+  --dodo-yellow: #{$dodo-yellow};
 }

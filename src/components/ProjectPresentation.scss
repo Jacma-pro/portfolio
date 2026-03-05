@@ -40,7 +40,7 @@
     font-weight: $fw-bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: $dodo-teal;
+    color: $dodo-blue;
   }
 
   &__title {
@@ -93,8 +93,8 @@
     }
 
     &--demo {
-      background: $dodo-teal;
-      border: 1px solid $dodo-teal;
+      background: $dodo-blue;
+      border: 1px solid $dodo-blue;
       color: $bg-primary;
       font-weight: $fw-bold;
     }
@@ -154,7 +154,7 @@
         width: 7px;
         height: 7px;
         border-radius: 50%;
-        background: $dodo-teal;
+        background: $dodo-blue;
       }
     }
   }
@@ -172,9 +172,9 @@
   &__tech {
     font-size: $fs-xs;
     font-family: $font-mono;
-    background: rgba($dodo-teal, 0.08);
-    border: 1px solid rgba($dodo-teal, 0.3);
-    color: $dodo-teal;
+    background: rgba($dodo-blue, 0.08);
+    border: 1px solid rgba($dodo-blue, 0.3);
+    color: $dodo-blue;
     padding: 5px 14px;
     border-radius: 4px;
   }

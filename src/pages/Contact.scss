@@ -22,9 +22,9 @@
   font-weight: $fw-semibold;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $dodo-teal;
-  background: rgba($dodo-teal, 0.08);
-  border: 1px solid rgba($dodo-teal, 0.25);
+  color: $dodo-pink;
+  background: rgba($dodo-pink, 0.08);
+  border: 1px solid rgba($dodo-pink, 0.25);
   border-radius: 999px;
   padding: 0.3rem 0.85rem;
   margin-bottom: 1rem;
@@ -35,7 +35,7 @@
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: $dodo-teal;
+    background: $dodo-pink;
     animation: badge-pulse 2.2s ease-in-out infinite;
   }
 }
@@ -85,18 +85,24 @@
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    border-color: $dodo-teal;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba($dodo-teal, 0.12);
+  }
+
+  &--email:hover {
+    border-color: $dodo-pink;
+    color: $dodo-pink;
+    box-shadow: 0 6px 20px rgba($dodo-pink, 0.12);
   }
 
   &--github:hover {
-    border-color: var(--text-muted);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.06);
+    border-color: $dodo-teal;
+    color: $dodo-teal;
+    box-shadow: 0 6px 20px rgba($dodo-teal, 0.12);
   }
 
   &--linkedin:hover {
     border-color: $dodo-blue;
+    color: $dodo-blue;
     box-shadow: 0 6px 20px rgba($dodo-blue, 0.12);
   }
 }
@@ -109,16 +115,30 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba($dodo-teal, 0.08);
-  color: $dodo-teal;
+  background: rgba(255, 255, 255, 0.06);
+
+  .contact__card--email & {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary)
+  }
+  .contact__card--email:hover & {
+    color: $dodo-pink;
+  }
 
   .contact__card--github & {
     background: rgba(255, 255, 255, 0.06);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+  .contact__card--github:hover & {
+    color: $dodo-teal;
   }
 
   .contact__card--linkedin & {
-    background: rgba($dodo-blue, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+  }
+
+  .contact__card--linkedin:hover & {
     color: $dodo-blue;
   }
 }
@@ -129,7 +149,7 @@
   font-weight: $fw-semibold;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: 0.15rem;
 }
 
@@ -137,15 +157,7 @@
   display: block;
   font-size: var(--fs-sm);
   font-weight: $fw-medium;
-  color: $dodo-teal;
-
-  .contact__card--github & {
-    color: var(--text-secondary);
-  }
-
-  .contact__card--linkedin & {
-    color: $dodo-blue;
-  }
+  color: var(--text-primary);
 }
 
 // ── Form ──────────────────────────────────────────────────────────────────────
@@ -163,7 +175,7 @@
   label {
     font-size: var(--fs-sm);
     font-weight: $fw-semibold;
-    color: var(--text-secondary);
+    color: var(--text-primary);
   }
 
   input,
@@ -184,15 +196,15 @@
     }
 
     &:focus {
-      border-color: $dodo-teal;
-      box-shadow: 0 0 0 3px rgba($dodo-teal, 0.1);
+      border-color: $dodo-blue;
+      box-shadow: 0 0 0 3px rgba($dodo-blue, 0.1);
     }
   }
 }
 
 .contact__submit {
-  align-self: flex-start;
-  background: $dodo-teal;
+  align-self: flex-end;
+  background: $dodo-blue;
   border: none;
   border-radius: 8px;
   color: #121212;
@@ -223,8 +235,8 @@
   border-radius: 8px;
 
   &--success {
-    color: $dodo-teal;
-    background: rgba($dodo-teal, 0.08);
-    border: 1px solid rgba($dodo-teal, 0.2);
+    color: $dodo-blue;
+    background: rgba($dodo-blue, 0.08);
+    border: 1px solid rgba($dodo-blue, 0.2);
   }
 }

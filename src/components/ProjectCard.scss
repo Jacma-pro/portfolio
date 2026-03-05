@@ -15,8 +15,8 @@
   &:hover,
   &:focus-visible {
     transform: translateY(-4px);
-    border-color: $dodo-teal;
-    box-shadow: 0 8px 28px rgba($dodo-teal, 0.15);
+    border-color: $dodo-blue;
+    box-shadow: 0 8px 28px rgba($dodo-blue, 0.15);
     outline: none;
 
     .project-card__img {
@@ -47,8 +47,8 @@
     inset: 0;
     background: repeating-linear-gradient(
       135deg,
-      rgba($dodo-teal,  0.06) 0px,
-      rgba($dodo-teal,  0.06) 2px,
+      rgba($dodo-blue,  0.06) 0px,
+      rgba($dodo-blue,  0.06) 2px,
       transparent 2px,
       transparent 20px
     );
@@ -60,7 +60,7 @@
     right: 10px;
     background: rgba($bg-primary, 0.82);
     border: 1px solid $border-color;
-    color: $dodo-teal;
+    color: $dodo-blue;
     font-family: $font-mono;
     font-size: 0.65rem;
     font-weight: $fw-bold;
@@ -108,9 +108,9 @@
   &__tech {
     font-size: 0.68rem;
     font-family: $font-mono;
-    background: rgba($dodo-teal, 0.08);
-    border: 1px solid rgba($dodo-teal, 0.25);
-    color: $dodo-teal;
+    background: rgba($dodo-blue, 0.08);
+    border: 1px solid rgba($dodo-blue, 0.25);
+    color: $dodo-blue;
     padding: 2px 8px;
     border-radius: 3px;
     white-space: nowrap;

@@ -19,8 +19,8 @@
     top: 20px;
     right: 24px;
     background: transparent;
-    border: 2px solid $dodo-teal;
-    color: $dodo-teal;
+    border: 2px solid $dodo-blue;
+    color: $dodo-blue;
     font-size: 1rem;
     width: 34px;
     height: 34px;
@@ -33,7 +33,7 @@
     line-height: 1;
 
     &:hover {
-      background: $dodo-teal;
+      background: $dodo-blue;
       color: $bg-primary;
     }
   }
@@ -47,17 +47,17 @@
     border-radius: 6px;
     padding: 24px 32px;
     background: $bg-primary;
-    box-shadow: 0 0 40px rgba($dodo-teal, 0.15);
+    box-shadow: 0 0 40px rgba($dodo-blue, 0.15);
     max-width: 96vw;
   }
 
   &__title {
     font-family: $font-mono;
-    color: $dodo-teal;
+    color: $dodo-blue;
     letter-spacing: 10px;
     font-size: 1.8rem;
     margin: 0;
-    text-shadow: 0 0 14px rgba($dodo-teal, 0.6);
+    text-shadow: 0 0 14px rgba($dodo-blue, 0.6);
     text-transform: uppercase;
   }
 

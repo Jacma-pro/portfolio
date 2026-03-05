@@ -1,18 +1,18 @@
 // ── Todo ──────────────────────────────────────────────────────────────────────
-import superTodoCover from '../assets/projects/super-todo/home-screen.png'
-import todo1 from '../assets/projects/super-todo/football.png'
-import todo2 from '../assets/projects/super-todo/basketball.png'
-import todo3 from '../assets/projects/super-todo/localhost.png'
+import superTodoCover from '../assets/projects/FRONT/super-todo/home-screen.png'
+import todo1 from '../assets/projects/FRONT/super-todo/football.png'
+import todo2 from '../assets/projects/FRONT/super-todo/basketball.png'
+import todo3 from '../assets/projects/FRONT/super-todo/localhost.png'
 
 // ── api auth ───────────────────────────────────────────────────────────────────
-import apiAuthCover from '../assets/projects/api-auth/sing.png'
-import apiAuth1 from '../assets/projects/api-auth/failed.png'
-import apiAuth2 from '../assets/projects/api-auth/profil.png'
-import apiAuth3 from '../assets/projects/api-auth/logout.png'
-import apiAuth4 from '../assets/projects/api-auth/request.png'
-import apiAuth5 from '../assets/projects/api-auth/success.png'
+import apiAuthCover from '../assets/projects/BACK/api-auth/sing.png'
+import apiAuth1 from '../assets/projects/BACK/api-auth/failed.png'
+import apiAuth2 from '../assets/projects/BACK/api-auth/profil.png'
+import apiAuth3 from '../assets/projects/BACK/api-auth/logout.png'
+import apiAuth4 from '../assets/projects/BACK/api-auth/request.png'
+import apiAuth5 from '../assets/projects/BACK/api-auth/success.png'
 
-export type Category = 'front' | 'back' | 'divers'
+export type Category = 'front' | 'back' | 'mockup'
 
 export interface Project {
   id:       string
@@ -65,22 +65,22 @@ export const PROJECTS: Project[] = [
     techs: ["tech1", "tech2", "tech3"],
   },
 
-  // ── Divers ─────────────────────────────────────────────────────────────────
+  // ── mockup ─────────────────────────────────────────────────────────────────
   {
     id: "test",
-    category: "divers",
+    category: "mockup",
     techs: ["tech1", "tech2", "tech3"],
   },
   {
     id: "test",
-    category: "divers",
+    category: "mockup",
     techs: ["tech1", "tech2", "tech3"],
   },
   {
     id: "test",
-    category: "divers",
+    category: "mockup",
     techs: ["tech1", "tech2", "tech3"],
   }
 ]
 
-export const CATEGORIES: Category[] = ['front', 'back', 'divers']
+export const CATEGORIES: Category[] = ['front', 'back', 'mockup']

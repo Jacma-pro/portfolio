@@ -62,6 +62,8 @@ const Contact = () => {
             icon={<MailIcon />}
             label={t('contact.email')}
             value="dorianjacolin@gmail.com"
+            variant="email"
+            external
           />
           <ContactCard
             href="https://github.com/Jacma-pro"
