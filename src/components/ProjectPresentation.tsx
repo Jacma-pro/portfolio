@@ -96,10 +96,11 @@ const ProjectPresentation = ({ project }: Props) => {
               {project.figma && (
                 <a
                   href={project.figma}
-                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="project-pres__link project-pres__link--figma"
                 >
-                  {t('projects.detail.figma')} ↓
+                  {t('projects.detail.figma')} ↗
                 </a>
               )}
               {project.pdf && (

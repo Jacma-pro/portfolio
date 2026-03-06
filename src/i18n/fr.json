@@ -26,9 +26,9 @@
     "detail": {
       "techs": "Technologies",
       "demo": "Voir la démo",
-      "figma": "Télécharger le .fig",
+      "figma": "Ouvrir dans Figma",
       "pdf": "Voir la maquette (PDF)",
-      "figma_hint": "Téléchargez le fichier .fig pour inspecter la maquette et découvrir les animations dans Figma.",
+      "figma_hint": "Ouvrez le projet dans Figma pour inspecter la maquette et découvrir les animations.",
       "context_title": "Contexte & Motivation",
       "objective_title": "Résultat attendu",
       "approach_title": "Approche technique",

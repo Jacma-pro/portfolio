@@ -26,9 +26,9 @@
     "detail": {
       "techs": "Technologies",
       "demo": "Live demo",
-      "figma": "Download .fig file",
+      "figma": "Open in Figma",
       "pdf": "View mockup (PDF)",
-      "figma_hint": "Download the .fig file to inspect the mockup and explore animations in Figma.",
+      "figma_hint": "Open the project in Figma to inspect the mockup and explore the animations.",
       "context_title": "Context & Motivation",
       "objective_title": "Expected Result",
       "approach_title": "Technical Approach",

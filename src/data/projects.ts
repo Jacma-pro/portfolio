@@ -22,7 +22,6 @@ import lkkTwo from '../assets/projects/MOCKUP/LKK/screen/two_section.png'
 import lkkFull from '../assets/projects/MOCKUP/LKK/screen/full_view.png'
 import lkkHover from '../assets/projects/MOCKUP/LKK/screen/animation_hover.png'
 import lkkFooter from '../assets/projects/MOCKUP/LKK/screen/footer.png'
-import lkkFigma from '../assets/projects/MOCKUP/LKK/Lee Kum Kee - B2.fig'
 import lkkPdf from '../assets/projects/MOCKUP/LKK/Lee Kum Kee - B2.pdf'
 
 // ── Mockup: RL-WP ──────────────────────────────────────────────────────────────
