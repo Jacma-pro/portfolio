@@ -38,8 +38,8 @@ const Navbar = () => {
       <NavLink to="/" className="navbar__logo" aria-label="Accueil">
         <img src={dodoFrame} alt="" className="navbar__logo-sprite" aria-hidden="true" />
         <span className="navbar__logo-name">
-          <span>Dorian</span>
-          <span>Jacolin</span>
+          <span>DORIAN</span>
+          <span>JACOLIN</span>
         </span>
       </NavLink>
 
