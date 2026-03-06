@@ -75,6 +75,7 @@ export const PROJECTS: Project[] = [
     category: "back",
     cover: apiAuthCover,
     techs: ["Node.js", "Express.js", "SQLite3", "bcryptjs", "JWT", "Helmet"],
+    github: "https://github.com/Jacma-pro/BACK_api-auth",
     images: [apiAuthCover, apiAuth5, apiAuth1, apiAuth2, apiAuth3, apiAuth4]
   },
   {

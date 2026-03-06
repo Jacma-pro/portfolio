@@ -100,9 +100,10 @@
     }
 
     &--figma {
-      background: $bg-secondary;
-      border: 1px solid $border-color;
-      color: $text-primary;
+      background: $dodo-blue;
+      border: 1px solid $dodo-blue;
+      color: $bg-primary;
+      font-weight: $fw-bold;
     }
 
     &--pdf {

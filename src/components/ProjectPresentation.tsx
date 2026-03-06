@@ -93,6 +93,16 @@ const ProjectPresentation = ({ project }: Props) => {
                   {t('projects.detail.demo')} ↗
                 </a>
               )}
+              {project.pdf && (
+                <a
+                href={project.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-pres__link project-pres__link--pdf"
+                >
+                  {t('projects.detail.pdf')} ↗
+                </a>
+              )}
               {project.figma && (
                 <a
                   href={project.figma}
@@ -101,16 +111,6 @@ const ProjectPresentation = ({ project }: Props) => {
                   className="project-pres__link project-pres__link--figma"
                 >
                   {t('projects.detail.figma')} ↗
-                </a>
-              )}
-              {project.pdf && (
-                <a
-                  href={project.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-pres__link project-pres__link--pdf"
-                >
-                  {t('projects.detail.pdf')} ↗
                 </a>
               )}
             </div>
