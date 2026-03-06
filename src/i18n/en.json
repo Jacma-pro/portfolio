@@ -15,7 +15,7 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "My projects and achievements…",
+    "subtitle": "Discover my work, from code to mockups.",
     "back": "Back to projects",
     "not_found": "Project not found.",
     "categories": {
@@ -63,6 +63,23 @@
         ],
         "learnings": "This project allowed me to deeply understand Vue 3 reactivity, particularly ref, computed, and watch with the deep option. I also learned to structure a front-end application in a modular way, handle client-side persistence, and implement an elegant theming system with CSS variables."
       },
+      "50ans": {
+        "title": "Event Site - 50th Birthday",
+        "short": "Mini event site for Karyn's 50th birthday: event info, online registration and guest list.",
+        "desc": "An event mini-site built to celebrate Karyn's 50th birthday. Guests can browse practical information, register via an online form, and view the participant list. This was my very first hosted web project, built in my first year of studies.",
+        "context": "This project was created to solve a real need: centralizing registrations for Karyn's birthday party, especially via phone. I deployed it on PlanetHoster (provided by the school) - my first ever experience going live with a website. I'm keeping it here to show where I started.",
+        "objective": "Provide a simple site, accessible from any device, allowing guests to register for the event, browse practical info (venue, date, dress code, accommodation) and see the up-to-date guest list.",
+        "approach": "Multi-page static site in HTML/CSS/JS with a minimal PHP back-end to handle registrations. Guest data is stored in a JSON file server-side - a simple solution suited to this non-sensitive use case. A JS countdown displays the time remaining before registration closes. The design is festive, colorful and mobile-responsive.",
+        "features": [
+          "Homepage with dynamic JS countdown and quick links",
+          "Registration form with PHP processing and JSON storage",
+          "Dynamically updated guest list page",
+          "Practical info: venue, schedule, dress code, accommodation",
+          "Background animation (stars / snow effect in JS)",
+          "Festive, responsive design for mobile and desktop"
+        ],
+        "learnings": "My first hosted web project taught me the practical basics of development: deploying a site to a hosting provider, handling forms server-side with PHP, storing data in a JSON file, sending email notifications to the organizer, and designing a mobile-friendly interface. A solid foundation for everything that followed."
+      },
       "api-auth": {
         "title": "API Auth Favorites",
         "short": "A secure REST API with JWT authentication, bcrypt hashing, and protected routes.",
@@ -80,6 +97,23 @@
           "HTTP header security with Helmet"
         ],
         "learnings": "This project allowed me to truly grasp how JWT authentication works end-to-end: generation, transmission in headers, middleware verification. I also understood why bcrypt is essential (salt prevents rainbow table attacks) and how to cleanly structure a Node.js API with a proper routes / controllers / middlewares separation."
+      },
+      "poke-api": {
+        "title": "Pokémon API",
+        "short": "Introduction to REST APIs: consuming PokéAPI and building a custom Strapi API connected to a React front-end.",
+        "desc": "A two-part REST API introduction project: a Strapi v5 back-end exposing a Pokémon collection with full CRUD, and a React front-end consuming the API to display interactive cards with sprites, types, HP and cry playback.",
+        "context": "This project was completed as part of an introductory course on back-end development and APIs. The goal was to understand the full cycle of an API: how an HTTP request works, how to structure server-side data, and how to consume it on the client side. The Pokémon theme was chosen to make the exercise concrete and fun, leveraging the rich public PokéAPI as a data source.",
+        "objective": "The project consists of two distinct parts: a Strapi back-end (api-pokemon/) exposing a Pokémon collection with full CRUD endpoints, and a React front-end (pokemon/) consuming the Strapi API and displaying Pokémon as interactive cards. The user can browse the Pokémon list, view their stats (name, type(s), HP, sprite) and listen to their cry via a button.",
+        "approach": "The project is split into two independent applications communicating over HTTP. On the back-end, Strapi v5 auto-generates a full REST API from a Pokémon Content Type (name, idPokemon, type1, type2, hp, sprite, cries) using SQLite as the database. On the front-end, React fetches the API in a useEffect. Data was seeded from PokéAPI using a requests.http file.",
+        "features": [
+          "Pokémon grid of cards (name, HP, sprite, type(s))",
+          "Conditional type display depending on whether a Pokémon has one or two types",
+          "Pokémon cry playback via native Web Audio API (.ogg)",
+          "Full CRUD API on /api/pokemons (GET, POST, PUT, DELETE)",
+          "Lightweight SQLite database, no external server required",
+          "API testing via requests.http file (VS Code REST Client)"
+        ],
+        "learnings": "This project gave me solid foundations in HTTP protocol (verbs, status codes, headers, JSON), data modeling for an API (Strapi Content Type, field types, constraints), consuming an external API (PokéAPI), building a REST API with Strapi, connecting a front-end to a back-end with fetch + useEffect, and testing an API with a .http file."
       },
       "bike": {
         "title": "ReCycle E-Bikes",

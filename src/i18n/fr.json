@@ -15,7 +15,7 @@
   },
   "projects": {
     "title": "Projets",
-    "subtitle": "Mes projets et réalisations…",
+    "subtitle": "Découvre mes réalisations, du code aux maquettes.",
     "back": "Retour aux projets",
     "not_found": "Projet introuvable.",
     "categories": {
@@ -63,6 +63,23 @@
         ],
         "learnings": "Ce projet m'a permis de comprendre en profondeur la réactivité de Vue 3, notamment les ref, computed et watch avec l'option deep. J'ai aussi appris à structurer une application front-end de manière modulaire, à gérer la persistance côté client et à implémenter un système de thème élégant avec les variables CSS."
       },
+      "50ans": {
+        "title": "Site événementiel - 50 ans",
+        "short": "Mini-site pour les 50 ans de Karyn : informations, inscription en ligne et liste des inscrits.",
+        "desc": "Mini-site événementiel développé pour célébrer les 50 ans de Karyn. Il permet aux invités de consulter les informations pratiques, de s'inscrire via un formulaire en ligne et de retrouver la liste des participants. C'était mon tout premier projet web hébergé, réalisé en première année d'études.",
+        "context": "Ce projet a été créé pour répondre à un besoin concret : centraliser les inscriptions pour l'anniversaire de Karyn, notamment depuis un téléphone. Je l'ai hébergé chez PlanetHoster (fourni par l'école) et c'était ma toute première expérience de mise en ligne d'un site. Je le conserve ici pour montrer d'où je viens.",
+        "objective": "Fournir un site simple, accessible depuis n'importe quel appareil, permettant de s'inscrire à l'événement, de consulter les informations pratiques (lieu, date, dress code, hébergement) et de voir la liste des inscrits mise à jour dynamiquement.",
+        "approach": "Site statique multi-pages en HTML/CSS/JS avec un back-end PHP minimal pour gérer les inscriptions. Les données des inscrits sont stockées dans un fichier JSON côté serveur - solution simple adaptée pour cet usage non sensible. Un compte à rebours JS affiche le temps restant avant la clôture des inscriptions. Le design est festif, coloré et responsive mobile.",
+        "features": [
+          "Page d'accueil avec compte à rebours dynamique et liens rapides",
+          "Formulaire d'inscription avec traitement PHP et stockage JSON",
+          "Page liste des inscrits mise à jour dynamiquement",
+          "Informations pratiques : lieu, horaires, dress code, hébergement",
+          "Animation de fond (effet étoiles / neige en JS)",
+          "Design festif et responsive mobile/desktop"
+        ],
+        "learnings": "Mon premier projet web hébergé m'a appris les bases concrètes du développement : déployer un site sur un hébergeur, gérer des formulaires côté serveur en PHP, stocker des données dans un fichier JSON, envoyer des notifications par mail à l'organisatrice, et concevoir une interface utilisable sur mobile. Une base solide pour la suite."
+      },
       "api-auth": {
         "title": "API Auth Favorites",
         "short": "Une API REST sécurisée avec authentification JWT, hachage bcrypt et routes protégées.",
@@ -80,6 +97,23 @@
           "Sécurisation des en-têtes HTTP avec Helmet"
         ],
         "learnings": "Ce projet m'a permis de vraiment saisir comment fonctionne l'authentification JWT de bout en bout : génération, transmission dans les en-têtes, vérification middleware. J'ai aussi compris pourquoi bcrypt est incontournable (le salt empêche les attaques par rainbow table) et comment structurer une API Node.js proprement avec une séparation routes / contrôleurs / middlewares."
+      },
+      "poke-api": {
+        "title": "Pokémon API",
+        "short": "Initiation aux API REST : consommer PokéAPI et créer sa propre API Strapi connectée à un front React.",
+        "desc": "Projet d'initiation aux API REST en deux parties : un back-end Strapi v5 exposant une collection Pokémon avec CRUD complet, et un front-end React qui consomme l'API pour afficher des cartes interactives avec sprites, types, HP et lecture des cris.",
+        "context": "Ce projet s'inscrit dans le cadre d'un cours d'initiation au développement back-end et aux API. L'objectif était de comprendre le cycle complet d'une API : comment fonctionne une requête HTTP, comment structurer des données côté serveur, et comment les consommer côté client. Le thème Pokémon a été choisi pour rendre l'exercice concret et ludique, en exploitant une API publique riche (PokéAPI) comme source de données de référence.",
+        "objective": "Le projet se compose de deux parties distinctes : un back-end Strapi (api-pokemon/) exposant une collection Pokémon avec endpoints CRUD complets, et un front-end React (pokemon/) qui consomme l'API Strapi et affiche les Pokémon sous forme de cartes interactives. L'utilisateur peut visualiser la liste des Pokémon, leurs caractéristiques (nom, type(s), HP, sprite) et écouter leur cri via un bouton.",
+        "approach": "Le projet est divisé en deux applications indépendantes qui communiquent via HTTP. Côté back, Strapi v5 génère automatiquement une API REST complète à partir d'un Content Type Pokémon (name, idPokemon, type1, type2, hp, sprite, cries) avec SQLite comme base de données. Côté front, React consomme l'API via fetch dans un useEffect. Les données ont été alimentées depuis PokéAPI via un fichier requests.http.",
+        "features": [
+          "Liste de Pokémon en grille de cartes (nom, HP, sprite, type(s))",
+          "Affichage conditionnel selon qu'un Pokémon possède un ou deux types",
+          "Lecture des cris Pokémon via l'API Web Audio native (.ogg)",
+          "API CRUD complète sur /api/pokemons (GET, POST, PUT, DELETE)",
+          "Base de données SQLite légère, sans serveur externe",
+          "Tests d'API via fichier requests.http (REST Client VS Code)"
+        ],
+        "learnings": "Ce projet m'a permis de poser des bases solides sur le protocole HTTP (verbes, codes de statut, headers, JSON), la modélisation de données pour une API (Content Type Strapi, types de champs, contraintes), la consommation d'une API externe (PokéAPI), la création d'une API REST avec Strapi, la connexion front/back avec fetch + useEffect, et le test d'API via fichier .http."
       },
       "bike": {
         "title": "ReCycle E-Bikes",

@@ -4,6 +4,11 @@ import todo1 from '../assets/projects/FRONT/super-todo/football.png'
 import todo2 from '../assets/projects/FRONT/super-todo/basketball.png'
 import todo3 from '../assets/projects/FRONT/super-todo/localhost.png'
 
+// ── 50 ans ────────────────────────────────────────────────────────────────────
+import cinquanteAnsCover from '../assets/projects/FRONT/50ans/screen/home.png'
+import cinquanteAns1 from '../assets/projects/FRONT/50ans/screen/information.png'
+import cinquanteAns2 from '../assets/projects/FRONT/50ans/screen/inscription.png'
+
 // ── api auth ───────────────────────────────────────────────────────────────────
 import apiAuthCover from '../assets/projects/BACK/api-auth/sing.png'
 import apiAuth1 from '../assets/projects/BACK/api-auth/failed.png'
@@ -11,6 +16,11 @@ import apiAuth2 from '../assets/projects/BACK/api-auth/profil.png'
 import apiAuth3 from '../assets/projects/BACK/api-auth/logout.png'
 import apiAuth4 from '../assets/projects/BACK/api-auth/request.png'
 import apiAuth5 from '../assets/projects/BACK/api-auth/success.png'
+
+// ── poke api ───────────────────────────────────────────────────────────────────
+import pokeApiCover from '../assets/projects/BACK/poke-api/screen/home.png'
+import pokeApi1 from '../assets/projects/BACK/poke-api/screen/Preview.png'
+import pokeApi2 from '../assets/projects/BACK/poke-api/screen/request.png'
 
 // ── Mockup: BIKE ───────────────────────────────────────────────────────────────
 import bikeHome from '../assets/projects/MOCKUP/BIKE/screen/home.png'
@@ -59,15 +69,18 @@ export const PROJECTS: Project[] = [
     images: [todo1, todo2, todo3]
   },
   {
-    id: "test",
+    id: "50ans",
     category: "front",
-    techs: ["tech1", "tech2", "tech3"],
+    cover: cinquanteAnsCover,
+    techs: ["HTML5", "CSS3", "JavaScript", "PHP"],
+    github: "https://github.com/Jacma-pro/FRONT_50ans",
+    images: [cinquanteAnsCover, cinquanteAns1, cinquanteAns2]
   },
   {
     id: "test",
     category: "front",
     techs: ["tech1", "tech2", "tech3"]
-},
+  },
 
   // ── Back ───────────────────────────────────────────────────────────────────
   {
@@ -79,9 +92,12 @@ export const PROJECTS: Project[] = [
     images: [apiAuthCover, apiAuth5, apiAuth1, apiAuth2, apiAuth3, apiAuth4]
   },
   {
-    id: "test",
+    id: "poke-api",
     category: "back",
-    techs: ["tech1", "tech2", "tech3"],
+    cover: pokeApiCover,
+    techs: ["Strapi v5", "Node.js", "SQLite", "React 19", "Vite", "PokéAPI"],
+    github: "https://github.com/Jacma-pro/BACK_pokemon-project",
+    images: [pokeApiCover, pokeApi1, pokeApi2]
   },
   {
     id: "test",
