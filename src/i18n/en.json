@@ -34,6 +34,8 @@
       "approach_title": "Technical Approach",
       "features_title": "Key Features",
       "gallery_title": "Gallery",
+      "gallery_more": "Show more ({{count}} photos)",
+      "gallery_less": "Show less",
       "learnings_title": "What I Learned",
       "links_title": "Links",
       "gallery_placeholder": "Screenshots coming soon…"

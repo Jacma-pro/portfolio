@@ -78,6 +78,10 @@
     gap: 8px;
     padding: 16px;
     flex: 1;
+
+    @media (max-width: 480px) {
+      padding: 12px;
+    }
   }
 
   &__title {

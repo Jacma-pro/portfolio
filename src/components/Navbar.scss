@@ -1,6 +1,8 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
 
+$navbar-bp: 700px;
+
 .navbar {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -13,16 +15,45 @@
   top: 0;
   z-index: 100;
 
-  &__logo {
-    justify-self: start;
-    font-size: var(--fs-md);
-    font-weight: $fw-bold;
-    color: var(--accent-primary);
-    letter-spacing: 0.03em;
-    position: relative;
-    z-index: 1;
+  @media (max-width: $navbar-bp) {
+    grid-template-columns: 1fr auto;
+    padding: 0 1rem;
   }
 
+  &__logo {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+
+    &-sprite {
+      width: 34 px;
+      height: 34px;
+    }
+
+    &-name {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      font-weight: $fw-bold;
+      color: $dodo-blue;
+      letter-spacing: 0.03em;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+
+      span:first-child {
+        font-size: var(--fs-md);
+      }
+      span:last-child {
+        text-align: center;
+        font-size: var(--fs-base);
+      }
+    }
+  }
+
+  // ── Desktop links ────────────────────────────────────────────────────────
   &__links {
     display: flex;
     gap: 2rem;
@@ -48,10 +79,56 @@
         border-bottom-color: var(--accent-primary);
       }
     }
+
+    // ── Mobile drawer ───────────────────────────────────────────────────
+    @media (max-width: $navbar-bp) {
+      position: fixed;
+      inset: 0;
+      top: 60px;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-secondary);
+      padding: 1rem 0;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 99;
+      overflow-y: auto;
+
+      &--open {
+        transform: translateX(0);
+      }
+
+      li {
+        width: 100%;
+      }
+
+      a {
+        display: block;
+        padding: 1rem 1.5rem;
+        font-size: var(--fs-md);
+        border-bottom: none;
+
+        &.active {
+          background: rgba($dodo-blue, 0.08);
+          border-bottom: none;
+          border-left: 3px solid var(--accent-primary);
+        }
+      }
+    }
   }
 
-  &__lang {
+  // ── Right group (lang + burger) ──────────────────────────────────────────
+  &__right-group {
     justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 101;
+  }
+
+  // ── Lang button ──────────────────────────────────────────────────────────
+  &__lang {
     background: transparent;
     border: 1px solid var(--border-color);
     padding: 0.25rem 0.5rem;
@@ -78,4 +155,64 @@
       margin-left: 0.5rem;
     }
   }
+
+  // ── Burger button ────────────────────────────────────────────────────────
+  &__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    width: 36px;
+    height: 36px;
+    z-index: 101;
+
+    @media (max-width: $navbar-bp) {
+      display: flex;
+    }
+  }
+
+  &__burger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  &__burger--active &__burger-line {
+    &:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    &:nth-child(2) {
+      opacity: 0;
+    }
+    &:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // ── Overlay ──────────────────────────────────────────────────────────────
+  &__overlay {
+    display: none;
+
+    @media (max-width: $navbar-bp) {
+      display: block;
+      position: fixed;
+      inset: 0;
+      top: 60px;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 98;
+      animation: overlay-fade-in 0.25s ease;
+    }
+  }
+}
+
+@keyframes overlay-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

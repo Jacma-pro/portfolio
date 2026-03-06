@@ -12,6 +12,10 @@
   overflow: hidden;
   z-index: 0;
 
+  @media (max-width: 700px) {
+    display: none;
+  }
+
   &__sprite {
     position: absolute;
     top: 0;

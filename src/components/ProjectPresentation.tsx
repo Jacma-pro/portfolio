@@ -19,6 +19,10 @@ const ProjectPresentation = ({ project }: Props) => {
 
   const images = project.images ?? []
 
+  // ── Gallery state ─────────────────────────────────────────────────────────
+  const GALLERY_LIMIT = 3
+  const [galleryExpanded, setGalleryExpanded] = useState(false)
+
   // ── Lightbox state ────────────────────────────────────────────────────────
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
@@ -175,17 +179,30 @@ const ProjectPresentation = ({ project }: Props) => {
       <section className="project-pres__section">
         <h2>{t('projects.detail.gallery_title')}</h2>
         {images.length > 0 ? (
-          <div className="project-pres__gallery">
-            {images.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`${t(`projects.items.${id}.title`)} - ${i + 1}`}
-                className="project-pres__gallery-img"
-                onClick={() => openLightbox(i)}
-              />
-            ))}
-          </div>
+          <>
+            <div className="project-pres__gallery">
+              {(galleryExpanded ? images : images.slice(0, GALLERY_LIMIT)).map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${t(`projects.items.${id}.title`)} - ${i + 1}`}
+                  className="project-pres__gallery-img"
+                  onClick={() => openLightbox(i)}
+                />
+              ))}
+            </div>
+            {images.length > GALLERY_LIMIT && (
+              <button
+                type="button"
+                className="project-pres__gallery-toggle"
+                onClick={() => setGalleryExpanded(prev => !prev)}
+              >
+                {galleryExpanded
+                  ? t('projects.detail.gallery_less')
+                  : t('projects.detail.gallery_more', { count: images.length - GALLERY_LIMIT })}
+              </button>
+            )}
+          </>
         ) : (
           <p className="project-pres__gallery-placeholder">
             {t('projects.detail.gallery_placeholder')}

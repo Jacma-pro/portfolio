@@ -4,6 +4,11 @@
 .project-detail {
   max-width: 800px;
 
+  @media (max-width: 640px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   &__back {
     display: inline-block;
     margin-bottom: 2rem;
@@ -31,6 +36,10 @@
     height: auto;
     object-fit: cover;
     max-height: 380px;
+
+    @media (max-width: 480px) {
+      max-height: 220px;
+    }
   }
 
   // ── Header ─────────────────────────────────────────────────────────────────
@@ -55,6 +64,10 @@
     font-weight: $fw-extrabold;
     color: $text-primary;
     margin: 0;
+
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+    }
   }
 
   &__desc {
@@ -103,6 +116,10 @@
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
   }
 
   &__link {

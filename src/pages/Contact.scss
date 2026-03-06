@@ -56,6 +56,10 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
+  }
 }
 
 // ── Section titles ─────────────────────────────────────────────────────────────
@@ -216,6 +220,11 @@
   padding: 0.7rem 1.75rem;
   text-transform: uppercase;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+
+  @media (max-width: 480px) {
+    align-self: stretch;
+    padding: 0.85rem 1.5rem;
+  }
 
   &:hover:not(:disabled) {
     background: $dodo-blue;
