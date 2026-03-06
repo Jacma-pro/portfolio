@@ -16,7 +16,6 @@ import apiAuth5 from '../assets/projects/BACK/api-auth/success.png'
 import bikeHome from '../assets/projects/MOCKUP/BIKE/screen/home.png'
 import bikeFull from '../assets/projects/MOCKUP/BIKE/screen/full_view.png'
 import bikeAvis from '../assets/projects/MOCKUP/BIKE/screen/avis.png'
-import bikeFigma from '../assets/projects/MOCKUP/BIKE/velo-dorian.fig'
 
 // ── Mockup: LKK ────────────────────────────────────────────────────────────────
 import lkkTwo from '../assets/projects/MOCKUP/LKK/screen/two_section.png'
@@ -33,7 +32,6 @@ import rlStory from '../assets/projects/MOCKUP/RL-WP/screen/story.png'
 import rlArticle from '../assets/projects/MOCKUP/RL-WP/screen/pre_acticle.png'
 import rlForm from '../assets/projects/MOCKUP/RL-WP/screen/form.png'
 import rlMobile from '../assets/projects/MOCKUP/RL-WP/screen/mobile.png'
-import rlFigma from '../assets/projects/MOCKUP/RL-WP/Dorian_Jacolin_b2_2025_maquettes_WP.fig'
 import rlPdf from '../assets/projects/MOCKUP/RL-WP/Dorian_Jacolin_b2_2025_maquettes_WP.pdf'
 
 export type Category = 'front' | 'back' | 'mockup'
@@ -97,7 +95,7 @@ export const PROJECTS: Project[] = [
     category: "mockup",
     cover: bikeHome,
     techs: ["Figma"],
-    figma: bikeFigma,
+    figma: "https://www.figma.com/design/8MTYxftwIpQqcGXfwadMEl/DORIAN---B2---J1?node-id=0-1&t=i8I2E2wYXY0u6q1N-1",
     images: [bikeHome, bikeFull, bikeAvis]
   },
   {
@@ -105,7 +103,7 @@ export const PROJECTS: Project[] = [
     category: "mockup",
     cover: rlHome,
     techs: ["Figma"],
-    figma: rlFigma,
+    figma: "https://www.figma.com/design/v2e97AVQGbCCl8YKxzN6p9/Dorian_Jacolin_b2_2025_maquettes_WP?node-id=0-1&t=U0Iw5B68B38Judkf-1",
     pdf: rlPdf,
     images: [rlHome, rlFull, rlStory, rlArticle, rlForm, rlMobile]
   },
@@ -114,7 +112,7 @@ export const PROJECTS: Project[] = [
     category: "mockup",
     cover: lkkTwo,
     techs: ["Figma"],
-    figma: lkkFigma,
+    figma: "https://www.figma.com/design/8vPmm4l10yyhTX9EldJeOy/Lee-Kum-Kee---B2?node-id=0-1&t=diRcpW2yODxLWGjK-1",
     pdf: lkkPdf,
     images: [lkkTwo, lkkFull, lkkHover, lkkFooter]
   }
