@@ -6,12 +6,49 @@
     "contact": "Contact"
   },
   "home": {
-    "title": "Welcome to my portfolio",
-    "subtitle": "Passionate developer - dodo theme 🦤"
+    "greeting": "Hey, I'm",
+    "name": "Dorian",
+    "role": "Fullstack Web Developer in formation",
+    "tagline": "I design and build modern web experiences, from front-end to back-end.",
+    "badge": "Apprentice at Equans Digital",
+    "cta_projects": "See my projects",
+    "cta_about": "Learn more",
+    "stats_projects": "Projects",
+    "stats_techs": "Technologies",
+    "stats_xp": "Year of apprenticeship",
+    "featured_title": "Recent projects",
+    "featured_subtitle": "A selection of what I've built recently.",
+    "featured_all": "View all projects",
+    "stack_title": "My stack",
+    "cta_title": "Got a project in mind?",
+    "cta_text": "Whether it's a project, an internship or just a chat — my inbox is always open.",
+    "cta_contact": "Get in touch"
   },
   "about": {
     "title": "About",
-    "subtitle": "Presentation, skills, background…"
+    "subtitle": "Presentation, skills, background…",
+    "intro": "Everyone calls me Dodo. Not just because it's been my nickname forever, but because I genuinely relate to the bird. The dodo is warm, endearing, one of a kind. And in a way, that's kind of me. This site is a window into my life - to get to know me and see what I do.",
+    "declic_title": "The spark",
+    "declic": "Ever since I was a kid, I've been curious about everything. For a long time, it was architecture that made me dream - designing spaces, building things that last. But alongside that, without really noticing, I was just as drawn to computers: PCs, video games, understanding how things work behind the screen.",
+    "declic_2": "My 9th-grade internship at an architecture firm changed everything. Living the job day-to-day, I realized the reality didn't match what I'd imagined. The spark was almost instant: tech had never really let me go. The answer had been there all along.",
+    "school_title": "Finding the right place",
+    "school": "At a student fair, I met Aurore. She was representing MyDigitalSchool, and she introduced the school in a way that spoke to me immediately - no rehearsed speech, just an honest and convincing presentation. That day, she gave me the confidence I needed to take the leap.",
+    "school_2": "Since joining MyDigitalSchool, zero regrets. I found an environment that fits me, real-world projects, amazing people, and above all the confirmation that web development was truly my path.",
+    "learning_title": "Learning by doing",
+    "learning": "What I love about development is that exact moment when you're stuck on a problem. You rack your brain, try a solution, it doesn't work, you try again differently, and then… it works. I never get tired of that feeling.",
+    "learning_2": "But I'm not the type to stay in my corner either. I like to exchange ideas, understand people's needs, explain my solutions in simple terms. Being useful to others, whether through code or through a conversation, matters a lot to me.",
+    "equans_title": "Equans Digital",
+    "equans": "My real transition into the professional world came through my internship at Equans Digital. From March to June 2025, I joined the Data team within the Application Solutions group. I worked on WR2GO, an internal web app for energy data visualization - fixing bugs, adding features, maintaining consistency between Angular and Spring Boot.",
+    "equans_2": "What struck me most was something my mentor said during my final presentation: 'Dorian was profitable for us, he saved us money.' Coming from a professional in a formal evaluation, it meant more to me than any grade ever could. That's when I decided to ask to continue as an apprentice - and they said yes.",
+    "alternance_title": "The apprenticeship",
+    "alternance": "Since September 2025, I've been an apprentice at Equans Digital alongside my second year of Bachelor's at MyDigitalSchool. It's a natural continuation: same team, same environment, and every week helps me grow both technically and personally.",
+    "outside_title": "Beyond the code",
+    "outside": "Big fan of video games (Rocket League, League of Legends) and sports - football holds a special place, especially GF38, my local club since forever. I love pushing myself, whether on a pitch, at the gym, or against a stubborn bug at 11 PM.",
+    "outside_2": "On the engagement side, I'm vice-president of my school's student union and a MyDigitalSchool ambassador. Representing my school and bringing students together is my way of giving back a little of what it gave me.",
+    "outside_3": "My friends would say I'm kind, funny, and always there when needed. The nickname Dodo comes from Dorian, but it's always stuck way beyond that. I naturally identified with the bird: warm, endearing, a bit unique in its own way.",
+    "future_title": "What's next?",
+    "future": "My journey isn't very long yet, but every step has confirmed I'm in the right place. Going forward, I see myself continuing to grow as a fullstack web developer, building projects with real impact, and keeping that connection with people - talking, exchanging, understanding needs. Project manager, tech consultant, or something else entirely: I don't know exactly, and I'm fine with that.",
+    "future_cta": "If you're here, maybe we have something to build together. 🦤"
   },
   "projects": {
     "title": "Projects",
@@ -49,10 +86,10 @@
       "super-todo": {
         "title": "Superb Todo List",
         "short": "A complete task management app with priorities, deadlines, and dark mode.",
-        "desc": "A modern task management application built with Vue 3, going well beyond a simple list with a priority system, deadlines with visual alerts, dark mode, multilingual support, and a fully responsive interface.",
-        "context": "This project was created as part of a course on JavaScript frameworks. The goal was to discover Vue.js and its Composition API by building a practical, functional application. I chose a Todo List because it's a classic that allows exploring many concepts: state management, reactivity, data persistence, and user interactions.",
-        "objective": "Build a complete and modern task management application, going well beyond a simple list. The expected result had to include a priority system, deadlines with visual alerts, a dark mode, multilingual support, and a responsive mobile-friendly interface.",
-        "approach": "I adopted a modular architecture with Vue 3 and the Composition API (<script setup>). Each component has a single responsibility: input (TodoInput), display (TodoList), filters (TodoFilters), and statistics (TodoStats). Persistence is handled via LocalStorage with deep watchers, and the dark theme uses CSS variables for instant switching. All styling is in native CSS3, without any framework.",
+        "desc": "A Vue 3 task manager that I pushed way beyond the assignment brief: priorities, deadlines, dark mode, i18n and animations. What was supposed to be a simple class exercise became the project that taught me what a real front-end architecture looks like.",
+        "context": "It started as a straightforward JavaScript frameworks course where we had to get hands-on with Vue.js. I could have done the bare minimum, but I wanted to dig deeper. I picked a Todo List because it looks simple on the surface - until you start adding priorities, deadlines, smart sorting, and suddenly you're touching a ton of different concepts. That progressive climb in complexity is what motivated me to go well beyond what was expected.",
+        "objective": "I wanted to build something I'd actually want to use every day. Not just a list of checkboxes, but a real task management app: color-coded priorities, deadlines that visually alert you when overdue, an ergonomic dark mode, and everything in both French and English. The goal was to deliver a polished, finished product - not a homework assignment.",
+        "approach": "I started by breaking the interface into Vue 3 components with the Composition API (<script setup>), giving each one a single responsibility: input (TodoInput), display (TodoList), filters and statistics. That forced me to think about architecture very early on. For persistence, I went with LocalStorage using deep watchers - and once the base was solid, I added dark mode via CSS variables. That's when I understood the power of that system: a single toggle switches the entire theme. The most satisfying part was watching all the pieces come together: filters interacting with sorting, TransitionGroup animations bringing everything to life, and i18n integrating without breaking anything.",
         "features": [
           "Priority management (high, medium, low) with smart sorting",
           "Deadlines with red visual alert when overdue",
@@ -61,15 +98,15 @@
           "Inline editing of text and date directly in the list",
           "Responsive interface with smooth animations (TransitionGroup)"
         ],
-        "learnings": "This project allowed me to deeply understand Vue 3 reactivity, particularly ref, computed, and watch with the deep option. I also learned to structure a front-end application in a modular way, handle client-side persistence, and implement an elegant theming system with CSS variables."
+        "learnings": "This project was a genuine turning point for me with Vue 3. I went from 'I know ref exists' to 'I understand why computed recalculates when a dependency changes'. The watch with deep option gave me trouble at first - an infinite loop when I mutated the watched object - but once I understood it, automatic persistence became second nature. Most importantly, I developed a taste for structuring applications cleanly: one component = one responsibility. It's a habit I've carried into every project since."
       },
       "50ans": {
         "title": "Event Site - 50th Birthday",
         "short": "Mini event site for Karyn's 50th birthday: event info, online registration and guest list.",
-        "desc": "An event mini-site built to celebrate Karyn's 50th birthday. Guests can browse practical information, register via an online form, and view the participant list. This was my very first hosted web project, built in my first year of studies.",
-        "context": "This project was created to solve a real need: centralizing registrations for Karyn's birthday party, especially via phone. I deployed it on PlanetHoster (provided by the school) - my first ever experience going live with a website. I'm keeping it here to show where I started.",
-        "objective": "Provide a simple site, accessible from any device, allowing guests to register for the event, browse practical info (venue, date, dress code, accommodation) and see the up-to-date guest list.",
-        "approach": "Multi-page static site in HTML/CSS/JS with a minimal PHP back-end to handle registrations. Guest data is stored in a JSON file server-side - a simple solution suited to this non-sensitive use case. A JS countdown displays the time remaining before registration closes. The design is festive, colorful and mobile-responsive.",
+        "desc": "My very first website ever deployed. A mini-site for Karyn's birthday, with online registration, practical info, and a guest list. The code is far from perfect, but this is the project that started it all: the first time I saw real people use something I had built.",
+        "context": "This is the very first site I ever put online. My mother needed a simple way for guests to RSVP for Karyn's birthday party, especially from their phones - and me, being a first-year dev student, I thought: 'might as well try it for real'. I got a PlanetHoster hosting account through school and built everything from scratch. It's far from technically perfect, but I'm keeping it in my portfolio because it shows where I started, and how far I've come since.",
+        "objective": "The goal was concrete and simple: a phone-friendly site where guests can register for the party, find practical information (venue, schedule, dress code, accommodation), and see who has already confirmed. No need for anything complex - just something that works and looks decent enough.",
+        "approach": "I kept it as simple as I could with what I knew: HTML, CSS and JavaScript for the front, and a small PHP script to handle the registration form. Guest data is stored in a JSON file server-side - no database, it was more than enough for this use case. I added a JavaScript countdown timer before the RSVP deadline, and a snow/stars effect in the background for the festive vibe. The design is clearly amateur, but the important thing is that it worked: people registered, the list updated, and Karyn got a notification email.",
         "features": [
           "Homepage with dynamic JS countdown and quick links",
           "Registration form with PHP processing and JSON storage",
@@ -78,15 +115,15 @@
           "Background animation (stars / snow effect in JS)",
           "Festive, responsive design for mobile and desktop"
         ],
-        "learnings": "My first hosted web project taught me the practical basics of development: deploying a site to a hosting provider, handling forms server-side with PHP, storing data in a JSON file, sending email notifications to the organizer, and designing a mobile-friendly interface. A solid foundation for everything that followed."
+        "learnings": "This project taught me the most important lesson: that the code you write can have a real impact. Watching actual people register on a site I built, receiving the confirmation email I had programmed myself - that motivated me more than any classroom exercise ever could. Concretely, I learned about deploying to a hosting provider, handling forms server-side with PHP, sending automated emails, and managing a site in production (even a small one). It's the foundation everything else was built on."
       },
       "api-auth": {
         "title": "API Auth Favorites",
         "short": "A secure REST API with JWT authentication, bcrypt hashing, and protected routes.",
-        "desc": "A backend REST API built with Node.js and Express, focused on secure authentication. The project implements a full JWT cycle, secure password storage with bcrypt, route-protection middleware, and a lightweight SQLite database - all with a built-in browser test interface.",
-        "context": "This project grew out of curiosity and experience gained during my apprenticeship - I had encountered authentication concepts at work (JWT, bcrypt, middlewares) without having had the chance to implement them from scratch myself. I decided to build this API to truly understand these mechanisms, with no coursework involved.",
-        "objective": "Understand and master the full server-side authentication cycle: registration, login, JWT generation and verification, route protection via middleware, and secure password storage. The result had to be a functional, testable, and cleanly structured API.",
-        "approach": "The architecture follows a clear separation of concerns: routes, controllers, middlewares, and the database are isolated. Passwords are hashed with bcryptjs (salt + hash), JWT tokens expire after 24 hours and are verified by a middleware injected on protected routes. Helmet secures HTTP headers. An HTML/JS interface is served at the root to test the API without any external tools.",
+        "desc": "A REST authentication API I built from scratch, outside of any coursework, to understand what I kept seeing at my apprenticeship without being able to touch it: JWT, bcrypt, middlewares. The kind of personal project born from frustration that ends up unlocking everything.",
+        "context": "During my apprenticeship, I kept seeing JWT tokens, authentication middlewares, hashed passwords fly by… but I had never implemented them myself. It was frustrating to understand the 'what' without mastering the 'how'. One evening, I decided: I'm going to build a complete auth API, from scratch, no tutorials, just the official docs. This project had nothing to do with school - it was purely to fill a gap I felt every day at work.",
+        "objective": "Build an API where I understand every gear: why you salt a password before hashing it, how a JWT is structured (header.payload.signature), why a middleware goes before the controller and not after, how to secure HTTP headers. I wanted the result to be testable directly in the browser, with no need for Postman or any external client.",
+        "approach": "I started with registration: take a password, hash it with bcrypt, store it in SQLite. Then login: verify the hash, generate a signed JWT with a secret key. Next, the auth middleware that intercepts requests to protected routes and verifies the token. What took the longest was understanding the full flow: when exactly is the token generated, where is it stored client-side, how does it get sent back in headers, and how does the middleware retrieve it to grant or deny access. I added Helmet for header security, and a small HTML/JS interface at the root to test everything in the browser - a choice that turned out to be incredibly useful for debugging.",
         "features": [
           "Registration with bcrypt password hashing (salt + hash)",
           "Login with signed JWT token generation (24h TTL)",
@@ -96,15 +133,15 @@
           "Built-in test interface accessible directly in the browser",
           "HTTP header security with Helmet"
         ],
-        "learnings": "This project allowed me to truly grasp how JWT authentication works end-to-end: generation, transmission in headers, middleware verification. I also understood why bcrypt is essential (salt prevents rainbow table attacks) and how to cleanly structure a Node.js API with a proper routes / controllers / middlewares separation."
+        "learnings": "The 'aha' moment was when I realized that a JWT isn't encrypted - it's just signed. Anyone can read the payload, but nobody can modify it without the secret key. That changed how I think about authentication entirely. I also finally understood the role of salt in bcrypt: two users with the same password will have different hashes, which blocks rainbow table attacks. And the routes/controllers/middlewares structure I adopted here has become my default pattern for every Node.js project since."
       },
       "poke-api": {
         "title": "Pokémon API",
         "short": "Introduction to REST APIs: consuming PokéAPI and building a custom Strapi API connected to a React front-end.",
-        "desc": "A two-part REST API introduction project: a Strapi v5 back-end exposing a Pokémon collection with full CRUD, and a React front-end consuming the API to display interactive cards with sprites, types, HP and cry playback.",
-        "context": "This project was completed as part of an introductory course on back-end development and APIs. The goal was to understand the full cycle of an API: how an HTTP request works, how to structure server-side data, and how to consume it on the client side. The Pokémon theme was chosen to make the exercise concrete and fun, leveraging the rich public PokéAPI as a data source.",
-        "objective": "The project consists of two distinct parts: a Strapi back-end (api-pokemon/) exposing a Pokémon collection with full CRUD endpoints, and a React front-end (pokemon/) consuming the Strapi API and displaying Pokémon as interactive cards. The user can browse the Pokémon list, view their stats (name, type(s), HP, sprite) and listen to their cry via a button.",
-        "approach": "The project is split into two independent applications communicating over HTTP. On the back-end, Strapi v5 auto-generates a full REST API from a Pokémon Content Type (name, idPokemon, type1, type2, hp, sprite, cries) using SQLite as the database. On the front-end, React fetches the API in a useEffect. Data was seeded from PokéAPI using a requests.http file.",
+        "desc": "My first real back-end project: a Pokédex built in two parts - a Strapi v5 API seeded from PokéAPI, and a React front-end displaying Pokémon as interactive cards with sprites, types and cries. The project that made me understand what actually happens between a fetch() and data appearing on screen.",
+        "context": "This was my first real course on back-end development and APIs. Before this, I vaguely knew that a fetch() went off to get data 'somewhere', but that 'somewhere' remained fuzzy. The teacher suggested we work with the Pokémon universe, which instantly made the exercise concrete and motivating. The idea of building my own Pokédex from nothing spoke to me right away.",
+        "objective": "The project breaks down into two parts that communicate: a Strapi back-end exposing a Pokémon collection via a REST API (full CRUD), and a React front-end consuming that API to display Pokémon as interactive cards. Users can see sprites, types, HP, and even listen to each Pokémon's cry. The educational goal was to touch every link in the chain: server-side modeling, REST endpoints, and client-side consumption.",
+        "approach": "On the back-end, I started by creating a Pokémon Content Type in Strapi v5 (name, type1, type2, hp, sprite, cries…), and Strapi auto-generated the REST API - it felt almost magical watching the endpoints appear. The most interesting part was seeding the database: I wrote HTTP requests in a .http file to fetch data from PokéAPI and inject it into my Strapi. On the front-end, I fetched the data with fetch in a React useEffect and built the Pokémon cards with conditional type display. Playing the cries in .ogg via the Web Audio API was a fun little bonus - it makes the whole thing genuinely interactive.",
         "features": [
           "Pokémon grid of cards (name, HP, sprite, type(s))",
           "Conditional type display depending on whether a Pokémon has one or two types",
@@ -113,15 +150,15 @@
           "Lightweight SQLite database, no external server required",
           "API testing via requests.http file (VS Code REST Client)"
         ],
-        "learnings": "This project gave me solid foundations in HTTP protocol (verbs, status codes, headers, JSON), data modeling for an API (Strapi Content Type, field types, constraints), consuming an external API (PokéAPI), building a REST API with Strapi, connecting a front-end to a back-end with fetch + useEffect, and testing an API with a .http file."
+        "learnings": "This project was a genuine revelation about how the web works. I finally understood what happens between the moment I type fetch() and the moment data appears on screen: HTTP verbs, status codes, headers, JSON serialization… everything became concrete. I also discovered Strapi and its ability to generate a full API in just a few clicks - handy for quick prototyping. But most importantly, connecting a React front-end to a Strapi back-end through real HTTP requests made me understand client-server architecture viscerally - more than any classroom diagram ever could."
       },
       "bdd-streaming": {
         "title": "Streaming Platform - Database",
         "short": "Full database design for a streaming platform: conceptual, logical and physical models plus analytical SQL queries.",
-        "desc": "A pair-work course project: designing and implementing a complete streaming platform database (Netflix-inspired) from business analysis to advanced SQL analytics.",
-        "context": "This project was completed as part of a database course at MyDigitalSchool. The goal was to model a realistic use case - a streaming platform with users, profiles, subscriptions, content, watch history, favorites and ratings - with real business constraints to enforce.",
-        "objective": "Deliver a complete database: a conceptual model (CDM), a logical model (LDM with relational tables and keys), a physical SQL model deployable on MySQL, a substantial test dataset (32 users, 40 profiles, 52 items...), and 13 analytical queries covering business use cases.",
-        "approach": "The exclusive Film/Episode inheritance is implemented as a 'table-per-subtype' strategy (shared primary key with `contenu`). N-N relationships (content ↔ genre, favorites, ratings) use junction tables. Business constraints (non-overlapping subscriptions, age restrictions, single rating per profile) are enforced via composite keys, UNIQUE constraints, and ENUMs.",
+        "desc": "A database course project done in pairs: modeling a complete streaming platform (Netflix-inspired) from the conceptual model all the way to analytical SQL queries. The kind of project that looks like 'just tables' at first, then turns into a real puzzle once business rules kick in.",
+        "context": "This database assignment was done in pairs at MyDigitalSchool. The brief: model a Netflix-style streaming platform with everything that entails - users with profiles, subscriptions, a catalog of movies and series, watch history, favorites, ratings. At first, you think it's 'just tables', but very quickly the business constraints make the whole thing way more complex than it appears.",
+        "objective": "The expected deliverable was comprehensive: a clean conceptual model with all entities and relationships, a logical model translated into relational tables with keys, a physical SQL model executable on MySQL, a substantial test dataset (32 users, 40 profiles, 52 content items…), and 13 analytical queries answering concrete business questions. It's the kind of project where every modeling decision ripples through everything else.",
+        "approach": "The main challenge was the exclusive Film/Episode inheritance: content is either a movie or an episode, never both. We implemented this as a 'table-per-subtype' strategy with a shared primary key with the content table. Many-to-many relationships (content ↔ genre, favorites, ratings) use classic junction tables. The real headaches came from business constraints: preventing a user from having overlapping subscriptions, blocking a child profile from 18+ content, ensuring a profile can only rate a piece of content once… All of that translates into composite keys, well-placed UNIQUE constraints, and ENUMs. The test dataset is what took us the longest: 32 users with consistent data, checking at every insertion that we weren't violating any constraint.",
         "features": [
           "Full CDM: 14 entities, exclusive Film/Episode specialization (XT)",
           "Relational LDM with primary and foreign keys",
@@ -130,15 +167,15 @@
           "13 analytical queries: binge-watching, age restrictions, completion rates",
           "Self-join on `historique` to detect binge-watching sessions"
         ],
-        "learnings": "Translating complex business rules into SQL constraints (exclusive inheritance, composite keys, UNIQUE). Mastering WHERE vs HAVING, correlated subqueries, self-joins and TIMESTAMPDIFF. Managing a large, consistent test dataset while anticipating foreign key conflicts and UNIQUE constraint violations."
+        "learnings": "Before this project, SQL meant 'SELECT * FROM table WHERE…'. Afterwards, I can tell WHERE from HAVING with my eyes closed, I can write correlated subqueries, and I understand why a self-join on watch history can detect binge-watching (if the same profile watched multiple episodes of a series within 2 hours). The biggest takeaway: a well-modeled database is 80% of the work. If the conceptual model is solid, the physical model follows naturally."
       },
       "bike": {
         "title": "ReCycle E-Bikes",
         "short": "UI/UX mockup for a fictional eco-friendly electric bike brand showcase website.",
-        "desc": "Mockup designed in Figma for ReCycle E-Bikes, a fictional eco-friendly electric bike brand. The project includes an immersive hero, impact sections, product cards and a testimonials carousel, all with animations designed from the conception stage.",
-        "context": "This project was completed as part of an individual UI/UX mockup exercise, based on a client brief focused on 'eco-friendly electric bikes'. The client wanted a modern website highlighting the positive ecological impact, riding comfort and e-bike innovation, while staying consistent with visual references provided in Figma. The goal was to design a complete and convincing homepage for ReCycle E-Bikes, respecting the provided assets and incorporating a real reflection on animations and content presentation.",
-        "objective": "The expected deliverable was a desktop mockup for a showcase website structured around several key blocks: a strong hero with the message 'Revolutionize Your Commute with ReCycle E-Bikes', an environmental and economic impact section, technical and sustainable arguments, a showcase of bike models (EcoBoost, Nature Ride, Urban Leaf), and a customer testimonials block.",
-        "approach": "The mockup was designed in Figma, working on the overall composition (hero, impact, models, testimonials), art direction (sober yet modern palette, readable typography), and planned animations materialized through variants: header animation, hover effects on cards, transitions on models and the carousel. The goal was purely UI/UX: thinking about motion design at the mockup level, without writing any code.",
+        "desc": "A Figma mockup for ReCycle E-Bikes, a fictional eco-friendly e-bike brand. My challenge: making an 'eco-responsible' topic visually impactful without falling into clichés, and above all, starting to think about animations at the design stage.",
+        "context": "This was an individual UI/UX mockup exercise, with a client brief centered on eco-friendly electric bikes. We were given visual assets and references in Figma, with the constraint of staying consistent with the tone of the fictional brand ReCycle E-Bikes. What interested me in this brief was the challenge of making a 'green' topic visually impactful without falling into the usual clichés.",
+        "objective": "Deliver a complete desktop mockup for a showcase website: a punchy hero with a strong message ('Revolutionize Your Commute'), an environmental impact section with key figures, a bike models showcase, and a customer testimonials carousel. All while thinking about animations from the design phase - not as an afterthought.",
+        "approach": "I started by analyzing the brief and the visual references provided, then structured the page into logical blocks: hook → benefits → products → social proof. The art direction came fairly naturally: a sober palette with green accents, modern and readable typography. What challenged me the most was materializing animations without code: I created Figma variants to show hover behavior on cards, the progressive header animation, and carousel transitions. It's a thinking exercise that forces you to project yourself into the user experience before writing a single line of code.",
         "features": [
           "Immersive hero with 'Revolutionize Your Commute' message and dual call-to-action",
           "Environmental & economic impact section with key figures",
@@ -147,15 +184,15 @@
           "Customer testimonials carousel with navigation",
           "Planned animations (hover, reveal, transitions) materialized as Figma variants"
         ],
-        "learnings": "On this project, I learned to follow a brief while maintaining a strong identity, to work on animations from the mockup stage (imagining header, cards and carousel behavior as variants), to structure a conversion-oriented landing page (hook, benefits, proof, CTA), and to highlight brand values in a clear and credible way."
+        "learnings": "I realized that thinking about animations at the mockup stage completely changes the approach. Instead of 'designing a page and adding animations later', you craft a fluid experience from the start. I also learned to structure a conversion-oriented landing page: the hook grabs attention, the numbers build credibility, the products show the offer, and the testimonials reassure. Most importantly, I understood that you can follow a brief while still bringing your own touch - the two aren't mutually exclusive."
       },
       "lkk": {
         "title": "Lee Kum Kee - Redesign",
         "short": "Group project redesigning the Lee Kum Kee website with art direction and animations.",
-        "desc": "Group project redesigning the Lee Kum Kee website (Asian sauces). The Figma mockup proposes a more modern, readable and appetizing version of the site, with product sections, recipes, newsletter and micro-interactions designed at the design level.",
-        "context": "This project was carried out as part of a group assignment, with a client brief centered on redesigning the Lee Kum Kee website (Asian sauces). The client gave relative creative freedom on style, as long as we respected the general structure (about us, products, recipes, newsletter) and used product/food visuals. The goal was to propose a more modern and appetizing version of the site, while learning to create a professional mockup as a team.",
-        "objective": "Deliver a complete showcase website mockup, featuring a strong homepage with the tagline 'Where True Flavor Begins', Products, About Us, Recipes and Newsletter sections, with appetizing visuals and a professional footer. The idea was to produce a realistic design that could serve as a foundation for a website redesign: coherent navigation, readable hierarchy, respected brand tone.",
-        "approach": "The mockup was created in Figma, working on layout, typography, color scheme and planned animations. We respected the brief's sections, set up product blocks with visuals and CTAs, developed a brand-inspired color palette (deep reds, golds, cream tones) with a detailed color guide, and designed micro-interactions (sauce reveals, recipe card hovers, newsletter pop-in).",
+        "desc": "A group redesign of the Lee Kum Kee website on Figma. Beyond the mockup itself, this is the project that taught me that collaborating on design is just as hard as collaborating on code - maybe harder, because 'good taste' is subjective.",
+        "context": "A group project with a client brief: redesign the Lee Kum Kee website (Asian sauces). We had relative creative freedom as long as we respected the required structure (about us, products, recipes, newsletter). What was new for me was working with multiple people on the same Figma file: dividing sections without losing consistency, agreeing on art direction, merging everything without it looking like a patchwork.",
+        "objective": "Deliver a complete and credible showcase website mockup, with a homepage that makes you want to stay, appetizing product sections, a recipe catalog, a GDPR-friendly newsletter block, and a professional footer. The challenge wasn't just to 'make it pretty', but to propose a realistic design that a real client could approve to launch a redesign.",
+        "approach": "We started by defining the art direction together: a brand-inspired palette (deep reds, golds, cream tones) with a shared color guide so everyone worked with the same colors. Then we split sections based on each person's strengths. I particularly focused on the product blocks and micro-interactions: progressive sauce reveals on scroll, hover effects on recipe cards, newsletter pop-in. The hardest part was maintaining visual consistency when merging several people's work - it taught me the importance of a design system, even a minimal one.",
         "features": [
           "Homepage with 'Where True Flavor Begins' hero and featured products",
           "'About Us' section with sub-sections: Roots, Quality, Sustainability",
@@ -164,15 +201,15 @@
           "Micro-interactions and animations designed at the design level (hover, pop-in, transitions)",
           "Professional footer with full Lee Kum Kee Europe contact information"
         ],
-        "learnings": "On this project, I learned to work from a client brief while proposing a credible creative direction, to collaborate as a group on a mockup (splitting pages, maintaining style consistency), to design animations at the design level (hover, transitions...) and to structure a coherent brand experience through content and visuals."
+        "learnings": "The main lesson: collaborating on design is just as demanding as collaborating on code. We had to find compromises, align on shared rules (spacing, font sizes, border radius…), and be ready to sacrifice a personal idea for the sake of overall consistency. On the technical side, I learned to design realistic micro-interactions at the mockup level and to structure a brand experience that tells a coherent story - from the hero all the way to the footer."
       },
       "rl-wp": {
         "title": "Rocket League Fan Site",
         "short": "Responsive mockup of a Rocket League fan site, designed for WordPress integration.",
-        "desc": "Responsive Figma mockup (desktop + mobile) for an unofficial Rocket League fan site, designed for future WordPress integration. The design includes an immersive homepage, a humorous patch notes blog, a contact page and a structure designed as WordPress templates.",
-        "context": "This project was completed as part of a WordPress integration course at My Digital School in Grenoble. As a passionate Rocket League player, I chose this theme to make the exercise more personal: rather than a generic website, I designed an unofficial fan site dedicated to the game, with its codes, memes and esports culture. The idea was to create a site I would genuinely enjoy visiting as a player.",
-        "objective": "Produce a complete responsive mockup, ready to be integrated into a WordPress theme: an immersive homepage featuring Season 19, a World Championship 2025 section, an editorial section on the game's history, a humorous patch notes blog, and a contact page with form. The result had to be visually coherent and structured for transposition into WordPress templates.",
-        "approach": "The mockup was entirely created in Figma, in both desktop and mobile versions, without animations, with particular attention to visual hierarchy and future WordPress integration. I broke down the site into reusable sections (hero, news blocks, articles, contact, footer), worked on a responsive grid, and set up components (buttons, article cards, patch notes blocks). The mockup anticipates WordPress integration with page, blog and contact templates.",
+        "desc": "A responsive Figma mockup for a Rocket League fan site, designed for WordPress integration. Rather than a generic website, I chose to design around a topic I'm passionate about - with its codes, memes and esports culture. The result is a project I'm genuinely proud of, because the subject truly spoke to me.",
+        "context": "A WordPress integration course with a responsive mockup assignment. Where most of my classmates picked neutral topics, I decided to mock up a Rocket League fan site - a game I've been playing for years. I loved the idea: using the game's codes, memes and esports culture to create a site I'd genuinely enjoy visiting as a player. It made the whole exercise much more personal and motivating.",
+        "objective": "Create a complete responsive mockup (desktop + mobile), designed for WordPress theme integration: an immersive homepage featuring Season 19, a World Championship 2025 section, an editorial section on the game's history, a humorous patch notes blog with the community's tone, and a contact page. Each section needed to be conceived as a potential WordPress template.",
+        "approach": "I worked entirely in Figma, creating the desktop version first then adapting for mobile. The structure is built around reusable sections: hero, news blocks, article cards, contact form, footer. What took the most time was paradoxically the content writing: crafting humorous patch notes in the Rocket League community's tone, telling the game's history from SARPBC, finding the right balance between 'unapologetic fan' and 'professional site'. The responsive grid was also a good exercise for anticipating WordPress behaviors.",
         "features": [
           "Immersive homepage with humorous tagline and Season 19 showcase",
           "World Championship 2025 section at the LOLC Arena in Lyon",
@@ -181,7 +218,7 @@
           "Contact page with form and info (username, social media)",
           "Desktop and mobile responsive design, prepared for WordPress integration"
         ],
-        "learnings": "This project helped me improve on following a brief and structuring a project, designing an 'integrable' mockup (sections, reusable components, responsive from the design stage), working on a design centered on a video game universe (humor and readability), and preparing for WordPress integration (templates, dynamic vs static content, form, footer)."
+        "learnings": "This project showed me the importance of thinking 'integration' from the mockup stage. When you know each section will become a WordPress template, you structure things differently: you distinguish static from dynamic content, you plan a blog with real articles, you think of the form as a plugin. And on a personal level, mixing passion with schoolwork let me produce a result I'm truly proud of - because when the subject speaks to you, you don't count the hours."
       }
     }
   },

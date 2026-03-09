@@ -1,0 +1,173 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+.about__hero {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+}
+
+.about__hero-photo {
+  flex-shrink: 0;
+
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid $dodo-blue;
+    box-shadow: 0 0 30px rgba($dodo-blue, 0.15);
+  }
+
+  @media (max-width: 640px) {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}
+
+.about__hero-text {
+  h1 {
+    margin-bottom: 0.25rem;
+  }
+
+  .text-muted {
+    margin-bottom: 1rem;
+  }
+}
+
+.about__intro {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: $lh-loose;
+}
+
+// ── Sections ──────────────────────────────────────────────────────────────────
+.about__section {
+  margin-bottom: 2.75rem;
+  padding-bottom: 2.75rem;
+  border-bottom: 1px solid rgba($border-color, 0.4);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  h2 {
+    color: $dodo-blue;
+    margin-bottom: 1rem;
+    font-size: var(--fs-lg);
+    font-weight: $fw-semibold;
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: $lh-loose;
+    margin-bottom: 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// ── Quote (Equans) ────────────────────────────────────────────────────────────
+.about__quote {
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid $dodo-blue;
+  background: rgba($dodo-blue, 0.04);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-primary);
+  font-style: italic;
+  line-height: $lh-loose;
+  font-size: var(--fs-sm);
+}
+
+// ── Outside section (text + photo) ────────────────────────────────────────────
+.about__outside-content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+.about__outside-text {
+  flex: 1;
+
+  p {
+    color: var(--text-secondary);
+    line-height: $lh-loose;
+    margin-bottom: 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.about__outside-photo {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  img {
+    width: 220px;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    object-fit: cover;
+  }
+
+  @media (max-width: 640px) {
+    align-self: center;
+
+    img {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+}
+
+.about__photo-caption {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+// ── Future section ────────────────────────────────────────────────────────────
+.about__section--future {
+  text-align: center;
+  border-bottom: none;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.about__cta {
+  margin-top: 1rem;
+  font-size: var(--fs-lg);
+  color: var(--text-primary) !important;
+  font-weight: $fw-semibold;
+}
