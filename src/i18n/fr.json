@@ -28,7 +28,7 @@
       "demo": "Voir la démo",
       "figma": "Ouvrir dans Figma",
       "pdf": "Voir la maquette (PDF)",
-      "figma_hint": "Ouvrez le projet dans Figma pour inspecter la maquette et découvrir les animations.",
+      "figma_hint": "Je vous recommande de consulter la maquette en cliquant sur le lien Figma pour une expérience optimale.",
       "context_title": "Contexte & Motivation",
       "objective_title": "Résultat attendu",
       "approach_title": "Approche technique",
@@ -114,6 +114,23 @@
           "Tests d'API via fichier requests.http (REST Client VS Code)"
         ],
         "learnings": "Ce projet m'a permis de poser des bases solides sur le protocole HTTP (verbes, codes de statut, headers, JSON), la modélisation de données pour une API (Content Type Strapi, types de champs, contraintes), la consommation d'une API externe (PokéAPI), la création d'une API REST avec Strapi, la connexion front/back avec fetch + useEffect, et le test d'API via fichier .http."
+      },
+      "bdd-streaming": {
+        "title": "Plateforme de Streaming - BDD",
+        "short": "Conception complète d'une base de données pour une plateforme de streaming : MCD, MLD, MPD et requêtes SQL analytiques.",
+        "desc": "Projet de cours réalisé en binôme : concevoir et implémenter de A à Z la base de données d'une plateforme de streaming (inspirée de Netflix), depuis l'analyse métier jusqu'à l'écriture de requêtes SQL analytiques avancées.",
+        "context": "Ce projet s'inscrit dans le cadre d'un TP de cours de bases de données à MyDigitalSchool. L'objectif était de modéliser un cas concret et réaliste - plateforme de streaming avec utilisatrices, profils, abonnements, contenus, historique, favoris et notes - en respectant de vraies contraintes métier.",
+        "objective": "Produire une base de données complète : un MCD (entités, relations, cardinalités), un MLD (tables relationnelles avec clés), un MPD SQL exécutable sur MySQL, un jeu de données de test conséquent (32 utilisatrices, 40 profils, 52 contenus...) et 13 requêtes analytiques couvrant les cas métier.",
+        "approach": "L'héritage exclusif Film/Épisode est implémenté en \"table par sous-type\" (clé primaire partagée avec `contenu`). Les relations N-N (contenu ↔ genre, favoris, notes) sont matérialisées par des tables de liaison. Les contraintes métier (abonnements non chevauchants, restriction d'âge, notation unique) sont portées par des clés composites, des UNIQUE et des ENUM.",
+        "features": [
+          "MCD complet : 14 entités, spécialisation exclusive Film/Épisode (XT)",
+          "MLD en tables relationnelles avec clés primaires et étrangères",
+          "MPD SQL MySQL déployable avec contraintes UNIQUE, CASCADE, ENUM",
+          "Jeu de test : 32 utilisatrices, 40 profils, 52 contenus, 11 séries",
+          "13 requêtes analytiques : binge-watching, restrictions d'âge, taux de complétion",
+          "Auto-jointure sur `historique` pour détecter les sessions de binge-watching"
+        ],
+        "learnings": "Traduire des règles métier complexes en contraintes SQL (héritage exclusif, clés composites, UNIQUE). Maîtriser WHERE vs HAVING, les sous-requêtes corrélées, l'auto-jointure et TIMESTAMPDIFF. Gérer un jeu de données volumineux et cohérent en anticipant les conflits de clés étrangères et les violations de contraintes UNIQUE."
       },
       "bike": {
         "title": "ReCycle E-Bikes",

@@ -28,7 +28,7 @@
       "demo": "Live demo",
       "figma": "Open in Figma",
       "pdf": "View mockup (PDF)",
-      "figma_hint": "Open the project in Figma to inspect the mockup and explore the animations.",
+      "figma_hint": "I recommend checking the mockup by clicking on the Figma link for an optimal experience.",
       "context_title": "Context & Motivation",
       "objective_title": "Expected Result",
       "approach_title": "Technical Approach",
@@ -114,6 +114,23 @@
           "API testing via requests.http file (VS Code REST Client)"
         ],
         "learnings": "This project gave me solid foundations in HTTP protocol (verbs, status codes, headers, JSON), data modeling for an API (Strapi Content Type, field types, constraints), consuming an external API (PokéAPI), building a REST API with Strapi, connecting a front-end to a back-end with fetch + useEffect, and testing an API with a .http file."
+      },
+      "bdd-streaming": {
+        "title": "Streaming Platform - Database",
+        "short": "Full database design for a streaming platform: conceptual, logical and physical models plus analytical SQL queries.",
+        "desc": "A pair-work course project: designing and implementing a complete streaming platform database (Netflix-inspired) from business analysis to advanced SQL analytics.",
+        "context": "This project was completed as part of a database course at MyDigitalSchool. The goal was to model a realistic use case - a streaming platform with users, profiles, subscriptions, content, watch history, favorites and ratings - with real business constraints to enforce.",
+        "objective": "Deliver a complete database: a conceptual model (CDM), a logical model (LDM with relational tables and keys), a physical SQL model deployable on MySQL, a substantial test dataset (32 users, 40 profiles, 52 items...), and 13 analytical queries covering business use cases.",
+        "approach": "The exclusive Film/Episode inheritance is implemented as a 'table-per-subtype' strategy (shared primary key with `contenu`). N-N relationships (content ↔ genre, favorites, ratings) use junction tables. Business constraints (non-overlapping subscriptions, age restrictions, single rating per profile) are enforced via composite keys, UNIQUE constraints, and ENUMs.",
+        "features": [
+          "Full CDM: 14 entities, exclusive Film/Episode specialization (XT)",
+          "Relational LDM with primary and foreign keys",
+          "Deployable MySQL SQL physical model with UNIQUE, CASCADE, ENUM constraints",
+          "Test dataset: 32 users, 40 profiles, 52 items, 11 series",
+          "13 analytical queries: binge-watching, age restrictions, completion rates",
+          "Self-join on `historique` to detect binge-watching sessions"
+        ],
+        "learnings": "Translating complex business rules into SQL constraints (exclusive inheritance, composite keys, UNIQUE). Mastering WHERE vs HAVING, correlated subqueries, self-joins and TIMESTAMPDIFF. Managing a large, consistent test dataset while anticipating foreign key conflicts and UNIQUE constraint violations."
       },
       "bike": {
         "title": "ReCycle E-Bikes",

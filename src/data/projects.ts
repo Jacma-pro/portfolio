@@ -22,6 +22,12 @@ import pokeApiCover from '../assets/projects/BACK/poke-api/screen/home.png'
 import pokeApi1 from '../assets/projects/BACK/poke-api/screen/Preview.png'
 import pokeApi2 from '../assets/projects/BACK/poke-api/screen/request.png'
 
+// ── BDD Streaming ──────────────────────────────────────────────────────────────
+import bddCover from '../assets/projects/BACK/BDD/screen/MCD.png'
+import bdd1 from '../assets/projects/BACK/BDD/screen/MLD.png'
+import bdd2 from '../assets/projects/BACK/BDD/screen/MPD.png'
+import bdd3 from '../assets/projects/BACK/BDD/screen/requetes.png'
+
 // ── Mockup: BIKE ───────────────────────────────────────────────────────────────
 import bikeHome from '../assets/projects/MOCKUP/BIKE/screen/home.png'
 import bikeFull from '../assets/projects/MOCKUP/BIKE/screen/full_view.png'
@@ -100,9 +106,12 @@ export const PROJECTS: Project[] = [
     images: [pokeApiCover, pokeApi1, pokeApi2]
   },
   {
-    id: "test",
+    id: "bdd-streaming",
     category: "back",
-    techs: ["tech1", "tech2", "tech3"],
+    cover: bddCover,
+    techs: ["MySQL", "SQL", "phpMyAdmin", "MCD/MLD/MPD"],
+    figma: "https://www.figma.com/board/xzWrSJyFflQarWZLpC6eqz/BDD?node-id=0-1&t=5TnF1ZKUwft95FsV-1",
+    images: [bddCover, bdd1, bdd2, bdd3]
   },
 
   // ── mockup ─────────────────────────────────────────────────────────────────
