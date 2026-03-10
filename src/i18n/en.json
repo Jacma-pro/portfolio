@@ -21,7 +21,7 @@
     "featured_all": "View all projects",
     "stack_title": "My stack",
     "cta_title": "Got a project in mind?",
-    "cta_text": "Whether it's a project, an internship or just a chat — my inbox is always open.",
+    "cta_text": "Whether it's a project, an internship or just a chat - my inbox is always open.",
     "cta_contact": "Get in touch"
   },
   "about": {
@@ -243,6 +243,15 @@
       "sent": "Sent!",
       "success": "Thanks! Your email client should open shortly."
     }
+  },
+  "footer": {
+    "nav_title": "Navigation",
+    "connect_title": "Find me",
+    "built_with": "Designed and built with",
+    "by": "by Dorian Jacolin",
+    "rights": "All rights reserved.",
+    "top": "Back to top",
+    "source": "Source code"
   },
   "game": {
     "idle": "Space / Click to start · Esc to quit",

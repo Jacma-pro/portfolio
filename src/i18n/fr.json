@@ -21,7 +21,7 @@
     "featured_all": "Voir tous les projets",
     "stack_title": "Ma stack",
     "cta_title": "Un projet en tête ?",
-    "cta_text": "Que ce soit pour un projet, un stage ou juste pour échanger — ma boîte mail est toujours ouverte.",
+    "cta_text": "Que ce soit pour un projet, un stage ou juste pour échanger - ma boîte mail est toujours ouverte.",
     "cta_contact": "Me contacter"
   },
   "about": {
@@ -243,6 +243,15 @@
       "sent": "Envoyé !",
       "success": "Merci ! Ton client mail devrait s'ouvrir dans quelques instants."
     }
+  },
+  "footer": {
+    "nav_title": "Navigation",
+    "connect_title": "Me retrouver",
+    "built_with": "Conçu et développé avec",
+    "by": "par Dorian Jacolin",
+    "rights": "Tous droits réservés.",
+    "top": "Haut de page",
+    "source": "Code source"
   },
   "game": {
     "idle": "Espace / Clic pour démarrer · Échap pour quitter",

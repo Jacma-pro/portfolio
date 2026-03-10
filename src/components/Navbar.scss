@@ -45,9 +45,10 @@ $navbar-bp: 700px;
 
       span:first-child {
         font-size: var(--fs-md);
+        color: var(--text-primary);
       }
       span:last-child {
-        text-align: center;
+        text-align: left;
         font-size: var(--fs-base);
       }
     }
