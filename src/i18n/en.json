@@ -48,7 +48,7 @@
     "outside_3": "My friends would say I'm kind, funny, and always there when needed. The nickname Dodo comes from Dorian, but it's always stuck way beyond that. I naturally identified with the bird: warm, endearing, a bit unique in its own way.",
     "future_title": "What's next?",
     "future": "My journey isn't very long yet, but every step has confirmed I'm in the right place. Going forward, I see myself continuing to grow as a fullstack web developer, building projects with real impact, and keeping that connection with people - talking, exchanging, understanding needs. Project manager, tech consultant, or something else entirely: I don't know exactly, and I'm fine with that.",
-    "future_cta": "If you're here, maybe we have something to build together. 🦤"
+    "future_cta": "If you're here, maybe we have something to build together."
   },
   "projects": {
     "title": "Projects",
@@ -116,6 +116,24 @@
           "Festive, responsive design for mobile and desktop"
         ],
         "learnings": "This project taught me the most important lesson: that the code you write can have a real impact. Watching actual people register on a site I built, receiving the confirmation email I had programmed myself - that motivated me more than any classroom exercise ever could. Concretely, I learned about deploying to a hosting provider, handling forms server-side with PHP, sending automated emails, and managing a site in production (even a small one). It's the foundation everything else was built on."
+      },
+      "stegano": {
+        "title": "Stegano Lab",
+        "short": "Educational web app about steganography: course, progressive hands-on lab, LSB encode/decode tools, and quiz assessment.",
+        "desc": "Stegano Lab is a Learning Lab project built at MyDigitalSchool Grenoble. The goal was to make steganography concrete and accessible through a complete 4-part flow (course, lab, tools, assessment), with a deliberately readable LSB implementation designed for classroom use.",
+        "context": "This project came from a real personal spark. I discovered steganography in a YouTube video by \"What a Fail\", and the idea of hiding a message inside an image immediately caught my attention. I quickly saw how this principle connects to broader topics like cybersecurity, information discretion, and even the spy culture often seen in digital content. At the same time, as part of MyDigitalSchool Grenoble, we had to deliver a Learning Lab project with three mandatory parts: a course, a practical lab, and an evaluation. I therefore chose to introduce steganography to the class with a simple, concrete, and progressive approach. There was also a strong third motivation: seriously testing what I could produce with AI on a full project, in real conditions, while still keeping full technical ownership of the final outcome.",
+        "objective": "The expected result was a complete educational web app that allows learners to understand steganography basics, practice with guided exercises, encode and decode a hidden message in an image, and validate their knowledge through a quiz with score tracking. The whole experience had to be clear enough for classroom presentation, backend-free, and based on simple local logic that is easy to launch and demonstrate.",
+        "approach": "The project is built with React, TypeScript, and Vite, and structured into 4 pedagogical pages: Course (definitions, LSB logic, steganography vs cryptography, PNG vs JPEG constraints), Lab (multi-step progression to manipulate bits and decode hidden messages step by step), Tools (image encode/decode area for concrete use cases), and Quiz (10-question MCQ with correction and local score tracking). The technical core is a deliberately readable implementation of LSB (Least Significant Bit): message bits are injected into the least significant bit of pixels (red channel), which minimally impacts visual quality; the decoder reads those bits back in the same order to reconstruct the message, using an end marker to know where to stop. Real-world constraints are handled: PNG is recommended (lossless), JPEG is discouraged (lossy compression can destroy hidden bits), and lab progress plus quiz scores are persisted in localStorage.",
+        "features": [
+          "Educational course on steganography and binary logic applied to images",
+          "Progressive hands-on lab from theory to practice",
+          "Message encoding tool for PNG images",
+          "Decoding tool for previously encoded images",
+          "10-question quiz with detailed corrections",
+          "Local attempt history (best score, average, recent scores)",
+          "Local tracking of lab progress and quiz scores via localStorage"
+        ],
+        "learnings": "This project taught me how to turn a technical topic into a clear educational path for a classroom, structure a simple but complete product experience (theory, practice, assessment), explain steganography vs cryptography in concrete terms, and integrate real image-format constraints (PNG/JPEG) into implementation choices. On the process side, it strongly reinforced how to work effectively with AI on an end-to-end project without losing technical control: provide the right context, frame pedagogical goals, request precise iterations, validate technical coherence, fix what does not hold up, and keep a product-level vision from start to finish. AI can dramatically accelerate production, but final quality still depends on how well you prompt, verify, and decide." 
       },
       "api-auth": {
         "title": "API Auth Favorites",

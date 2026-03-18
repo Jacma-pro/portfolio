@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { PROJECTS } from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
-import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
 import './Home.scss'
 
 /* ── Featured project IDs (hand-picked, in order) ─────────────────────────── */
@@ -37,7 +36,6 @@ const Home = () => {
           <h1 className="home__title">
             {t('home.greeting')}{' '}
             <span className="home__name">{t('home.name')}</span>
-            <img src={dodoSprite} alt="" className="home__dodo-inline" aria-hidden="true" />
           </h1>
 
           <p className="home__role">{t('home.role')}</p>

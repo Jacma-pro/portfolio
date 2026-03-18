@@ -9,6 +9,13 @@ import cinquanteAnsCover from '../assets/projects/FRONT/50ans/screen/home.png'
 import cinquanteAns1 from '../assets/projects/FRONT/50ans/screen/information.png'
 import cinquanteAns2 from '../assets/projects/FRONT/50ans/screen/inscription.png'
 
+// ── Stegano ─────────────────────────────────────────────────────────────────
+import steganoHome from '../assets/projects/FRONT/stegano/screen/home.png'
+import stegano1 from '../assets/projects/FRONT/stegano/screen/learnTp.png'
+import stegano2 from '../assets/projects/FRONT/stegano/screen/praticeTp.png'
+import stegano3 from '../assets/projects/FRONT/stegano/screen/codeMessage.png'
+import stegano4 from '../assets/projects/FRONT/stegano/screen/QCM.png'
+
 // ── api auth ───────────────────────────────────────────────────────────────────
 import apiAuthCover from '../assets/projects/BACK/api-auth/sing.png'
 import apiAuth1 from '../assets/projects/BACK/api-auth/failed.png'
@@ -75,17 +82,21 @@ export const PROJECTS: Project[] = [
     images: [todo1, todo2, todo3]
   },
   {
+    id: "stegano",
+    category: "front",
+    cover: steganoHome,
+    techs: ["React", "TypeScript", "Vite", "LSB", "LocalStorage"],
+    github: "https://github.com/Jacma-pro/stegano-lab",
+    demo: "https://stegano-lab.vercel.app/",
+    images: [stegano2, stegano1, stegano3, steganoHome, stegano4]
+  },
+  {
     id: "50ans",
     category: "front",
     cover: cinquanteAnsCover,
     techs: ["HTML5", "CSS3", "JavaScript", "PHP"],
     github: "https://github.com/Jacma-pro/FRONT_50ans",
     images: [cinquanteAnsCover, cinquanteAns1, cinquanteAns2]
-  },
-  {
-    id: "test",
-    category: "front",
-    techs: ["tech1", "tech2", "tech3"]
   },
 
   // ── Back ───────────────────────────────────────────────────────────────────
