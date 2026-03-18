@@ -37,7 +37,6 @@ const Home = () => {
           <h1 className="home__title">
             {t('home.greeting')}{' '}
             <span className="home__name">{t('home.name')}</span>
-            <img src={dodoSprite} alt="" className="home__dodo-inline" aria-hidden="true" />
           </h1>
 
           <p className="home__role">{t('home.role')}</p>
