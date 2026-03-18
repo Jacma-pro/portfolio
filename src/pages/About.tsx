@@ -68,7 +68,7 @@ const About = () => {
           </div>
           <div className="about__outside-photo">
             <img src={photoSalon} alt="Salon de l'étudiant – MyDigitalSchool" />
-            <span className="about__photo-caption">Salon de l'étudiant</span>
+            <span className="about__photo-caption">Salon de l'étudiant - Nov 2025 - Grenoble</span>
           </div>
         </div>
       </section>
