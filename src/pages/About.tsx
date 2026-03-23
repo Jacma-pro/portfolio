@@ -57,6 +57,14 @@ const About = () => {
         <p>{t('about.alternance')}</p>
       </section>
 
+      {/* ── Comment je fonctionne ─────────────────────────────── */}
+      <section className="about__section">
+        <h2>{t('about.workflow_title')}</h2>
+        <p>{t('about.workflow')}</p>
+        <p>{t('about.workflow_2')}</p>
+        <p>{t('about.workflow_3')}</p>
+      </section>
+
       {/* ── En dehors du code ─────────────────────────────────── */}
       <section className="about__section about__section--outside">
         <h2>{t('about.outside_title')}</h2>
