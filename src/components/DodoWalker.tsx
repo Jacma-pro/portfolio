@@ -30,8 +30,8 @@ const SPEED_H      = 2
 const SPEED_V      = 1
 const TICK_MS         = 120
 const TICK_MS_RAINBOW = 60
-const SPEED_H_RAINBOW = 6
-const SPEED_V_RAINBOW = 3
+const SPEED_H_RAINBOW = 10
+const SPEED_V_RAINBOW = 8
 const PAUSE_CHANCE    = 0.004
 
 const KONAMI_CODE = [
