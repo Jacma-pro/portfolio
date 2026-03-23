@@ -25,6 +25,8 @@ const Footer = () => {
             </span>
           </div>
           <p className="footer__tagline">{t('home.tagline')}</p>
+          <br />
+          <p className="footer__tagline">{t('footer.konami')}</p>
         </div>
 
         {/* ── Nav links ────────────────────────────────────── */}

@@ -266,7 +266,8 @@
     "by": "par Dorian Jacolin",
     "rights": "Tous droits réservés.",
     "top": "Haut de page",
-    "source": "Code source"
+    "source": "Code source",
+    "konami": "↑ ↑ ↓ ↓ ← → ← → b a"
   },
   "game": {
     "idle": "Espace / Clic pour démarrer · Échap pour quitter",
