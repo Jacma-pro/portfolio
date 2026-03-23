@@ -16,7 +16,7 @@ const STACK = [
   'React', 'Vue 3', 'TypeScript', 'Angular',
   'Node.js', 'Express', 'Spring Boot',
   'MySQL', 'SQLite', 'Strapi',
-  'SCSS', 'Figma', 'Git',
+  'SCSS', 'Figma', 'Git'
 ]
 
 const Home = () => {
