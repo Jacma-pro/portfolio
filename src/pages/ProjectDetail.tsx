@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { PROJECTS } from '../data/projects'
@@ -8,6 +9,9 @@ const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>()
   const { t }  = useTranslation()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const project = PROJECTS.find(p => p.id === id)
 
   if (!project) {
