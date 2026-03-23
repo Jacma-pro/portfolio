@@ -24,24 +24,27 @@ const FRAMES = {
 
 type Direction = 'left' | 'right' | 'up' | 'down'
 
-const DODO_SIZE_X    = 30
-const DODO_SIZE_Y    = 30
-const SPEED_H      = 2 
-const SPEED_V      = 1
+const DODO_SIZE_X     = 30
+const DODO_SIZE_Y     = 30
+const SPEED_H         = 2
+const SPEED_V         = 1
 const TICK_MS         = 120
 const TICK_MS_RAINBOW = 60
-const SPEED_H_RAINBOW = 10
-const SPEED_V_RAINBOW = 8
+const SPEED_H_RAINBOW = 20
+const SPEED_V_RAINBOW = 15
 const PAUSE_CHANCE    = 0.004
+const TRAIL_LENGTH    = 8
 
 const KONAMI_CODE = [
   'ArrowUp','ArrowUp','ArrowDown','ArrowDown',
   'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight',
-  'b','a'
+  'b','a',
 ]
 
+type TrailPoint = { x: number; y: number; src: string; hue: number }
+
 function nextSegment(): { dir: Direction; dist: number } {
-  const horizontal = Math.random() < 0.550
+  const horizontal = Math.random() < 0.55
   const dist = 40 + Math.random() * 120
   if (horizontal) {
     return { dir: Math.random() < 0.5 ? 'right' : 'left', dist }
@@ -53,25 +56,25 @@ function nextSegment(): { dir: Direction; dist: number } {
 const DodoWalker = () => {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const [ready, setReady]   = useState(false)
-  const [x,     setX]       = useState(0)
-  const [y,     setY]       = useState(0)
-  const [frame, setFrame]   = useState(0)
-  const [dir,   setDir]     = useState<Direction>('right')
-  const [paused,      setPaused]      = useState(false)
-  const [pauseLeft,   setPauseLeft]   = useState(0)
-  const [gameOpen,    setGameOpen]    = useState(false)
-  const [isRainbow,   setIsRainbow]   = useState(false)
+  const [ready,     setReady]     = useState(false)
+  const [x,         setX]         = useState(0)
+  const [y,         setY]         = useState(0)
+  const [frame,     setFrame]     = useState(0)
+  const [dir,       setDir]       = useState<Direction>('right')
+  const [paused,    setPaused]    = useState(false)
+  const [pauseLeft, setPauseLeft] = useState(0)
+  const [gameOpen,  setGameOpen]  = useState(false)
+  const [isRainbow, setIsRainbow] = useState(false)
+  const [trail,     setTrail]     = useState<TrailPoint[]>([])
 
-  const segRef       = useRef<{ dir: Direction; remaining: number }>(
-    { dir: 'right', remaining: 80 }
-  )
+  const segRef       = useRef<{ dir: Direction; remaining: number }>({ dir: 'right', remaining: 80 })
   const xRef         = useRef(0)
   const yRef         = useRef(0)
   const pausedRef    = useRef(false)
   const pauseLeftRef = useRef(0)
   const isRainbowRef = useRef(false)
   const konamiIdx    = useRef(0)
+  const hueRef       = useRef(0)
 
   useEffect(() => { xRef.current = x },                 [x])
   useEffect(() => { yRef.current = y },                 [y])
@@ -79,6 +82,7 @@ const DodoWalker = () => {
   useEffect(() => { pauseLeftRef.current = pauseLeft }, [pauseLeft])
   useEffect(() => { isRainbowRef.current = isRainbow }, [isRainbow])
 
+  // Konami Code listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = (e.key === 'a' || e.key === 'A') ? 'a'
@@ -98,11 +102,12 @@ const DodoWalker = () => {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  // Init position
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
-    const maxX = container.clientWidth  - DODO_SIZE_X
-    const maxY = container.clientHeight - DODO_SIZE_Y
+    const maxX   = container.clientWidth  - DODO_SIZE_X
+    const maxY   = container.clientHeight - DODO_SIZE_Y
     const startX = Math.random() * maxX
     const startY = Math.random() * Math.max(maxY, 0)
     xRef.current = startX
@@ -115,12 +120,13 @@ const DodoWalker = () => {
     setReady(true)
   }, [])
 
+  // Main loop
   useEffect(() => {
     if (!ready) return
 
-    const tickMs  = isRainbow ? TICK_MS_RAINBOW : TICK_MS
-    const speedH  = isRainbow ? SPEED_H_RAINBOW : SPEED_H
-    const speedV  = isRainbow ? SPEED_V_RAINBOW : SPEED_V
+    const tickMs = isRainbow ? TICK_MS_RAINBOW : TICK_MS
+    const speedH = isRainbow ? SPEED_H_RAINBOW : SPEED_H
+    const speedV = isRainbow ? SPEED_V_RAINBOW : SPEED_V
 
     const interval = setInterval(() => {
       const container = containerRef.current
@@ -142,10 +148,9 @@ const DodoWalker = () => {
         return
       }
 
-      const seg = segRef.current
-
-      let newX = xRef.current
-      let newY = yRef.current
+      const seg   = segRef.current
+      let newX    = xRef.current
+      let newY    = yRef.current
       let hitWall = false
 
       if (seg.dir === 'right') {
@@ -164,18 +169,30 @@ const DodoWalker = () => {
 
       seg.remaining -= seg.dir === 'right' || seg.dir === 'left' ? speedH : speedV
       if (seg.remaining <= 0 || hitWall) {
-        const next = nextSegment()
+        const next      = nextSegment()
         const forbidden = hitWall
           ? seg.dir === 'right' ? 'right'
           : seg.dir === 'left'  ? 'left'
           : seg.dir === 'down'  ? 'down' : 'up'
           : null
-        const finalDir = forbidden && next.dir === forbidden
+        const finalDir  = forbidden && next.dir === forbidden
           ? (next.dir === 'right' ? 'left' : next.dir === 'left' ? 'right'
            : next.dir === 'down'  ? 'up'   : 'down') as Direction
           : next.dir
         segRef.current = { dir: finalDir, remaining: next.dist }
         setDir(finalDir)
+      }
+
+      // Update trail before moving
+      if (isRainbowRef.current) {
+        hueRef.current = (hueRef.current + 25) % 360
+        const currentSrc = FRAMES[segRef.current.dir][frame]
+        setTrail(prev => [
+          { x: xRef.current, y: yRef.current, src: currentSrc, hue: hueRef.current },
+          ...prev.slice(0, TRAIL_LENGTH - 1),
+        ])
+      } else {
+        setTrail([])
       }
 
       setX(newX)
@@ -186,24 +203,52 @@ const DodoWalker = () => {
     return () => clearInterval(interval)
   }, [ready, isRainbow])
 
+  if (!ready) return <div className="dodo-walker" ref={containerRef} aria-hidden="true" />
+
   const src            = FRAMES[dir][paused ? 1 : frame]
   const transitionTime = isRainbow ? '0.06s' : '0.12s'
 
   return (
     <>
       <div className="dodo-walker" ref={containerRef} aria-hidden="true">
+
+        {/* Trail ghosts */}
+        {isRainbow && trail.map((point, i) => {
+          const opacity = (1 - (i + 1) / (TRAIL_LENGTH + 1)) * 0.65
+          const scale   = 1 - i * 0.035
+          return (
+            <img
+              key={i}
+              className="dodo-walker__trail"
+              src={point.src}
+              alt=""
+              style={{
+                left:           `${point.x}px`,
+                top:            `${point.y}px`,
+                width:          `${DODO_SIZE_X}px`,
+                height:         `${DODO_SIZE_Y}px`,
+                imageRendering: 'pixelated',
+                opacity,
+                transform:      `scale(${scale})`,
+                filter:         `hue-rotate(${point.hue}deg) brightness(1.5) saturate(1.5)`,
+              }}
+            />
+          )
+        })}
+
+        {/* Main sprite */}
         <img
           className={`dodo-walker__sprite${isRainbow ? ' dodo-walker__sprite--rainbow' : ''}`}
           src={src}
           alt=""
           onClick={() => setGameOpen(true)}
           style={{
-            left:            `${x}px`,
-            top:             `${y}px`,
-            width:           `${DODO_SIZE_X}px`,
-            height:          `${DODO_SIZE_Y}px`,
-            imageRendering:  'pixelated',
-            transition:      `left ${transitionTime} linear, top ${transitionTime} linear`,
+            left:           `${x}px`,
+            top:            `${y}px`,
+            width:          `${DODO_SIZE_X}px`,
+            height:         `${DODO_SIZE_Y}px`,
+            imageRendering: 'pixelated',
+            transition:     `left ${transitionTime} linear, top ${transitionTime} linear`,
           }}
         />
       </div>
