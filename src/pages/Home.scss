@@ -13,22 +13,28 @@
   padding: 2rem 0 3rem;
 
   @media (max-width: 700px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
     text-align: center;
-    gap: 2rem;
+    gap: 0;
     padding: 1rem 0 2rem;
   }
 }
 
 .home__hero-content {
   flex: 1;
+
+  @media (max-width: 700px) {
+    display: contents;
+  }
 }
 
 .home__hero-visual {
   flex-shrink: 0;
 
   @media (max-width: 700px) {
-    order: -1;
+    order: 5;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -47,6 +53,11 @@
   border-radius: 999px;
   padding: 0.3rem 0.85rem;
   margin-bottom: 1.25rem;
+
+  @media (max-width: 700px) {
+    order: 6;
+    margin-bottom: 0;
+  }
 }
 
 .home__badge-dot {
@@ -69,6 +80,10 @@
   color: $text-primary;
   margin-bottom: 0.25rem;
   line-height: 1.15;
+
+  @media (max-width: 700px) {
+    order: 1;
+  }
 
   @media (max-width: 640px) {
     font-size: $fs-2xl;
@@ -105,6 +120,10 @@
   color: $text-secondary;
   margin-bottom: 0.75rem;
   font-weight: $fw-medium;
+
+  @media (max-width: 700px) {
+    order: 2;
+  }
 }
 
 .home__tagline {
@@ -114,6 +133,7 @@
   margin-bottom: 1.75rem;
 
   @media (max-width: 700px) {
+    order: 3;
     margin-left: auto;
     margin-right: auto;
   }
@@ -157,6 +177,8 @@
 
   @media (max-width: 700px) {
     justify-content: center;
+    order: 4;
+    margin-bottom: 2rem;
   }
 }
 

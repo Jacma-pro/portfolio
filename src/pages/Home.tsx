@@ -6,7 +6,7 @@ import photoMe from '../assets/aboutme/photo/me.jpeg'
 import './Home.scss'
 
 /* ── Featured project IDs (hand-picked, in order) ─────────────────────────── */
-const FEATURED_IDS = ['super-todo', 'api-auth', 'bike']
+const FEATURED_IDS = ['stegano', 'bdd-streaming', 'rl-wp']
 const FEATURED = FEATURED_IDS
   .map(id => PROJECTS.find(p => p.id === id))
   .filter(Boolean) as typeof PROJECTS
