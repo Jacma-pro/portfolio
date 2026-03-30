@@ -60,6 +60,7 @@ const DodoWalker = () => {
   const [x,         setX]         = useState(0)
   const [y,         setY]         = useState(0)
   const [frame,     setFrame]     = useState(0)
+  const frameRef = useRef(0)
   const [dir,       setDir]       = useState<Direction>('right')
   const [paused,    setPaused]    = useState(false)
   const [pauseLeft, setPauseLeft] = useState(0)
@@ -186,7 +187,7 @@ const DodoWalker = () => {
       // Update trail before moving
       if (isRainbowRef.current) {
         hueRef.current = (hueRef.current + 25) % 360
-        const currentSrc = FRAMES[segRef.current.dir][frame]
+        const currentSrc = FRAMES[segRef.current.dir][frameRef.current]
         setTrail(prev => [
           { x: xRef.current, y: yRef.current, src: currentSrc, hue: hueRef.current },
           ...prev.slice(0, TRAIL_LENGTH - 1),
@@ -197,7 +198,8 @@ const DodoWalker = () => {
 
       setX(newX)
       setY(newY)
-      setFrame(f => (f + 1) % 3)
+      frameRef.current = (frameRef.current + 1) % 3
+      setFrame(frameRef.current)
     }, tickMs)
 
     return () => clearInterval(interval)
