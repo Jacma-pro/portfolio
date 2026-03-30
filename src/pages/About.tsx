@@ -85,6 +85,7 @@ const About = () => {
       <section className="about__section about__section--future">
         <h2>{t('about.future_title')}</h2>
         <p>{t('about.future')}</p>
+        <p>{t('about.future_2')}</p>
         <p className="about__cta">{t('about.future_cta')}</p>
       </section>
 
