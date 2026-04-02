@@ -66,8 +66,9 @@
       "mockup": "Maquettes"
     },
     "filter": {
-      "label": "Filtrer par catégorie",
-      "all": "Tous"
+      "label": "Filtrer par catégorie et technologie",
+      "all": "Tous",
+      "techs": "Technologies"
     },
     "detail": {
       "techs": "Technologies",

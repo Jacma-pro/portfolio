@@ -66,8 +66,9 @@
       "mockup": "Mockups"
     },
     "filter": {
-      "label": "Filter by category",
-      "all": "All"
+      "label": "Filter by category and technology",
+      "all": "All",
+      "techs": "Technologies"
     },
     "detail": {
       "techs": "Technologies",

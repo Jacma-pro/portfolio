@@ -1,12 +1,19 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
 
+.project-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+}
+
 .project-filter {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2.5rem;
-  margin-top: 1.5rem;
 
   &__btn {
     display: inline-flex;
@@ -43,6 +50,87 @@
       background: rgba($dodo-blue, 0.12);
       border-color: $dodo-blue;
       color: $dodo-blue;
+    }
+  }
+}
+
+.project-filter-tech {
+  position: relative;
+  
+  &__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+  }
+  
+  &__arrow {
+    font-size: 0.6rem;
+    opacity: 0.7;
+    margin-left: 0.25rem;
+  }
+  
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 10;
+    background: $bg-secondary;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 0.5rem;
+    min-width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    
+    // Smooth scrollbar
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $border-color;
+      border-radius: 3px;
+    }
+  }
+  
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    
+    &:hover {
+      background: rgba($dodo-blue, 0.08);
+    }
+    
+    input[type='checkbox'] {
+      margin: 0;
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+      accent-color: $dodo-blue;
+    }
+    
+    .project-filter-tech__label {
+      font-family: $font-mono;
+      font-size: $fs-xs;
+      color: $text-secondary;
+    }
+    
+    &:hover .project-filter-tech__label {
+      color: $text-primary;
+    }
+    
+    input[type='checkbox']:checked + .project-filter-tech__label {
+      color: $dodo-blue;
+      font-weight: $fw-bold;
     }
   }
 }

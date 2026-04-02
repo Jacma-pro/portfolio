@@ -8,11 +8,16 @@ import './Projects.scss'
 const Projects = () => {
   const { t } = useTranslation()
   const [activeFilters, setActiveFilters] = useState<Category[]>([])
+  const [activeTechs, setActiveTechs] = useState<string[]>([])
 
-  const isFiltered = activeFilters.length > 0
+  const isFiltered = activeFilters.length > 0 || activeTechs.length > 0
 
   const filteredProjects = isFiltered
-    ? PROJECTS.filter(p => activeFilters.includes(p.category))
+    ? PROJECTS.filter(p => {
+        const matchesCategory = activeFilters.length === 0 || activeFilters.includes(p.category)
+        const matchesTech = activeTechs.length === 0 || p.techs.some(tech => activeTechs.includes(tech))
+        return matchesCategory && matchesTech
+      })
     : null
 
   return (
@@ -20,7 +25,12 @@ const Projects = () => {
       <h1>{t('projects.title')}</h1>
       <p className="text-muted">{t('projects.subtitle')}</p>
 
-      <ProjectFilter active={activeFilters} onChange={setActiveFilters} />
+      <ProjectFilter 
+        active={activeFilters} 
+        onChange={setActiveFilters} 
+        activeTechs={activeTechs}
+        onChangeTechs={setActiveTechs}
+      />
 
       {isFiltered ? (
         <div className={`projects-flat-grid${isFiltered ? ' projects-flat-grid--visible' : ''}`}>
