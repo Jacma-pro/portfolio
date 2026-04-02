@@ -9,14 +9,29 @@ const Projects = () => {
   const { t } = useTranslation()
   const [activeFilters, setActiveFilters] = useState<Category[]>([])
   const [activeTechs, setActiveTechs] = useState<string[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const isFiltered = activeFilters.length > 0 || activeTechs.length > 0
+  const isFiltered = activeFilters.length > 0 || activeTechs.length > 0 || searchQuery.trim().length > 0
 
   const filteredProjects = isFiltered
     ? PROJECTS.filter(p => {
         const matchesCategory = activeFilters.length === 0 || activeFilters.includes(p.category)
         const matchesTech = activeTechs.length === 0 || p.techs.some(tech => activeTechs.includes(tech))
-        return matchesCategory && matchesTech
+        
+        const searchLower = searchQuery.toLowerCase().trim()
+        let matchesSearch = true
+        
+        if (searchLower) {
+          const title = t(`projects.items.${p.id}.title`).toLowerCase()
+          const desc = t(`projects.items.${p.id}.short`).toLowerCase()
+          const catName = t(`projects.categories.${p.category}`).toLowerCase()
+          const techNames = p.techs.join(' ').toLowerCase()
+          
+          const combinedString = `${title} ${desc} ${catName} ${techNames}`
+          matchesSearch = combinedString.includes(searchLower)
+        }
+
+        return matchesCategory && matchesTech && matchesSearch
       })
     : null
 
@@ -30,6 +45,8 @@ const Projects = () => {
         onChange={setActiveFilters} 
         activeTechs={activeTechs}
         onChangeTechs={setActiveTechs}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
       />
 
       {isFiltered ? (

@@ -68,7 +68,8 @@
     "filter": {
       "label": "Filter by category and technology",
       "all": "All",
-      "techs": "Technologies"
+      "techs": "Technologies",
+      "search": "Search for a project..."
     },
     "detail": {
       "techs": "Technologies",

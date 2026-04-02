@@ -13,9 +13,11 @@ interface Props {
   onChange: (cats: Category[]) => void
   activeTechs: string[]
   onChangeTechs: (techs: string[]) => void
+  searchQuery: string
+  onSearchChange: (query: string) => void
 }
 
-const ProjectFilter = ({ active, onChange, activeTechs, onChangeTechs }: Props) => {
+const ProjectFilter = ({ active, onChange, activeTechs, onChangeTechs, searchQuery, onSearchChange }: Props) => {
   const { t } = useTranslation()
   const [isTechDropdownOpen, setIsTechDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -54,6 +56,16 @@ const ProjectFilter = ({ active, onChange, activeTechs, onChangeTechs }: Props) 
 
   return (
     <div className="project-filter-container">
+      <div className="project-filter-search">
+        <input
+          type="text"
+          placeholder={t('projects.filter.search')}
+          value={searchQuery}
+          onChange={e => onSearchChange(e.target.value)}
+          className="project-filter-search__input"
+        />
+      </div>
+
       <div className="project-filter" role="group" aria-label={t('projects.filter.label')}>
         <button
           type="button"

@@ -10,6 +10,40 @@
   margin-top: 1.5rem;
 }
 
+.project-filter-search {
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: auto;
+    flex-grow: 1;
+    max-width: 320px;
+    margin-right: auto;
+  }
+
+  &__input {
+    width: 100%;
+    font-family: $font-primary;
+    font-size: $fs-sm;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid $border-color;
+    background: transparent;
+    color: $text-primary;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      background: rgba($bg-secondary, 0.4);
+      border-color: $dodo-blue;
+      box-shadow: 0 0 0 2px rgba($dodo-blue, 0.15);
+    }
+  }
+}
+
 .project-filter {
   display: flex;
   flex-wrap: wrap;
