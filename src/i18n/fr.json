@@ -65,6 +65,10 @@
       "back": "Back-end",
       "mockup": "Maquettes"
     },
+    "filter": {
+      "label": "Filtrer par catégorie",
+      "all": "Tous"
+    },
     "detail": {
       "techs": "Technologies",
       "demo": "Voir la démo",

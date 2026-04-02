@@ -65,6 +65,10 @@
       "back": "Back-end",
       "mockup": "Mockups"
     },
+    "filter": {
+      "label": "Filter by category",
+      "all": "All"
+    },
     "detail": {
       "techs": "Technologies",
       "demo": "Live demo",
@@ -138,7 +142,7 @@
           "Local attempt history (best score, average, recent scores)",
           "Local tracking of lab progress and quiz scores via localStorage"
         ],
-        "learnings": "This project taught me how to turn a technical topic into a clear educational path for a classroom, structure a simple but complete product experience (theory, practice, assessment), explain steganography vs cryptography in concrete terms, and integrate real image-format constraints (PNG/JPEG) into implementation choices. On the process side, it strongly reinforced how to work effectively with AI on an end-to-end project without losing technical control: provide the right context, frame pedagogical goals, request precise iterations, validate technical coherence, fix what does not hold up, and keep a product-level vision from start to finish. AI can dramatically accelerate production, but final quality still depends on how well you prompt, verify, and decide." 
+        "learnings": "This project taught me how to turn a technical topic into a clear educational path for a classroom, structure a simple but complete product experience (theory, practice, assessment), explain steganography vs cryptography in concrete terms, and integrate real image-format constraints (PNG/JPEG) into implementation choices. On the process side, it strongly reinforced how to work effectively with AI on an end-to-end project without losing technical control: provide the right context, frame pedagogical goals, request precise iterations, validate technical coherence, fix what does not hold up, and keep a product-level vision from start to finish. AI can dramatically accelerate production, but final quality still depends on how well you prompt, verify, and decide."
       },
       "api-auth": {
         "title": "API Auth Favorites",

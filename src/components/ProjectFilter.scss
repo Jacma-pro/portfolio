@@ -1,0 +1,48 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
+.project-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid $border-color;
+    background: transparent;
+    color: $text-secondary;
+    cursor: pointer;
+    transition: color 0.18s ease, border-color 0.18s ease,
+                background 0.18s ease, transform 0.15s ease;
+
+    &:hover {
+      color: $text-primary;
+      border-color: rgba($dodo-blue, 0.5);
+      transform: translateY(-1px);
+    }
+
+    // -- Generic active state --
+    &--active {
+      background: rgba($dodo-blue, 0.1);
+      border-color: $dodo-blue;
+      color: $dodo-blue;
+    }
+
+    // -- Active state --
+    --active {
+      background: rgba($dodo-blue, 0.12);
+      border-color: $dodo-blue;
+      color: $dodo-blue;
+    }
+  }
+}

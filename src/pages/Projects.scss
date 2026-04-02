@@ -2,12 +2,34 @@
 @use '../styles/fonts/font' as *;
 
 .projects-library {
-  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
+  animation: fade-in 0.22s ease both;
 }
 
+/* ── Flat filtered grid ─────────────────────────────────────────────────────── */
+.projects-flat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  animation: fade-in 0.22s ease both;
+
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Grouped categories ────────────────────────────────────────────────────── */
 .projects-category {
   &__header {
     display: flex;
@@ -30,13 +52,6 @@
     flex: 1;
     height: 1px;
     background: $border-color;
-  }
-
-  &__title {
-    font-size: 1.25rem;
-    font-weight: $fw-bold;
-    color: $text-primary;
-    margin: 0 0 0.25rem;
   }
 
   &__grid {
