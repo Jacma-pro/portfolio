@@ -5,6 +5,19 @@ import ProjectCard from '../components/ProjectCard'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
 import './Home.scss'
 
+declare const __BUILD_DATE__: string;
+
+const getDaysSinceUpdate = (dateString: string) => {
+  try {
+    const buildDate = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - buildDate.getTime());
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  } catch {
+    return 0;
+  }
+};
+
 /* ── Featured project IDs (hand-picked, in order) ─────────────────────────── */
 const FEATURED_IDS = ['stegano', 'bdd-streaming', 'rl-wp']
 const FEATURED = FEATURED_IDS
@@ -21,6 +34,7 @@ const STACK = [
 
 const Home = () => {
   const { t } = useTranslation()
+  const daysSinceUpdate = typeof __BUILD_DATE__ !== 'undefined' ? getDaysSinceUpdate(__BUILD_DATE__) : 0;
 
   return (
     <main className="page page--home">
@@ -72,8 +86,8 @@ const Home = () => {
           <span className="home__stat-label">{t('home.stats_techs')}</span>
         </div>
         <div className="home__stat">
-          <span className="home__stat-number">1</span>
-          <span className="home__stat-label">{t('home.stats_xp')}</span>
+          <span className="home__stat-number">{daysSinceUpdate}</span>
+          <span className="home__stat-label">{t('home.stats_update')}</span>
         </div>
       </section>
 
