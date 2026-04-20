@@ -1,0 +1,111 @@
+@use '../styles/colors/colors' as *;
+@use '../styles/fonts/font' as *;
+
+.about-nav {
+  /* ── Desktop : sticky sidebar pleine hauteur ───────────── */
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+
+  /* ── Mobile : dots fixes sur le bord droit ─────────────── */
+  @media (max-width: 900px) {
+    position: fixed;
+    top: 50%;
+    right: 0.75rem;
+    height: 40vh;
+    transform: translateY(-50%);
+    z-index: 40;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1;
+    position: relative;
+
+    /* Ligne verticale connectrice (desktop uniquement) */
+    @media (min-width: 901px) {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba($border-color, 0.45);
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.45rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+
+    @media (max-width: 900px) {
+      gap: 0;
+      padding: 0.35rem 0;
+    }
+
+    &:hover:not(.about-nav__item--active) {
+      .about-nav__dot { border-color: $dodo-blue; }
+      .about-nav__label { color: $text-secondary; }
+    }
+
+    &--active {
+      .about-nav__dot {
+        background: $dodo-blue;
+        border-color: $dodo-blue;
+        box-shadow: 0 0 8px rgba($dodo-blue, 0.45);
+      }
+      .about-nav__label { color: $dodo-blue; }
+    }
+  }
+
+  &__dot {
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 2px solid rgba($border-color, 0.7);
+    background: $bg-primary;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 900px) {
+      width: 8px;
+      height: 8px;
+      border-width: 1.5px;
+    }
+  }
+
+  &__label {
+    font-family: $font-mono;
+    font-size: 0.75rem;
+    font-weight: $fw-semibold;
+    color: $text-muted;
+    letter-spacing: 0.04em;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 130px;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+}

@@ -1,6 +1,25 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
 
+// ── Page override ─────────────────────────────────────────────────────────────
+.page--about {
+  max-width: 1080px;
+}
+
+// ── Body layout (sidebar + content) ───────────────────────────────────────────
+.about__body {
+  @media (min-width: 901px) {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+.about__content {
+  min-width: 0;
+}
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 .about__hero {
   display: flex;
