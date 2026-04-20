@@ -5,8 +5,63 @@ import './ProjectFilter.scss'
 
 const ALL_CATEGORIES: Category[] = ['front', 'back', 'mockup']
 
-// Extrait toutes les technos uniques triées par ordre alphabétique
 const ALL_TECHS = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).sort((a, b) => a.localeCompare(b))
+
+const DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+
+const TECH_ICONS: Record<string, { icon: string; invert?: boolean }> = {
+  'Angular':      { icon: 'angular/angular-original' },
+  'CSS3':         { icon: 'css3/css3-original' },
+  'Docker':       { icon: 'docker/docker-original' },
+  'Express.js':   { icon: 'express/express-original', invert: true },
+  'Figma':        { icon: 'figma/figma-original' },
+  'HTML5':        { icon: 'html5/html5-original' },
+  'Java':         { icon: 'java/java-original' },
+  'JavaScript':   { icon: 'javascript/javascript-original' },
+  'MySQL':        { icon: 'mysql/mysql-original' },
+  'NestJS':       { icon: 'nestjs/nestjs-original' },
+  'Node.js':      { icon: 'nodejs/nodejs-original' },
+  'PHP':          { icon: 'php/php-original' },
+  'PostgreSQL':   { icon: 'postgresql/postgresql-original' },
+  'React':        { icon: 'react/react-original' },
+  'React 19':     { icon: 'react/react-original' },
+  'SCSS':         { icon: 'sass/sass-original' },
+  'Spring Boot':  { icon: 'spring/spring-original' },
+  'SQLite':       { icon: 'sqlite/sqlite-original' },
+  'SQLite3':      { icon: 'sqlite/sqlite-original' },
+  'Strapi':       { icon: 'strapi/strapi-original' },
+  'Strapi v5':    { icon: 'strapi/strapi-original' },
+  'Supabase':     { icon: 'supabase/supabase-original' },
+  'TypeScript':   { icon: 'typescript/typescript-original' },
+  'Vite':         { icon: 'vitejs/vitejs-original' },
+  'Vue 3':        { icon: 'vuejs/vuejs-original' },
+}
+
+const FallbackIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="project-filter-tech__icon project-filter-tech__icon--fallback" aria-hidden="true">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+)
+
+const TechIcon = ({ tech }: { tech: string }) => {
+  const [failed, setFailed] = useState(false)
+  const iconInfo = TECH_ICONS[tech]
+
+  if (!iconInfo || failed) return <FallbackIcon />
+
+  return (
+    <img
+      src={`${DI}/${iconInfo.icon}.svg`}
+      alt=""
+      width="16"
+      height="16"
+      aria-hidden="true"
+      className={`project-filter-tech__icon${iconInfo.invert ? ' project-filter-tech__icon--invert' : ''}`}
+      onError={() => setFailed(true)}
+    />
+  )
+}
 
 interface Props {
   active: Category[]
@@ -112,6 +167,7 @@ const ProjectFilter = ({ active, onChange, activeTechs, onChangeTechs, searchQue
                   checked={activeTechs.includes(tech)}
                   onChange={() => handleToggleTech(tech)}
                 />
+                <TechIcon tech={tech} />
                 <span className="project-filter-tech__label">{tech}</span>
               </label>
             ))}

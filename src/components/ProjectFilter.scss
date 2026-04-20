@@ -152,6 +152,16 @@
       accent-color: $dodo-blue;
     }
     
+    .project-filter-tech__icon {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      flex-shrink: 0;
+
+      &--invert   { filter: brightness(0) invert(0.65); }
+      &--fallback { color: $text-muted; opacity: 0.5; }
+    }
+
     .project-filter-tech__label {
       font-family: $font-mono;
       font-size: $fs-xs;

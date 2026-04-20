@@ -48,12 +48,54 @@ const SOFT_SKILLS = [
   },
 ] as const
 
-const HARD_SKILLS = [
-  { category: 'Frontend', color: 'blue',   items: ['React', 'Vue 3', 'Angular', 'TypeScript', 'SCSS'] },
-  { category: 'Backend',  color: 'teal',   items: ['Node.js', 'Express','NestJS','Java', 'Spring Boot'] },
-  { category: 'Data',     color: 'yellow', items: ['MySQL', 'SQLite','PostgreSQL', 'Strapi'] },
-  { category: 'Outils',   color: 'pink',   items: ['VS Code','IntelliJ', 'WebStorm' ,'Git', 'Github', 'Gitlab', 'Docker', 'Figma'] },
-] as const
+const DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+
+type SkillItem = { name: string; icon: string; url: string; invert?: boolean }
+type SkillGroup = { category: string; color: 'blue' | 'teal' | 'yellow' | 'pink'; items: SkillItem[] }
+
+const HARD_SKILLS: SkillGroup[] = [
+  {
+    category: 'Frontend', color: 'blue' as const,
+    items: [
+      { name: 'React',      icon: 'react/react-original',           url: 'https://react.dev' },
+      { name: 'Vue 3',      icon: 'vuejs/vuejs-original',           url: 'https://vuejs.org' },
+      { name: 'Angular',    icon: 'angular/angular-original',       url: 'https://angular.dev' },
+      { name: 'TypeScript', icon: 'typescript/typescript-original', url: 'https://www.typescriptlang.org' },
+      { name: 'SCSS',       icon: 'sass/sass-original',             url: 'https://sass-lang.com' },
+    ],
+  },
+  {
+    category: 'Backend', color: 'teal' as const,
+    items: [
+      { name: 'Node.js',     icon: 'nodejs/nodejs-original',   url: 'https://nodejs.org' },
+      { name: 'Express',     icon: 'express/express-original', url: 'https://expressjs.com', invert: true },
+      { name: 'NestJS',      icon: 'nestjs/nestjs-original',   url: 'https://nestjs.com' },
+      { name: 'Java',        icon: 'java/java-original',       url: 'https://www.java.com' },
+      { name: 'Spring Boot', icon: 'spring/spring-original',   url: 'https://spring.io' },
+    ],
+  },
+  {
+    category: 'Data', color: 'yellow' as const,
+    items: [
+      { name: 'MySQL',      icon: 'mysql/mysql-original',           url: 'https://www.mysql.com' },
+      { name: 'PostgreSQL', icon: 'postgresql/postgresql-original', url: 'https://www.postgresql.org' },
+      { name: 'SQLite',     icon: 'sqlite/sqlite-original',         url: 'https://www.sqlite.org' }
+    ],
+  },
+  {
+    category: 'Outils', color: 'pink' as const,
+    items: [
+      { name: 'VS Code',  icon: 'vscode/vscode-original',     url: 'https://code.visualstudio.com' },
+      { name: 'IntelliJ', icon: 'intellij/intellij-original', url: 'https://www.jetbrains.com/idea' },
+      { name: 'WebStorm', icon: 'webstorm/webstorm-original', url: 'https://www.jetbrains.com/webstorm' },
+      { name: 'Git',      icon: 'git/git-original',           url: 'https://git-scm.com' },
+      { name: 'GitHub',   icon: 'github/github-original',     url: 'https://github.com',   invert: true },
+      { name: 'GitLab',   icon: 'gitlab/gitlab-original',     url: 'https://gitlab.com' },
+      { name: 'Docker',   icon: 'docker/docker-original',     url: 'https://www.docker.com' },
+      { name: 'Figma',    icon: 'figma/figma-original',       url: 'https://www.figma.com' },
+    ],
+  },
+]
 
 const Home = () => {
   const { t } = useTranslation()
@@ -161,7 +203,23 @@ const Home = () => {
                 <span className={`home__hard-label home__hard-label--${group.color}`}>{group.category}</span>
                 <div className="home__hard-chips">
                   {group.items.map(item => (
-                    <span key={item} className={`home__chip home__chip--${group.color}`}>{item}</span>
+                    <a
+                      key={item.name}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`home__chip home__chip--${group.color}`}
+                    >
+                      <img
+                        src={`${DI}/${item.icon}.svg`}
+                        alt=""
+                        className={`home__chip-icon${item.invert ? ' home__chip-icon--invert' : ''}`}
+                        width="16"
+                        height="16"
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
                   ))}
                 </div>
               </div>

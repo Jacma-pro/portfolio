@@ -407,7 +407,9 @@
 }
 
 .home__chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: $font-mono;
   font-size: $fs-xs;
   font-weight: $fw-semibold;
@@ -417,12 +419,22 @@
   border-radius: 6px;
   padding: 0.3rem 0.7rem;
   letter-spacing: 0.03em;
+  text-decoration: none;
   transition: all 0.2s ease;
 
   &--blue   { &:hover { color: $dodo-blue;   border-color: rgba($dodo-blue, 0.45);   background: rgba($dodo-blue, 0.1);   transform: translateY(-1px); } }
   &--teal   { &:hover { color: $dodo-teal;   border-color: rgba($dodo-teal, 0.45);   background: rgba($dodo-teal, 0.1);   transform: translateY(-1px); } }
   &--yellow { &:hover { color: $dodo-yellow; border-color: rgba($dodo-yellow, 0.45); background: rgba($dodo-yellow, 0.1); transform: translateY(-1px); } }
   &--pink   { &:hover { color: $dodo-pink;   border-color: rgba($dodo-pink, 0.45);   background: rgba($dodo-pink, 0.1);   transform: translateY(-1px); } }
+}
+
+.home__chip-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+
+  &--invert { filter: brightness(0) invert(0.65); }
 }
 
 /* ── CTA Section ───────────────────────────────────────────────────────────── */

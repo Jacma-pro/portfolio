@@ -67,6 +67,8 @@
   "projects": {
     "title": "Projets",
     "subtitle": "Découvre mes réalisations, du code aux maquettes.",
+    "show_more": "Voir plus ({{count}})",
+    "show_less": "Voir moins",
     "back": "Retour aux projets",
     "not_found": "Projet introuvable.",
     "categories": {

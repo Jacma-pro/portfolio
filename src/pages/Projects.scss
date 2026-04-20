@@ -67,6 +67,27 @@
       grid-template-columns: 1fr;
     }
   }
+
+  &__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    color: $dodo-blue;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease, gap 0.2s ease;
+
+    &:hover {
+      color: $dodo-blue;
+      gap: 0.65rem;
+    }
+  }
 }
 
 .page--projects {

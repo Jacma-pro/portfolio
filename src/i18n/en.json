@@ -67,6 +67,8 @@
   "projects": {
     "title": "Projects",
     "subtitle": "Discover my work, from code to mockups.",
+    "show_more": "Show more ({{count}})",
+    "show_less": "Show less",
     "back": "Back to projects",
     "not_found": "Project not found.",
     "categories": {
