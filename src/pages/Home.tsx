@@ -24,13 +24,36 @@ const FEATURED = FEATURED_IDS
   .map(id => PROJECTS.find(p => p.id === id))
   .filter(Boolean) as typeof PROJECTS
 
-/* ── Stack chips ──────────────────────────────────────────────────────────── */
-const STACK = [
-  'React', 'Vue 3', 'TypeScript', 'Angular',
-  'Node.js', 'Express', 'Spring Boot',
-  'MySQL', 'SQLite', 'Strapi',
-  'SCSS', 'Figma', 'Git'
-]
+/* ── Skills ───────────────────────────────────────────────────────────────── */
+const SOFT_SKILLS = [
+  {
+    key: 'curiosity',
+    color: 'blue',
+    path: 'M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z',
+  },
+  {
+    key: 'adaptability',
+    color: 'teal',
+    path: 'M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0 1-15.357-2m15.357 2H15',
+  },
+  {
+    key: 'collaboration',
+    color: 'pink',
+    path: 'M12 4.354a4 4 0 1 1 0 5.292M15 21H3v-1a6 6 0 0 1 12 0v1zm0 0h6v-1a6 6 0 0 0-9-5.197M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z',
+  },
+  {
+    key: 'proactivity',
+    color: 'yellow',
+    path: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+] as const
+
+const HARD_SKILLS = [
+  { category: 'Frontend', color: 'blue',   items: ['React', 'Vue 3', 'Angular', 'TypeScript', 'SCSS'] },
+  { category: 'Backend',  color: 'teal',   items: ['Node.js', 'Express', 'Spring Boot'] },
+  { category: 'Data',     color: 'yellow', items: ['MySQL', 'SQLite', 'Strapi'] },
+  { category: 'Outils',   color: 'pink',   items: ['Git', 'Figma'] },
+] as const
 
 const Home = () => {
   const { t } = useTranslation()
@@ -110,13 +133,40 @@ const Home = () => {
         </Link>
       </section>
 
-      {/* ── Stack ─────────────────────────────────────────── */}
-      <section className="home__stack">
-        <h2>{t('home.stack_title')}</h2>
-        <div className="home__stack-chips">
-          {STACK.map(tech => (
-            <span key={tech} className="home__chip">{tech}</span>
-          ))}
+      {/* ── Skills ────────────────────────────────────────── */}
+      <section className="home__skills">
+        <div className="home__section-header">
+          <h2>{t('home.skills_title')}</h2>
+          <p className="text-muted">{t('home.skills_subtitle')}</p>
+        </div>
+
+        <div className="home__skills-grid">
+          <div className="home__soft">
+            {SOFT_SKILLS.map(skill => (
+              <div key={skill.key} className={`home__soft-card home__soft-card--${skill.color}`}>
+                <svg className="home__soft-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d={skill.path} />
+                </svg>
+                <div>
+                  <p className="home__soft-name">{t(`home.soft_${skill.key}_label`)}</p>
+                  <p className="home__soft-desc">{t(`home.soft_${skill.key}_desc`)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="home__hard">
+            {HARD_SKILLS.map(group => (
+              <div key={group.category} className="home__hard-group">
+                <span className={`home__hard-label home__hard-label--${group.color}`}>{group.category}</span>
+                <div className="home__hard-chips">
+                  {group.items.map(item => (
+                    <span key={item} className={`home__chip home__chip--${group.color}`}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
