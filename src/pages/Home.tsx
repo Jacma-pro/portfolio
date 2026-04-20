@@ -50,9 +50,9 @@ const SOFT_SKILLS = [
 
 const HARD_SKILLS = [
   { category: 'Frontend', color: 'blue',   items: ['React', 'Vue 3', 'Angular', 'TypeScript', 'SCSS'] },
-  { category: 'Backend',  color: 'teal',   items: ['Node.js', 'Express', 'Spring Boot'] },
-  { category: 'Data',     color: 'yellow', items: ['MySQL', 'SQLite', 'Strapi'] },
-  { category: 'Outils',   color: 'pink',   items: ['Git', 'Figma'] },
+  { category: 'Backend',  color: 'teal',   items: ['Node.js', 'Express','NestJS','Java', 'Spring Boot'] },
+  { category: 'Data',     color: 'yellow', items: ['MySQL', 'SQLite','PostgreSQL', 'Strapi'] },
+  { category: 'Outils',   color: 'pink',   items: ['VS Code','IntelliJ', 'WebStorm' ,'Git', 'Github', 'Gitlab', 'Docker', 'Figma'] },
 ] as const
 
 const Home = () => {

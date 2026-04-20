@@ -155,6 +155,27 @@
         ],
         "learnings": "This project taught me how to turn a technical topic into a clear educational path for a classroom, structure a simple but complete product experience (theory, practice, assessment), explain steganography vs cryptography in concrete terms, and integrate real image-format constraints (PNG/JPEG) into implementation choices. On the process side, it strongly reinforced how to work effectively with AI on an end-to-end project without losing technical control: provide the right context, frame pedagogical goals, request precise iterations, validate technical coherence, fix what does not hold up, and keep a product-level vision from start to finish. AI can dramatically accelerate production, but final quality still depends on how well you prompt, verify, and decide."
       },
+      "lidl-drive": {
+        "title": "Lidl Drive – REST API",
+        "short": "Full NestJS REST API for a Lidl Drive & Click & Collect app: 22 modules, 60+ endpoints, multi-profile JWT auth, and PostgreSQL/Supabase integration.",
+        "desc": "A group fullstack project built in response to a fictional Lidl France tender. My main contribution covers the complete backend architecture (NestJS, TypeORM, Supabase), multi-profile JWT authentication, Swagger documentation, and the technical bridge with the React frontend built by the team.",
+        "context": "As part of my Bachelor 2 at MyDigitalSchool, this group project simulated a real Lidl France tender: design a Drive & Click & Collect app covering the full order journey, from inventory management to pickup slots and product substitutions. The app distinguishes three user profiles — customer, order picker (under time pressure), and store manager — each with differentiated access rights. As the backend developer, I handled the architecture design, 22 business modules, the JWT authentication system, Swagger documentation, and technical coordination with the frontend team.",
+        "objective": "The goal was to deliver a robust, fully-documented REST API capable of handling real-time stock updates, pickup slot management, and the complete order lifecycle (PENDING to PICKED_UP). The backend had to be fully decoupled from the frontend, deployable via Docker, and documented thoroughly enough for the frontend team to work independently. In parallel, I contributed directly to the React side: setting up the API communication layer, building the product detail page, the registration page, and the global authentication context.",
+        "approach": "I structured the project around NestJS's native modular architecture: each business domain has its own isolated module. The PostgreSQL database is hosted on Supabase with TypeORM in synchronize: false mode for strict migration control. The auth system queries all three user tables sequentially from a single /auth/login endpoint — the client never needs to specify their profile type. Custom guards and decorators (JwtAuthGuard, RolesGuard, @Roles()) handle role-based access control on every route. On the React side, I set up a centralized HTTP client with automatic JWT injection and a global AuthContext.",
+        "features": [
+          "22 independent NestJS modules covering the full business domain",
+          "60+ REST endpoints documented on Swagger with Bearer Token support",
+          "Multi-profile JWT auth (CLIENT, OPERATOR, MANAGER) from a single endpoint",
+          "RBAC via JwtAuthGuard, RolesGuard, and custom @Roles() decorator",
+          "Cloud PostgreSQL (Supabase) with TypeORM, manual migrations",
+          "Full order lifecycle: PENDING → IN_PROGRESS → READY → PICKED_UP",
+          "Product substitutions on stock shortage (PENDING | ACCEPTED | REFUSED)",
+          "Node 24 Alpine Dockerfile for containerization",
+          "Centralized React HTTP client with automatic JWT injection",
+          "Global React AuthContext with localStorage session persistence"
+        ],
+        "learnings": "This project marked a real step forward on the backend side. Moving from Express to NestJS means adopting a completely different philosophy: the architecture isn't something you invent — it's enforced by the framework, and that's a strength. I understood concretely why modularity and dependency injection matter at scale. The most rewarding part was designing the multi-profile auth system: handling three user types from a single endpoint, without the client ever specifying who they are, forced me to think in terms of real data flows and use cases. On a human level, acting as the technical lead — writing an integration guide, coordinating API adjustments based on frontend feedback, maintaining a working Dockerfile — taught me that communication matters as much as the code itself."
+      },
       "api-auth": {
         "title": "API Auth Favorites",
         "short": "A secure REST API with JWT authentication, bcrypt hashing, and protected routes.",
