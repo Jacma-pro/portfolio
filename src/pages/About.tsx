@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion'
+import AboutNav from '../components/AboutNav'
 import Reveal from '../components/motion/Reveal'
 import SplitText from '../components/motion/SplitText'
 import Parallax from '../components/motion/Parallax'
@@ -35,6 +36,8 @@ const About = () => {
 
   return (
     <main className="page page--about">
+      <AboutNav />
+
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="about-hero">
@@ -65,6 +68,8 @@ const About = () => {
 
         {CHAPTERS.map((chapter, i) => (
           <Reveal key={chapter.id} className="timeline__item" direction="up" amount={0.15}>
+            {/* id repris par le sommaire latéral (AboutNav) */}
+            <span className="timeline__anchor" id={chapter.id} aria-hidden="true" />
             <span className="timeline__marker" aria-hidden="true" />
             <span className="timeline__index">{String(i + 1).padStart(2, '0')}</span>
 
@@ -84,7 +89,7 @@ const About = () => {
       </div>
 
       {/* ── En dehors du code ──────────────────────────────────────────── */}
-      <section className="about-outside">
+      <section className="about-outside" id="outside">
         <Reveal className="section-head">
           <span className="eyebrow">{t('about.outside_title')}</span>
         </Reveal>
@@ -108,7 +113,7 @@ const About = () => {
       </section>
 
       {/* ── Et maintenant ? ────────────────────────────────────────────── */}
-      <section className="about-future">
+      <section className="about-future" id="future">
         <Reveal direction="scale">
           <div className="about-future__box">
             <h2 className="about-future__title">

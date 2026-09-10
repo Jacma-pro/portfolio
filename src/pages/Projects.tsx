@@ -6,8 +6,12 @@ import ProjectCard from '../components/ProjectCard'
 import ProjectFilter from '../components/ProjectFilter'
 import Reveal from '../components/motion/Reveal'
 import SplitText from '../components/motion/SplitText'
+import { ChevronDown } from '../components/icons'
 import { EASE } from '../motion/variants'
 import './Projects.scss'
+
+/** Nombre de cartes visibles avant dépliage, calé sur une ligne de grille. */
+const GRID_COLS = 3
 
 const Projects = () => {
   const { t } = useTranslation()
@@ -16,6 +20,15 @@ const Projects = () => {
   const [activeCats, setActiveCats] = useState<Category[]>([])
   const [activeTechs, setActiveTechs] = useState<string[]>([])
   const [query, setQuery] = useState('')
+  const [expanded, setExpanded] = useState<Set<Category>>(new Set())
+
+  const toggleExpand = (cat: Category) =>
+    setExpanded(prev => {
+      const next = new Set(prev)
+      if (next.has(cat)) next.delete(cat)
+      else next.add(cat)
+      return next
+    })
 
   const isFiltered = activeCats.length > 0 || activeTechs.length > 0 || query.trim().length > 0
 
@@ -101,6 +114,9 @@ const Projects = () => {
         <div className="projects__library">
           {CATEGORIES.map(cat => {
             const items = PROJECTS.filter(p => p.category === cat)
+            const isExpanded = expanded.has(cat)
+            const visible = isExpanded ? items : items.slice(0, GRID_COLS)
+            const hiddenCount = items.length - GRID_COLS
             return (
               <section key={cat} className="projects__category" data-category={cat}>
                 <Reveal className="projects__category-head" direction="in">
@@ -114,12 +130,29 @@ const Projects = () => {
                 </Reveal>
 
                 <div className="projects__grid">
-                  {items.map((project, i) => (
-                    <Reveal key={project.id} delay={i * 0.07} amount={0.15}>
+                  {visible.map((project, i) => (
+                    <Reveal key={project.id} delay={Math.min(i, 5) * 0.07} amount={0.15}>
                       <ProjectCard project={project} index={i} />
                     </Reveal>
                   ))}
                 </div>
+
+                {hiddenCount > 0 && (
+                  <button
+                    type="button"
+                    className="projects__toggle"
+                    onClick={() => toggleExpand(cat)}
+                    aria-expanded={isExpanded}
+                  >
+                    {isExpanded
+                      ? t('projects.show_less')
+                      : t('projects.show_more', { count: hiddenCount })}
+                    <ChevronDown
+                      size={14}
+                      className={`projects__toggle-arrow${isExpanded ? ' projects__toggle-arrow--up' : ''}`}
+                    />
+                  </button>
+                )}
               </section>
             )
           })}

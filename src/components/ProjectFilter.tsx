@@ -2,11 +2,24 @@ import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PROJECTS, type Category } from '../data/projects'
-import { Search, Close, ChevronDown } from './icons'
+import { Search, Close, ChevronDown, Code } from './icons'
+import TechLogo from './TechLogo'
+import { iconForTech } from '../data/tech-icons'
 import { EASE } from '../motion/variants'
 import './ProjectFilter.scss'
 
 const ALL_CATEGORIES: Category[] = ['front', 'back', 'mockup']
+
+/**
+ * Logo d'une techno de projet. Toutes n'ont pas de marque derrière elles
+ * (LSB, LocalStorage, MCD/MLD/MPD…) : celles-là reçoivent des chevrons.
+ */
+const TechMark = ({ tech }: { tech: string }) => {
+  const icon = iconForTech(tech)
+  return icon
+    ? <TechLogo tech={icon} size={15} className="filters__option-icon" />
+    : <Code size={15} className="filters__option-icon filters__option-icon--generic" />
+}
 const ALL_TECHS = Array.from(new Set(PROJECTS.flatMap(p => p.techs)))
   .sort((a, b) => a.localeCompare(b))
 
@@ -161,6 +174,7 @@ const ProjectFilter = ({
                       onChange={() => toggleTech(tech)}
                     />
                     <span className="filters__option-box" aria-hidden="true" />
+                    <TechMark tech={tech} />
                     <span className="filters__option-label">{tech}</span>
                   </label>
                 ))}

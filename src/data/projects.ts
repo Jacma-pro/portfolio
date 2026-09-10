@@ -16,6 +16,11 @@ import stegano2 from '../assets/projects/FRONT/stegano/screen/praticeTp.png'
 import stegano3 from '../assets/projects/FRONT/stegano/screen/codeMessage.png'
 import stegano4 from '../assets/projects/FRONT/stegano/screen/QCM.png'
 
+// ── Lidl Drive ─────────────────────────────────────────────────────────────────
+import lidlCover from '../assets/projects/BACK/lidl/screen/api_register.png'
+import lidl1 from '../assets/projects/BACK/lidl/screen/api_product.png'
+import lidl2 from '../assets/projects/BACK/lidl/screen/api_sotre_id.png'
+
 // ── api auth ───────────────────────────────────────────────────────────────────
 import apiAuthCover from '../assets/projects/BACK/api-auth/sing.png'
 import apiAuth1 from '../assets/projects/BACK/api-auth/failed.png'
@@ -100,6 +105,14 @@ export const PROJECTS: Project[] = [
   },
 
   // ── Back ───────────────────────────────────────────────────────────────────
+  {
+    id: "lidl-drive",
+    category: "back",
+    cover: lidlCover,
+    techs: ["NestJS", "TypeScript", "PostgreSQL", "Supabase", "TypeORM", "JWT", "Swagger", "Docker", "React"],
+    github: "https://github.com/Jacma-pro/back-lidl",
+    images: [lidlCover, lidl1, lidl2]
+  },
   {
     id: "api-auth",
     category: "back",

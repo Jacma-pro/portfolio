@@ -382,29 +382,106 @@
   }
 }
 
-/* Trois blocs : Développement / Données / Outils */
-.stack-groups {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.6rem, 3.5vw, 2.4rem);
+/* ───────────────────────────────────────────────────────────────────────
+   COMPÉTENCES — savoir-être à gauche, savoir-faire par catégorie à droite
+   ─────────────────────────────────────────────────────────────────────── */
+.skills {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
   margin-top: clamp(2rem, 4vw, 2.8rem);
+
+  @media (max-width: 940px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__soft {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    list-style: none;
+  }
+
+  &__hard {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.3rem, 3vw, 1.9rem);
+  }
 }
 
-.stack-group {
+/* ── Carte savoir-être ────────────────────────────────────────────────── */
+.soft-card {
+  --tint: #{$dodo-blue};
+
+  &--teal   { --tint: #{$dodo-teal}; }
+  &--pink   { --tint: #{$dodo-pink}; }
+  &--yellow { --tint: #{$dodo-yellow}; }
+
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.85rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--r-md);
+  border: 1px solid $border-color;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.006));
+  @include transition(border-color, background-color, transform);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--tint) 40%, transparent);
+    background: color-mix(in srgb, var(--tint) 6%, transparent);
+  }
+
+  &__icon {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-sm);
+    border: 1px solid color-mix(in srgb, var(--tint) 30%, transparent);
+    background: color-mix(in srgb, var(--tint) 10%, transparent);
+    color: var(--tint);
+  }
+
+  &__name {
+    @include font-h3;
+    font-size: 0.98rem;
+    color: $text-primary;
+    align-self: end;
+  }
+
+  &__desc {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: $text-muted;
+  }
+}
+
+/* ── Catégorie de savoir-faire ────────────────────────────────────────── */
+.skill-group {
+  --tint: #{$dodo-blue};
+
+  &--teal   { --tint: #{$dodo-teal}; }
+  &--pink   { --tint: #{$dodo-pink}; }
+  &--yellow { --tint: #{$dodo-yellow}; }
+
   &__title {
     @include font-label;
-    color: $text-muted;
-    margin-bottom: 0.9rem;
     display: flex;
     align-items: center;
     gap: 0.7rem;
+    color: var(--tint);
+    margin-bottom: 0.85rem;
 
     // filet qui prolonge le titre jusqu'au bord du bloc
     &::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, $border-color, transparent);
+      background: linear-gradient(90deg, color-mix(in srgb, var(--tint) 40%, transparent), transparent);
     }
   }
 }

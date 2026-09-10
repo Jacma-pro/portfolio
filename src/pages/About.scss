@@ -268,3 +268,14 @@
     margin-bottom: 0.6rem;
   }
 }
+
+/* Ancre invisible : le sommaire latéral vise ce point, décalé pour que le
+   titre du chapitre ne finisse pas sous la navbar flottante. */
+.timeline__anchor {
+  position: absolute;
+  top: -6rem;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}

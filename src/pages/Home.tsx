@@ -11,6 +11,7 @@ import Magnetic from '../components/motion/Magnetic'
 import { ArrowRight, ArrowUpRight } from '../components/icons'
 import TechLogo from '../components/TechLogo'
 import { TECH_ICONS, TECH_GROUPS, type TechIcon } from '../data/tech-icons'
+import { SOFT_SKILLS } from '../data/soft-skills'
 import { EASE } from '../motion/variants'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
 import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
@@ -35,10 +36,11 @@ const FEATURED = FEATURED_IDS
   .filter(Boolean) as typeof PROJECTS
 
 /* ── Bandeau technos ───────────────────────────────────────────────────── */
-// Le bandeau reste décoratif : une ligne pour le développement, une pour tout
-// le reste, les deux défilant en sens opposés.
-const STACK_ROW_A = TECH_ICONS.filter(t => t.group === 'dev')
-const STACK_ROW_B = TECH_ICONS.filter(t => t.group !== 'dev')
+// Le bandeau reste décoratif : front d'un côté, tout le reste de l'autre.
+// Le groupe « extra » n'existe que pour le filtre projets, il n'apparaît pas ici.
+const SHOWN = TECH_ICONS.filter(t => t.group !== 'extra')
+const STACK_ROW_A = SHOWN.filter(t => t.group === 'frontend' || t.group === 'backend')
+const STACK_ROW_B = SHOWN.filter(t => t.group === 'data' || t.group === 'tools')
 
 const TECH_COUNT = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length
 
@@ -199,12 +201,12 @@ const Home = () => {
         </Reveal>
       </section>
 
-      {/* ── Stack ──────────────────────────────────────────────────────── */}
-      <section className="home-section home-section--stack">
+      {/* ── Compétences ────────────────────────────────────────────────── */}
+      <section className="home-section home-section--skills">
         <Reveal className="section-head">
           <span className="eyebrow">{t('home.stack_eyebrow')}</span>
-          <h2>{t('home.stack_title')}</h2>
-          <p>{t('home.stack_subtitle')}</p>
+          <h2>{t('home.skills_title')}</h2>
+          <p>{t('home.skills_subtitle')}</p>
         </Reveal>
 
         <div className="stack-band">
@@ -212,44 +214,61 @@ const Home = () => {
           <Marquee items={STACK_ROW_B} reverse />
         </div>
 
-        {/* Regroupé par nature : une liste plate de 25 puces se lirait comme
-            « des choses que j'ai touchées » plutôt que comme une façon de
-            travailler. */}
-        <div className="stack-groups">
-          {TECH_GROUPS.map(group => (
-            <section className="stack-group" key={group}>
-              <h3 className="stack-group__title">{t(`home.stack_group_${group}`)}</h3>
+        <div className="skills">
+          {/* ── Savoir-être ───────────────────────────────────────────── */}
+          <ul className="skills__soft">
+            {SOFT_SKILLS.map((skill, i) => (
+              <Reveal as="li" key={skill.key} delay={i * 0.06} amount={0.3}>
+                <article className={`soft-card soft-card--${skill.color}`}>
+                  <span className="soft-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={skill.path} />
+                    </svg>
+                  </span>
+                  <h3 className="soft-card__name">{t(`home.soft_${skill.key}_label`)}</h3>
+                  <p className="soft-card__desc">{t(`home.soft_${skill.key}_desc`)}</p>
+                </article>
+              </Reveal>
+            ))}
+          </ul>
 
-              <ul className="stack-list">
-                {TECH_ICONS.filter(tech => tech.group === group).map((tech, i) => (
-                  <Reveal
-                    key={tech.slug}
-                    as="li"
-                    direction="up"
-                    amount={0.4}
-                    delay={Math.min(i, 8) * 0.04}
-                  >
-                    {/* La couleur de marque n'est révélée qu'au survol : au
-                        repos la ligne reste dans la palette du site. */}
-                    <a
-                      className="stack-chip"
-                      href={tech.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${tech.label} — ${t('home.stack_link')}`}
-                      style={{ '--brand': tech.brand } as React.CSSProperties}
+          {/* ── Savoir-faire, par catégorie ───────────────────────────── */}
+          <div className="skills__hard">
+            {TECH_GROUPS.map(group => (
+              <section className={`skill-group skill-group--${group.color}`} key={group.id}>
+                <h3 className="skill-group__title">{t(`home.skills_cat_${group.id}`)}</h3>
+
+                <ul className="stack-list">
+                  {SHOWN.filter(tech => tech.group === group.id).map((tech, i) => (
+                    <Reveal
+                      key={tech.slug}
+                      as="li"
+                      direction="up"
+                      amount={0.4}
+                      delay={Math.min(i, 8) * 0.035}
                     >
-                      <TechLogo tech={tech} size={18} />
-                      {tech.label}
-                      {/* Flèche toujours présente mais transparente : la faire
-                          apparaître en changeant la largeur décalerait la ligne. */}
-                      <ArrowUpRight size={12} className="stack-chip__out" />
-                    </a>
-                  </Reveal>
-                ))}
-              </ul>
-            </section>
-          ))}
+                      {/* La couleur de marque n'est révélée qu'au survol : au
+                          repos la ligne reste dans la palette du site. */}
+                      <a
+                        className="stack-chip"
+                        href={tech.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${tech.label} — ${t('home.stack_link')}`}
+                        style={{ '--brand': tech.brand } as React.CSSProperties}
+                      >
+                        <TechLogo tech={tech} size={18} />
+                        {tech.label}
+                        {/* Flèche toujours présente mais transparente : la faire
+                            apparaître en changeant la largeur décalerait la ligne. */}
+                        <ArrowUpRight size={12} className="stack-chip__out" />
+                      </a>
+                    </Reveal>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
 

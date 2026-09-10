@@ -44,6 +44,17 @@ const GROUPS = {
     ['DBeaver',     'siDbeaver'],
     ['Grafana',     'siGrafana'],
   ],
+  // Non affiché dans la section Compétences : ces icônes n'existent que pour
+  // le filtre projets, où elles illustrent les technos des réalisations.
+  extra: [
+    ['HTML5',       'siHtml5'],
+    ['CSS3',        'siCss'],
+    ['JavaScript',  'siJavascript'],
+    ['PHP',         'siPhp'],
+    ['phpMyAdmin',  'siPhpmyadmin'],
+    ['JWT',         'siJsonwebtokens'],
+    ['TypeORM',     'siTypeorm'],
+  ],
   tools: [
     ['VS Code',     MANUAL.vscode],
     ['IntelliJ',    'siIntellijidea'],
@@ -98,6 +109,13 @@ const URLS = {
   vscode:       'https://code.visualstudio.com',
   intellijidea: 'https://www.jetbrains.com/idea',
   webstorm:     'https://www.jetbrains.com/webstorm',
+  html5:        'https://developer.mozilla.org/docs/Web/HTML',
+  css:          'https://developer.mozilla.org/docs/Web/CSS',
+  javascript:   'https://developer.mozilla.org/docs/Web/JavaScript',
+  php:          'https://www.php.net',
+  phpmyadmin:   'https://www.phpmyadmin.net',
+  jsonwebtokens:'https://jwt.io',
+  typeorm:      'https://typeorm.io',
   git:          'https://git-scm.com',
   github:       'https://github.com',
   gitlab:       'https://about.gitlab.com',
@@ -188,12 +206,28 @@ const out = `/**
  */
 
 /** Catégorie de compétence — reprend le découpage de la section Compétences. */
-export type TechGroup = 'frontend' | 'backend' | 'data' | 'tools'
+export type TechGroup = 'frontend' | 'backend' | 'data' | 'tools' | 'extra'
 
 /** Couleur dodo portant chaque catégorie. */
 export type GroupColor = 'blue' | 'teal' | 'yellow' | 'pink'
 
 /** Ordre d'affichage. Les libellés visibles vivent dans les traductions. */
+/**
+ * Noms de technos tels qu'ils apparaissent dans les projets → libellé d'icône.
+ * Les projets nomment parfois une version précise ; l'icône reste la même.
+ */
+export const TECH_ALIASES: Record<string, string> = {
+  'Express.js': 'Express',
+  'SQLite3': 'SQLite',
+  'Strapi v5': 'Strapi',
+  'React 19': 'React',
+  'SQL': 'MySQL',
+}
+
+/** Retrouve l'icône d'une techno de projet, alias compris. */
+export const iconForTech = (name: string): TechIcon | undefined =>
+  TECH_ICONS.find(t => t.label === (TECH_ALIASES[name] ?? name))
+
 export const TECH_GROUPS: { id: TechGroup; color: GroupColor }[] = [
   { id: 'frontend', color: 'blue' },
   { id: 'backend', color: 'teal' },

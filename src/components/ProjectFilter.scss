@@ -268,3 +268,17 @@
     &__tech-toggle { width: 100%; justify-content: center; }
   }
 }
+
+/* Logo de la techno dans le menu de filtres */
+.filters__option-icon {
+  flex-shrink: 0;
+  color: $text-muted;
+  @include transition(color);
+
+  &--generic { opacity: 0.5; }
+}
+
+.filters__option:hover .filters__option-icon,
+.filters__option input:checked ~ .filters__option-icon {
+  color: $dodo-blue;
+}

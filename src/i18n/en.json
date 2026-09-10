@@ -22,7 +22,16 @@
     "featured_title": "Recent projects",
     "featured_subtitle": "A selection of what I've built recently.",
     "featured_all": "View all projects",
-    "stack_title": "My stack",
+    "skills_title": "Skills",
+    "skills_subtitle": "Technical and human — both matter.",
+    "soft_curiosity_label": "Curiosity",
+    "soft_curiosity_desc": "I like understanding how things actually work, not just using them.",
+    "soft_adaptability_label": "Adaptability",
+    "soft_adaptability_desc": "Lead at school, learner at work — I adapt to the context.",
+    "soft_collaboration_label": "Collaboration",
+    "soft_collaboration_desc": "Student union VP, tight team projects: the collective drives me.",
+    "soft_proactivity_label": "Proactivity",
+    "soft_proactivity_desc": "I look for solutions before asking questions.",
     "cta_title": "What to conctact me ?",
     "cta_text": "My inbox is always open.",
     "cta_contact": "Get in touch",
@@ -34,10 +43,11 @@
     "stack_subtitle": "What I build with, at work and on personal projects.",
     "cta_eyebrow": "Let's talk",
     "view_project": "View project",
-    "stack_group_dev": "Development",
-    "stack_group_data": "Data & visualisation",
-    "stack_group_tools": "Tools & practices",
-    "stack_link": "Official website"
+    "stack_link": "Official website",
+    "skills_cat_frontend": "Frontend",
+    "skills_cat_backend": "Backend",
+    "skills_cat_data": "Data",
+    "skills_cat_tools": "Tools"
   },
   "about": {
     "title": "About",
@@ -69,11 +79,14 @@
     "future": "My journey isn't very long yet, but every step has confirmed I'm in the right place. Going forward, I see myself continuing to grow as a fullstack web developer, building projects with real impact, and above all, keeping that connection with people to truly understand their needs. Becoming a project manager, a tech consultant, or something else: I don't know exactly yet, and I completely embrace that ambiguity.",
     "future_2": "Artificial Intelligence has naturally found its way into my daily life as a developer, whether it's for more efficient debugging, coding faster, or sparking new ideas. It's true that the speed at which this whole field is evolving can feel anxiety-inducing, but I primarily view it as a incredible opportunity. Today, I consider it an essential shift that we must learn to harness rather than endure.",
     "future_cta": "In the meantime, the most important thing is meeting new people and collaborating. If my profile interests you, don't hesitate to reach out!",
-    "eyebrow": "About"
+    "eyebrow": "About",
+    "nav_label": "Page sections"
   },
   "projects": {
     "title": "Projects",
     "subtitle": "Discover my work, from code to mockups.",
+    "show_more": "Show more ({{count}})",
+    "show_less": "Show less",
     "back": "Back to projects",
     "not_found": "Project not found.",
     "categories": {
@@ -167,6 +180,27 @@
           "Local tracking of lab progress and quiz scores via localStorage"
         ],
         "learnings": "This project taught me how to turn a technical topic into a clear educational path for a classroom, structure a simple but complete product experience (theory, practice, assessment), explain steganography vs cryptography in concrete terms, and integrate real image-format constraints (PNG/JPEG) into implementation choices. On the process side, it strongly reinforced how to work effectively with AI on an end-to-end project without losing technical control: provide the right context, frame pedagogical goals, request precise iterations, validate technical coherence, fix what does not hold up, and keep a product-level vision from start to finish. AI can dramatically accelerate production, but final quality still depends on how well you prompt, verify, and decide."
+      },
+      "lidl-drive": {
+        "title": "Lidl Drive – REST API",
+        "short": "Full NestJS REST API for a Lidl Drive & Click & Collect app: 22 modules, 60+ endpoints, multi-profile JWT auth, and PostgreSQL/Supabase integration.",
+        "desc": "A group fullstack project built in response to a fictional Lidl France tender. My main contribution covers the complete backend architecture (NestJS, TypeORM, Supabase), multi-profile JWT authentication, Swagger documentation, and the technical bridge with the React frontend built by the team.",
+        "context": "As part of my Bachelor 2 at MyDigitalSchool, this group project simulated a real Lidl France tender: design a Drive & Click & Collect app covering the full order journey, from inventory management to pickup slots and product substitutions. The app distinguishes three user profiles — customer, order picker (under time pressure), and store manager — each with differentiated access rights. As the backend developer, I handled the architecture design, 22 business modules, the JWT authentication system, Swagger documentation, and technical coordination with the frontend team.",
+        "objective": "The goal was to deliver a robust, fully-documented REST API capable of handling real-time stock updates, pickup slot management, and the complete order lifecycle (PENDING to PICKED_UP). The backend had to be fully decoupled from the frontend, deployable via Docker, and documented thoroughly enough for the frontend team to work independently. In parallel, I contributed directly to the React side: setting up the API communication layer, building the product detail page, the registration page, and the global authentication context.",
+        "approach": "I structured the project around NestJS's native modular architecture: each business domain has its own isolated module. The PostgreSQL database is hosted on Supabase with TypeORM in synchronize: false mode for strict migration control. The auth system queries all three user tables sequentially from a single /auth/login endpoint — the client never needs to specify their profile type. Custom guards and decorators (JwtAuthGuard, RolesGuard, @Roles()) handle role-based access control on every route. On the React side, I set up a centralized HTTP client with automatic JWT injection and a global AuthContext.",
+        "features": [
+          "22 independent NestJS modules covering the full business domain",
+          "60+ REST endpoints documented on Swagger with Bearer Token support",
+          "Multi-profile JWT auth (CLIENT, OPERATOR, MANAGER) from a single endpoint",
+          "RBAC via JwtAuthGuard, RolesGuard, and custom @Roles() decorator",
+          "Cloud PostgreSQL (Supabase) with TypeORM, manual migrations",
+          "Full order lifecycle: PENDING → IN_PROGRESS → READY → PICKED_UP",
+          "Product substitutions on stock shortage (PENDING | ACCEPTED | REFUSED)",
+          "Node 24 Alpine Dockerfile for containerization",
+          "Centralized React HTTP client with automatic JWT injection",
+          "Global React AuthContext with localStorage session persistence"
+        ],
+        "learnings": "This project marked a real step forward on the backend side. Moving from Express to NestJS means adopting a completely different philosophy: the architecture isn't something you invent — it's enforced by the framework, and that's a strength. I understood concretely why modularity and dependency injection matter at scale. The most rewarding part was designing the multi-profile auth system: handling three user types from a single endpoint, without the client ever specifying who they are, forced me to think in terms of real data flows and use cases. On a human level, acting as the technical lead — writing an integration guide, coordinating API adjustments based on frontend feedback, maintaining a working Dockerfile — taught me that communication matters as much as the code itself."
       },
       "api-auth": {
         "title": "API Auth Favorites",
