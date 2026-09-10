@@ -432,16 +432,24 @@
   background: rgba(255, 255, 255, 0.025);
   color: $text-secondary;
   white-space: nowrap;
-  cursor: default;
+  cursor: pointer;
 
   svg {
     flex-shrink: 0;
     // au repos le logo est un cran plus discret que le libellé
     color: $text-muted;
-    @include transition(color, transform);
+    @include transition(color, transform, opacity);
   }
 
-  &:hover {
+  // Flèche « lien externe » : sa place est réservée en permanence, seule son
+  // opacité change — sinon chaque survol repousserait les puces voisines.
+  &__out {
+    opacity: 0;
+    margin-left: -0.15rem;
+  }
+
+  &:hover,
+  &:focus-visible {
     transform: translateY(-2px);
     color: $text-primary;
     border-color: color-mix(in srgb, var(--brand) 45%, transparent);
@@ -450,6 +458,12 @@
     svg {
       color: var(--brand);
       transform: scale(1.12);
+    }
+
+    .stack-chip__out {
+      opacity: 1;
+      transform: none;
+      color: var(--brand);
     }
   }
 }

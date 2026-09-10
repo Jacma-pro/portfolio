@@ -36,7 +36,8 @@
     "view_project": "Voir le projet",
     "stack_group_dev": "Développement",
     "stack_group_data": "Données & visualisation",
-    "stack_group_tools": "Outils & méthodes"
+    "stack_group_tools": "Outils & méthodes",
+    "stack_link": "Site officiel"
   },
   "about": {
     "title": "À propos",

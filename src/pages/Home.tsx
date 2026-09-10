@@ -8,7 +8,7 @@ import SplitText from '../components/motion/SplitText'
 import Counter from '../components/motion/Counter'
 import Parallax from '../components/motion/Parallax'
 import Magnetic from '../components/motion/Magnetic'
-import { ArrowRight } from '../components/icons'
+import { ArrowRight, ArrowUpRight } from '../components/icons'
 import TechLogo from '../components/TechLogo'
 import { TECH_ICONS, TECH_GROUPS, type TechIcon } from '../data/tech-icons'
 import { EASE } from '../motion/variants'
@@ -231,13 +231,20 @@ const Home = () => {
                   >
                     {/* La couleur de marque n'est révélée qu'au survol : au
                         repos la ligne reste dans la palette du site. */}
-                    <span
+                    <a
                       className="stack-chip"
+                      href={tech.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${tech.label} — ${t('home.stack_link')}`}
                       style={{ '--brand': tech.brand } as React.CSSProperties}
                     >
                       <TechLogo tech={tech} size={18} />
                       {tech.label}
-                    </span>
+                      {/* Flèche toujours présente mais transparente : la faire
+                          apparaître en changeant la largeur décalerait la ligne. */}
+                      <ArrowUpRight size={12} className="stack-chip__out" />
+                    </a>
                   </Reveal>
                 ))}
               </ul>

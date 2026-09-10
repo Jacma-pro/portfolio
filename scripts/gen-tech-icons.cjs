@@ -43,6 +43,39 @@ const GROUPS = {
 const STACK = Object.entries(GROUPS).flatMap(([group, items]) =>
   items.map(([label, key]) => ({ label, key, group })))
 
+// Site officiel de chaque techno, vérifié à la main : Simple Icons expose bien
+// un champ `source`, mais il pointe vers l'origine du logo (page de presse,
+// fichier GitHub…), pas vers la page d'accueil du projet.
+const URLS = {
+  react:        'https://react.dev',
+  typescript:   'https://www.typescriptlang.org',
+  vuedotjs:     'https://vuejs.org',
+  angular:      'https://angular.dev',
+  sass:         'https://sass-lang.com',
+  vite:         'https://vite.dev',
+  nodedotjs:    'https://nodejs.org',
+  express:      'https://expressjs.com',
+  springboot:   'https://spring.io/projects/spring-boot',
+  apachemaven:  'https://maven.apache.org',
+  postgresql:   'https://www.postgresql.org',
+  mysql:        'https://www.mysql.com',
+  sqlite:       'https://www.sqlite.org',
+  supabase:     'https://supabase.com',
+  strapi:       'https://strapi.io',
+  dbeaver:      'https://dbeaver.io',
+  grafana:      'https://grafana.com',
+  git:          'https://git-scm.com',
+  github:       'https://github.com',
+  gitlab:       'https://about.gitlab.com',
+  jenkins:      'https://www.jenkins.io',
+  docker:       'https://www.docker.com',
+  jira:         'https://www.atlassian.com/software/jira',
+  confluence:   'https://www.atlassian.com/software/confluence',
+  swagger:      'https://swagger.io',
+  figma:        'https://www.figma.com',
+  claudecode:   'https://claude.com/product/claude-code',
+}
+
 // Luminance relative (WCAG) : sert à repérer les marques trop sombres pour
 // être lisibles sur le fond sombre du site.
 const luminance = (hex) => {
@@ -88,7 +121,9 @@ const entries = STACK.map(({ label, key, group }) => {
   // Angular, Express, SQLite… ont une teinte de marque quasi noire : illisible
   // sur fond sombre. On l'éclaircit au lieu de la remplacer.
   const brand = tooDark ? lighten(icon.hex) : `#${icon.hex}`
-  return { label, group, slug: icon.slug, title: icon.title, brand, path: icon.path, dark: tooDark, source: icon.hex }
+  const url = URLS[icon.slug]
+  if (!url) throw new Error('URL manquante pour ' + icon.slug)
+  return { label, group, slug: icon.slug, title: icon.title, brand, url, path: icon.path, dark: tooDark, source: icon.hex }
 })
 
 const body = entries.map(e =>
@@ -96,6 +131,7 @@ const body = entries.map(e =>
     label: ${JSON.stringify(e.label)},
     slug: ${JSON.stringify(e.slug)},
     group: ${JSON.stringify(e.group)},
+    url: ${JSON.stringify(e.url)},
     // ${e.title}${e.dark ? ` — teinte officielle #${e.source} trop sombre sur fond noir, éclaircie` : ''}
     brand: ${JSON.stringify(e.brand)},
     path: ${JSON.stringify(e.path)},
@@ -125,6 +161,8 @@ export interface TechIcon {
   label: string
   slug: string
   group: TechGroup
+  /** Site officiel de la techno. */
+  url: string
   /** Couleur officielle de la marque, ou couleur de repli si elle est illisible sur fond sombre. */
   brand: string
   /** Tracé SVG, sur une grille 24×24. */
