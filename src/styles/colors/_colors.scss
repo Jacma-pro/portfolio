@@ -1,35 +1,73 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  Palette — l'ADN dodo, reconstruit autour d'un cyan dominant
+//  Les teintes historiques sont conservées : elles servent d'accents ponctuels
+//  (catégories de projets, hovers, easter eggs).
+// ─────────────────────────────────────────────────────────────────────────────
 
-// Dodo colors
+// ── Dodo colors (identité, inchangées) ──────────────────────────────────────
 $dodo-blue:   #69e3ff;
 $dodo-teal:   #6FC3A9;
-$dodo-pink: #F49CBB;
+$dodo-pink:   #F49CBB;
 $dodo-yellow: #F7FF00;
 $dodo-orange: #FF6F61;
 
-// Dark theme colors
-$bg-primary: #121212;
-$bg-secondary: #1A1A1A;
-$text-primary: #E0E0E0;
-$text-secondary: #B0B0B0;
-$text-muted: #888888;
-$accent-primary: $dodo-blue;
-$accent-secondary: $dodo-blue;
-$border-color: #444444;
+// Variations du cyan pour construire une vraie échelle
+$dodo-blue-deep: #1b8fae;
+$dodo-blue-dim:  #3fb4d6;
+$dodo-blue-soft: #a8efff;
 
-// CSS Variables
-:root {
-  --bg-primary: #{$bg-primary};
-  --bg-secondary: #{$bg-secondary};
-  --text-primary: #{$text-primary};
-  --text-secondary: #{$text-secondary};
-  --text-muted: #{$text-muted};
-  --accent-primary: #{$accent-primary};
-  --accent-secondary: #{$accent-secondary};
-  --border-color: #{$border-color};
+// ── Surfaces — dark légèrement teinté bleu nuit (moins plat que #121212) ────
+$bg-void:      #07090d;   // fond absolu, derrière tout
+$bg-primary:   #0a0d12;   // fond de page
+$bg-secondary: #10141b;   // cartes, sections
+$bg-elevated:  #161b24;   // surfaces au-dessus des cartes
+$bg-overlay:   #05070a;   // modales, wipe de transition
 
-  --dodo-blue: #{$dodo-blue};
-  --dodo-teal: #{$dodo-teal};
-  --dodo-pink: #{$dodo-pink};
-  --dodo-yellow: #{$dodo-yellow};
-  --dodo-orange: #{$dodo-orange};
+// ── Texte ───────────────────────────────────────────────────────────────────
+$text-primary:   #edf2f7;
+$text-secondary: #a8b3c4;
+$text-muted:     #6b7688;
+$text-faint:     #414b5c;
+
+// ── Bordures ────────────────────────────────────────────────────────────────
+$border-color:   #212936;
+$border-soft:    #1a212c;
+$border-strong:  #2e3846;
+
+// ── Accents sémantiques ─────────────────────────────────────────────────────
+$accent-primary:   $dodo-blue;
+$accent-secondary: $dodo-pink;
+
+// ── Couleurs par catégorie de projet ────────────────────────────────────────
+$cat-front:  $dodo-blue;
+$cat-back:   $dodo-teal;
+$cat-mockup: $dodo-pink;
+
+// ── Échelle de z-index ──────────────────────────────────────────────────────
+// La navbar passe AU-DESSUS du menu plein écran : sans ça, le bouton de
+// fermeture serait recouvert par le menu qu'il doit fermer.
+$z-base:       1;
+$z-raised:     10;
+$z-sticky:     20;
+$z-overlay:    40;  // menu plein écran
+$z-navbar:     50;  // pilule de navigation + bouton de fermeture
+$z-modal:      80;  // jeu, visionneuse
+$z-transition: 100; // rideau entre deux pages
+
+// ── Mixins de surface ───────────────────────────────────────────────────────
+@mixin surface($level: 1) {
+  @if $level == 1 {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
+    border: 1px solid $border-color;
+  } @else {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+    border: 1px solid $border-strong;
+  }
+  backdrop-filter: blur(12px);
+}
+
+@mixin glow-ring($color: $dodo-blue, $alpha: 0.35) {
+  box-shadow:
+    0 0 0 1px rgba($color, $alpha),
+    0 8px 40px -12px rgba($color, $alpha * 1.4);
 }

@@ -1,45 +1,52 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
+@use '../styles/motion/motion' as *;
 
 .project-card {
+  // Couleur d'accent pilotée par la catégorie du projet
+  --accent: #{$dodo-blue};
+
+  &[data-category='back']   { --accent: #{$dodo-teal}; }
+  &[data-category='mockup'] { --accent: #{$dodo-pink}; }
+
+  position: relative;
   display: flex;
   flex-direction: column;
-  background: $bg-secondary;
+  height: 100%;
+  border-radius: var(--r-lg);
   border: 1px solid $border-color;
-  border-radius: 8px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+  @include transition(transform, border-color, box-shadow, background-color);
 
   &:hover,
   &:focus-visible {
-    transform: translateY(-4px);
-    border-color: $dodo-blue;
-    box-shadow: 0 8px 28px rgba($dodo-blue, 0.15);
-    outline: none;
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    box-shadow:
+      0 24px 60px -28px rgba(0, 0, 0, 0.95),
+      0 0 44px -18px color-mix(in srgb, var(--accent) 70%, transparent);
 
-    .project-card__img {
-      transform: scale(1.04);
-    }
+    .project-card__img   { transform: scale(1.06); }
+    .project-card__cta   { opacity: 1; transform: translateY(0); }
+    .project-card__scrim { opacity: 1; }
+    .project-card__title { color: var(--accent); }
   }
 
-  // ── Cover ────────────────────────────────────────────────────────────────
+  /* ── Visuel ───────────────────────────────────────────────────────── */
   &__cover {
     position: relative;
-    width: 100%;
-    padding-top: 55%;
-    background: $bg-secondary;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
+    background: $bg-void;
   }
 
   &__img {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.35s ease;
+    transition: transform 0.6s $ease-out-quart;
   }
 
   &__placeholder {
@@ -47,76 +54,120 @@
     inset: 0;
     background: repeating-linear-gradient(
       135deg,
-      rgba($dodo-blue,  0.06) 0px,
-      rgba($dodo-blue,  0.06) 2px,
+      color-mix(in srgb, var(--accent) 8%, transparent) 0px,
+      color-mix(in srgb, var(--accent) 8%, transparent) 2px,
       transparent 2px,
-      transparent 20px
+      transparent 18px
     );
+  }
+
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    background: linear-gradient(180deg, rgba($bg-void, 0.1) 0%, rgba($bg-void, 0.85) 100%);
+    @include transition(opacity);
   }
 
   &__category {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba($bg-primary, 0.82);
-    border: 1px solid $border-color;
-    color: $dodo-blue;
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    font-weight: $fw-bold;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
+    top: 0.75rem;
+    left: 0.75rem;
+    @include font-label;
+    font-size: 0.62rem;
+    padding: 0.28rem 0.6rem;
+    border-radius: var(--r-sm);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    background: rgba(7, 9, 13, 0.72);
+    backdrop-filter: blur(6px);
+    color: var(--accent);
   }
 
-  // ── Body ─────────────────────────────────────────────────────────────────
+  &__index {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    @include font-mono;
+    font-size: 0.66rem;
+    padding: 0.28rem 0.5rem;
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    // les captures claires avalaient un chiffre posé à même l'image
+    background: rgba(7, 9, 13, 0.72);
+    backdrop-filter: blur(6px);
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  &__cta {
+    position: absolute;
+    left: 0.85rem;
+    bottom: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--r-full);
+    background: var(--accent);
+    color: $bg-void;
+    font-size: 0.72rem;
+    font-weight: $fw-semibold;
+    opacity: 0;
+    transform: translateY(8px);
+    @include transition(opacity, transform);
+  }
+
+  /* ── Contenu ──────────────────────────────────────────────────────── */
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 16px;
+    gap: 0.55rem;
+    padding: 1.1rem 1.15rem 1.25rem;
     flex: 1;
-
-    @media (max-width: 480px) {
-      padding: 12px;
-    }
   }
 
   &__title {
-    font-size: 1rem;
-    font-weight: $fw-bold;
+    @include font-h3;
+    font-size: 1.05rem;
     color: $text-primary;
-    margin: 0;
+    @include transition(color);
   }
 
   &__desc {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
     color: $text-muted;
-    line-height: 1.5;
     flex: 1;
-    margin: 0;
+    // deux lignes maximum : les cartes gardent la même hauteur
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  // ── Tech badges ──────────────────────────────────────────────────────────
   &__techs {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 0.35rem;
     list-style: none;
-    padding: 0;
-    margin: 4px 0 0;
+    margin-top: 0.3rem;
   }
 
   &__tech {
-    font-size: 0.68rem;
-    font-family: $font-mono;
-    background: rgba($dodo-blue, 0.08);
-    border: 1px solid rgba($dodo-blue, 0.25);
-    color: $dodo-blue;
-    padding: 2px 8px;
-    border-radius: 3px;
+    @include font-mono;
+    font-size: 0.66rem;
+    padding: 0.18rem 0.48rem;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    color: color-mix(in srgb, var(--accent) 90%, white);
     white-space: nowrap;
+
+    &--more {
+      border-style: dashed;
+      color: $text-muted;
+      border-color: $border-strong;
+      background: transparent;
+    }
   }
 }

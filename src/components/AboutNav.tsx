@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { getLenis } from '../motion/lenis'
 import './AboutNav.scss'
 
 const SECTIONS = [
@@ -16,8 +17,11 @@ const SECTIONS = [
 const scrollTo = (id: string) => {
   const el = document.getElementById(id)
   if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY - 88
-  window.scrollTo({ top, behavior: 'smooth' })
+  const top = el.getBoundingClientRect().top + window.scrollY - 96
+  // Lenis pilote le scroll : passer par window.scrollTo se battrait avec lui.
+  const lenis = getLenis()
+  if (lenis) lenis.scrollTo(top, { duration: 1 })
+  else window.scrollTo({ top, behavior: 'smooth' })
 }
 
 const AboutNav = () => {
@@ -41,7 +45,7 @@ const AboutNav = () => {
   }, [])
 
   return (
-    <nav className="about-nav" aria-label="Sections">
+    <nav className="about-nav" aria-label={t('about.nav_label')}>
       <ul className="about-nav__list">
         {SECTIONS.map(({ id, labelKey }) => (
           <li key={id}>

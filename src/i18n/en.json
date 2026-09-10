@@ -3,7 +3,10 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "contact": "Contact"
+    "contact": "Contact",
+    "aria": "Main navigation",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu"
   },
   "home": {
     "greeting": "Hey, I'm",
@@ -31,7 +34,20 @@
     "soft_proactivity_desc": "I look for solutions before asking questions.",
     "cta_title": "What to conctact me ?",
     "cta_text": "My inbox is always open.",
-    "cta_contact": "Get in touch"
+    "cta_contact": "Get in touch",
+    "scroll": "Scroll",
+    "hero_label": "Portfolio 2026",
+    "stats_eyebrow": "By the numbers",
+    "featured_eyebrow": "Selected work",
+    "stack_eyebrow": "Toolbox",
+    "stack_subtitle": "What I build with, at work and on personal projects.",
+    "cta_eyebrow": "Let's talk",
+    "view_project": "View project",
+    "stack_link": "Official website",
+    "skills_cat_frontend": "Frontend",
+    "skills_cat_backend": "Backend",
+    "skills_cat_data": "Data",
+    "skills_cat_tools": "Tools"
   },
   "about": {
     "title": "About",
@@ -62,7 +78,9 @@
     "future_title": "What's next?",
     "future": "My journey isn't very long yet, but every step has confirmed I'm in the right place. Going forward, I see myself continuing to grow as a fullstack web developer, building projects with real impact, and above all, keeping that connection with people to truly understand their needs. Becoming a project manager, a tech consultant, or something else: I don't know exactly yet, and I completely embrace that ambiguity.",
     "future_2": "Artificial Intelligence has naturally found its way into my daily life as a developer, whether it's for more efficient debugging, coding faster, or sparking new ideas. It's true that the speed at which this whole field is evolving can feel anxiety-inducing, but I primarily view it as a incredible opportunity. Today, I consider it an essential shift that we must learn to harness rather than endure.",
-    "future_cta": "In the meantime, the most important thing is meeting new people and collaborating. If my profile interests you, don't hesitate to reach out!"
+    "future_cta": "In the meantime, the most important thing is meeting new people and collaborating. If my profile interests you, don't hesitate to reach out!",
+    "eyebrow": "About",
+    "nav_label": "Page sections"
   },
   "projects": {
     "title": "Projects",
@@ -80,7 +98,9 @@
       "label": "Filter by category and technology",
       "all": "All",
       "techs": "Technologies",
-      "search": "Search for a project..."
+      "search": "Search for a project...",
+      "clear": "Clear all",
+      "search_label": "Search a project"
     },
     "detail": {
       "techs": "Technologies",
@@ -97,7 +117,11 @@
       "gallery_less": "Show less",
       "learnings_title": "What I Learned",
       "links_title": "Links",
-      "gallery_placeholder": "Screenshots coming soon…"
+      "gallery_placeholder": "Screenshots coming soon…",
+      "eyebrow": "Case study",
+      "summary": "At a glance",
+      "next": "Next project",
+      "category": "Category"
     },
     "items": {
       "test": {
@@ -278,7 +302,12 @@
         ],
         "learnings": "I learned two crucial things. Technically: UI/UX design does not happen in a vacuum. Designing web pages primarily means designing component systems compatible with a CMS's rigidity. And fundamentally: refusing 'Lorem Ipsum' and injecting your own passion (gaming) into an academic assignment changes everything. When you genuinely care about the subject, you don't count the hours spent refining details, and it instantly elevates the final quality of the project."
       }
-    }
+    },
+    "eyebrow": "Work",
+    "empty": "No project matches this search.",
+    "empty_hint": "Try another keyword or remove a filter.",
+    "results_one": "{{count}} project",
+    "results_other": "{{count}} projects"
   },
   "contact": {
     "title": "Contact",
@@ -300,7 +329,8 @@
       "send": "Send message",
       "sent": "Sent!",
       "success": "Thanks! Your email client should open shortly."
-    }
+    },
+    "eyebrow": "Get in touch"
   },
   "footer": {
     "nav_title": "Navigation",

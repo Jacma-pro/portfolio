@@ -1,0 +1,14 @@
+@use '../styles/colors/colors' as *;
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: $z-navbar + 1;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, $dodo-blue, $dodo-blue-soft 45%, $dodo-pink);
+  box-shadow: 0 0 14px rgba($dodo-blue, 0.7);
+  pointer-events: none;
+}

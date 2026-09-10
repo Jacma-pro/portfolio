@@ -1,21 +1,29 @@
-// Import Google Fonts - Poppins
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+// ─────────────────────────────────────────────────────────────────────────────
+//  Typographie
+//  Display : Bricolage Grotesque — grotesque variable, très marquée, idéale
+//            pour des titres énormes qui portent l'identité.
+//  Corps   : Inter — neutre et lisible sur les longs textes (page À propos).
+//  Mono    : JetBrains Mono — labels, chiffres, HUD, clin d'œil dev.
+// ─────────────────────────────────────────────────────────────────────────────
 
-// --- Familly ---
-$font-primary: 'Poppins', system-ui, -apple-system, sans-serif;
-$font-mono: 'Courier New', monospace;
 
-// --- Sizes ---
-$fs-xs:   0.75rem;   // 12px - labels, badges
-$fs-sm:   0.875rem;  // 14px - secondary
-$fs-base: 1rem;      // 16px - body text (p)
-$fs-md:   1.125rem;  // 18px - highlighted text
-$fs-lg:   1.5rem;    // 24px - h3, subtitles
-$fs-xl:   2rem;      // 32px - h2
-$fs-2xl:  2.75rem;   // 44px - h1
-$fs-3xl:  3.5rem;    // 56px - hero title
+// --- Familles ---
+$font-display: 'Bricolage Grotesque', 'Archivo', system-ui, -apple-system, sans-serif;
+$font-primary: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-// --- Font weights ---
+// --- Échelle fluide (clamp : mobile → desktop) ---
+$fs-xs:   0.75rem;
+$fs-sm:   0.875rem;
+$fs-base: 1rem;
+$fs-md:   clamp(1.0625rem, 0.4vw + 1rem, 1.1875rem);
+$fs-lg:   clamp(1.25rem, 0.8vw + 1.05rem, 1.5rem);
+$fs-xl:   clamp(1.6rem, 1.8vw + 1.2rem, 2.25rem);
+$fs-2xl:  clamp(2.1rem, 3.4vw + 1.2rem, 3.5rem);
+$fs-3xl:  clamp(2.8rem, 7vw + 0.6rem, 6.5rem);
+$fs-4xl:  clamp(3.4rem, 12vw, 11rem);
+
+// --- Graisses ---
 $fw-light:     300;
 $fw-regular:   400;
 $fw-medium:    500;
@@ -23,101 +31,96 @@ $fw-semibold:  600;
 $fw-bold:      700;
 $fw-extrabold: 800;
 
-// --- Line-heights ---
-$lh-tight:  1.2;
+// --- Interlignes ---
+$lh-none:   1;
+$lh-tight:  1.08;
+$lh-snug:   1.25;
 $lh-normal: 1.5;
 $lh-loose:  1.75;
 
-// --- Letter-spacing ---
-$ls-tight:  -0.02em;
-$ls-normal: 0em;
-$ls-wide:   0.05em;
-$ls-wider:  0.1em;
-
-// --- Export CSS variables ---
-:root {
-  --font-primary: #{$font-primary};
-  --font-mono: #{$font-mono};
-
-  --fs-xs:   #{$fs-xs};
-  --fs-sm:   #{$fs-sm};
-  --fs-base: #{$fs-base};
-  --fs-md:   #{$fs-md};
-  --fs-lg:   #{$fs-lg};
-  --fs-xl:   #{$fs-xl};
-  --fs-2xl:  #{$fs-2xl};
-  --fs-3xl:  #{$fs-3xl};
-
-  --fw-light:     #{$fw-light};
-  --fw-regular:   #{$fw-regular};
-  --fw-medium:    #{$fw-medium};
-  --fw-semibold:  #{$fw-semibold};
-  --fw-bold:      #{$fw-bold};
-  --fw-extrabold: #{$fw-extrabold};
-}
+// --- Interlettrage ---
+$ls-tighter: -0.045em;
+$ls-tight:   -0.025em;
+$ls-normal:  0em;
+$ls-wide:    0.05em;
+$ls-wider:   0.14em;
 
 // --- Mixins typographiques ---
+@mixin font-mega {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  font-weight: $fw-extrabold;
+  line-height: $lh-none;
+  letter-spacing: $ls-tighter;
+  font-optical-sizing: auto;
+}
+
 @mixin font-hero-title {
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: var(--fs-3xl);
-  font-weight: var(--fw-extrabold);
-  line-height: #{$lh-tight};
-  letter-spacing: #{$ls-tight};
+  font-weight: $fw-extrabold;
+  line-height: $lh-tight;
+  letter-spacing: $ls-tighter;
+  font-optical-sizing: auto;
 }
 
 @mixin font-h1 {
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: var(--fs-2xl);
-  font-weight: var(--fw-bold);
-  line-height: #{$lh-tight};
-  letter-spacing: #{$ls-tight};
+  font-weight: $fw-bold;
+  line-height: $lh-tight;
+  letter-spacing: $ls-tight;
+  font-optical-sizing: auto;
 }
 
 @mixin font-h2 {
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: var(--fs-xl);
-  font-weight: var(--fw-semibold);
-  line-height: #{$lh-tight};
+  font-weight: $fw-bold;
+  line-height: $lh-snug;
+  letter-spacing: $ls-tight;
 }
 
 @mixin font-h3 {
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
   font-size: var(--fs-lg);
-  font-weight: var(--fw-semibold);
-  line-height: #{$lh-normal};
+  font-weight: $fw-semibold;
+  line-height: $lh-snug;
+  letter-spacing: $ls-tight;
 }
 
 @mixin font-subtitle {
   font-family: var(--font-primary);
   font-size: var(--fs-md);
-  font-weight: var(--fw-medium);
-  line-height: #{$lh-normal};
+  font-weight: $fw-regular;
+  line-height: $lh-normal;
 }
 
 @mixin font-body {
   font-family: var(--font-primary);
   font-size: var(--fs-base);
-  font-weight: var(--fw-regular);
-  line-height: #{$lh-loose};
+  font-weight: $fw-regular;
+  line-height: $lh-loose;
 }
 
 @mixin font-caption {
   font-family: var(--font-primary);
   font-size: var(--fs-sm);
-  font-weight: var(--fw-regular);
-  line-height: #{$lh-normal};
-  letter-spacing: #{$ls-wide};
+  font-weight: $fw-regular;
+  line-height: $lh-normal;
 }
 
 @mixin font-mono {
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 
+// Label mono en capitales — la « voix » technique du site
 @mixin font-label {
-  font-family: var(--font-primary);
+  font-family: var(--font-mono);
   font-size: var(--fs-xs);
-  font-weight: var(--fw-semibold);
-  line-height: #{$lh-normal};
-  letter-spacing: #{$ls-wider};
+  font-weight: $fw-medium;
+  line-height: $lh-normal;
+  letter-spacing: $ls-wider;
   text-transform: uppercase;
 }

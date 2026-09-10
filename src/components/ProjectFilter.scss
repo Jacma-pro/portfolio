@@ -1,180 +1,284 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
+@use '../styles/motion/motion' as *;
 
-.project-filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: center;
-  margin-bottom: 2.5rem;
-  margin-top: 1.5rem;
-}
+.filters {
+  position: sticky;
+  top: 5.4rem; // sous la pilule de navigation
+  z-index: $z-sticky;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
 
-.project-filter-search {
-  width: 100%;
-  
-  @media (min-width: 768px) {
-    width: auto;
-    flex-grow: 1;
-    max-width: 320px;
-    margin-right: auto;
+  &__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem;
+    border-radius: var(--r-lg);
+    border: 1px solid $border-color;
+    background: rgba(10, 13, 18, 0.82);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    box-shadow: 0 18px 50px -30px rgba(0, 0, 0, 0.9);
   }
 
-  &__input {
-    width: 100%;
-    font-family: $font-primary;
-    font-size: $fs-sm;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    border: 1px solid $border-color;
-    background: transparent;
-    color: $text-primary;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  /* ── Recherche ────────────────────────────────────────────────────── */
+  &__search {
+    position: relative;
+    flex: 1 1 220px;
+    display: flex;
+    align-items: center;
+  }
 
-    &::placeholder {
-      color: $text-muted;
-    }
+  &__search-icon {
+    position: absolute;
+    left: 0.8rem;
+    color: $text-faint;
+    pointer-events: none;
+  }
+
+  &__search-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 2.4rem 0 2.4rem;
+    border-radius: var(--r-full);
+    border: 1px solid $border-color;
+    background: rgba(255, 255, 255, 0.025);
+    color: $text-primary;
+    font-size: 0.875rem;
+    @include transition(border-color, background-color);
+
+    &::placeholder { color: $text-faint; }
+
+    // masque la croix native de Safari/Chrome : on affiche la nôtre
+    &::-webkit-search-cancel-button { display: none; }
 
     &:focus {
-      background: rgba($bg-secondary, 0.4);
-      border-color: $dodo-blue;
-      box-shadow: 0 0 0 2px rgba($dodo-blue, 0.15);
+      outline: none;
+      border-color: rgba($dodo-blue, 0.55);
+      background: rgba($dodo-blue, 0.05);
     }
   }
-}
 
-.project-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  &__search-clear {
+    position: absolute;
+    right: 0.55rem;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: $text-muted;
+    cursor: pointer;
+    @include transition(color, background-color);
 
-  &__btn {
+    &:hover {
+      color: $text-primary;
+      background: rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  /* ── Puces de filtre ──────────────────────────────────────────────── */
+  &__cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  &__chip {
+    --accent: #{$dodo-blue};
+
+    &[data-category='back']   { --accent: #{$dodo-teal}; }
+    &[data-category='mockup'] { --accent: #{$dodo-pink}; }
+
     display: inline-flex;
     align-items: center;
-    font-family: $font-mono;
-    font-size: $fs-xs;
-    font-weight: $fw-bold;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    padding: 0.45rem 1.1rem;
-    border-radius: 6px;
+    gap: 0.4rem;
+    height: 44px;
+    padding: 0 1rem;
+    border-radius: var(--r-full);
     border: 1px solid $border-color;
     background: transparent;
     color: $text-secondary;
+    font-size: 0.82rem;
+    font-weight: $fw-medium;
     cursor: pointer;
-    transition: color 0.18s ease, border-color 0.18s ease,
-                background 0.18s ease, transform 0.15s ease;
+    white-space: nowrap;
+    @include transition(color, border-color, background-color);
 
     &:hover {
       color: $text-primary;
-      border-color: rgba($dodo-blue, 0.5);
-      transform: translateY(-1px);
+      border-color: $border-strong;
     }
 
-    // -- Generic active state --
-    &--active {
-      background: rgba($dodo-blue, 0.1);
-      border-color: $dodo-blue;
-      color: $dodo-blue;
-    }
-
-    // -- Active state --
-    --active {
-      background: rgba($dodo-blue, 0.12);
-      border-color: $dodo-blue;
-      color: $dodo-blue;
+    &--on {
+      color: var(--accent);
+      border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
     }
   }
-}
 
-.project-filter-tech {
-  position: relative;
-  
-  &__toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
+  /* ── Menu technologies ────────────────────────────────────────────── */
+  &__tech {
+    position: relative;
   }
-  
-  &__arrow {
-    font-size: 0.6rem;
-    opacity: 0.7;
-    margin-left: 0.25rem;
+
+  &__tech-count {
+    display: grid;
+    place-items: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: var(--r-full);
+    background: var(--accent);
+    color: $bg-void;
+    @include font-mono;
+    font-size: 0.62rem;
+    font-weight: $fw-bold;
   }
-  
+
+  &__tech-arrow {
+    @include transition(transform);
+
+    &--up { transform: rotate(180deg); }
+  }
+
   &__dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
-    left: 0;
-    z-index: 10;
-    background: $bg-secondary;
-    border: 1px solid $border-color;
-    border-radius: 8px;
-    padding: 0.5rem;
-    min-width: 220px;
-    max-height: 300px;
+    right: 0;
+    z-index: $z-raised;
+    width: min(280px, 78vw);
+    max-height: 320px;
     overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    
-    // Smooth scrollbar
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: $border-color;
-      border-radius: 3px;
-    }
+    padding: 0.45rem;
+    border-radius: var(--r-md);
+    border: 1px solid $border-strong;
+    background: rgba(12, 16, 22, 0.97);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.95);
+    transform-origin: top right;
   }
-  
+
   &__option {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: var(--r-sm);
     cursor: pointer;
-    transition: background 0.15s ease;
-    
-    &:hover {
-      background: rgba($dodo-blue, 0.08);
-    }
-    
-    input[type='checkbox'] {
-      margin: 0;
-      cursor: pointer;
-      width: 16px;
-      height: 16px;
-      accent-color: $dodo-blue;
-    }
-    
-    .project-filter-tech__icon {
-      width: 16px;
-      height: 16px;
-      object-fit: contain;
-      flex-shrink: 0;
+    @include transition(background-color);
 
-      &--invert   { filter: brightness(0) invert(0.65); }
-      &--fallback { color: $text-muted; opacity: 0.5; }
+    &:hover { background: rgba(255, 255, 255, 0.045); }
+
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
     }
 
-    .project-filter-tech__label {
-      font-family: $font-mono;
-      font-size: $fs-xs;
-      color: $text-secondary;
+    input:focus-visible + .filters__option-box {
+      outline: 2px solid $dodo-blue;
+      outline-offset: 2px;
     }
-    
-    &:hover .project-filter-tech__label {
-      color: $text-primary;
-    }
-    
-    input[type='checkbox']:checked + .project-filter-tech__label {
-      color: $dodo-blue;
-      font-weight: $fw-bold;
+
+    input:checked + .filters__option-box {
+      background: $dodo-blue;
+      border-color: $dodo-blue;
+
+      &::after { opacity: 1; transform: scale(1); }
     }
   }
+
+  &__option-box {
+    position: relative;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid $border-strong;
+    @include transition(background-color, border-color);
+
+    // coche dessinée en CSS
+    &::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1.5px;
+      width: 4px;
+      height: 8px;
+      border: solid $bg-void;
+      border-width: 0 2px 2px 0;
+      transform: scale(0.5) rotate(45deg);
+      transform-origin: center;
+      opacity: 0;
+      @include transition(opacity, transform);
+    }
+  }
+
+  &__option-label {
+    font-size: 0.82rem;
+    color: $text-secondary;
+  }
+
+  /* ── Bilan ────────────────────────────────────────────────────────── */
+  &__summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 0.4rem 0;
+  }
+
+  &__count {
+    @include font-mono;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    color: $text-muted;
+    text-transform: uppercase;
+  }
+
+  &__reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.6rem;
+    border: 0;
+    border-radius: var(--r-full);
+    background: transparent;
+    color: $dodo-pink;
+    font-size: 0.74rem;
+    cursor: pointer;
+    @include transition(background-color);
+
+    &:hover { background: rgba($dodo-pink, 0.1); }
+  }
+
+  @media (max-width: 700px) {
+    position: static;
+
+    &__bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__cats { justify-content: flex-start; }
+    &__tech-toggle { width: 100%; justify-content: center; }
+  }
+}
+
+/* Logo de la techno dans le menu de filtres */
+.filters__option-icon {
+  flex-shrink: 0;
+  color: $text-muted;
+  @include transition(color);
+
+  &--generic { opacity: 0.5; }
+}
+
+.filters__option:hover .filters__option-icon,
+.filters__option input:checked ~ .filters__option-icon {
+  color: $dodo-blue;
 }

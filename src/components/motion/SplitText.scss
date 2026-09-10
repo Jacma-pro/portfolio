@@ -1,0 +1,17 @@
+.split {
+  display: inline;
+
+  &__mask {
+    display: inline-block;
+    overflow: hidden;
+    // laisse respirer les jambages (g, y, p) coupés par le masque
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+    vertical-align: bottom;
+  }
+
+  &__unit {
+    display: inline-block;
+    will-change: transform;
+  }
+}

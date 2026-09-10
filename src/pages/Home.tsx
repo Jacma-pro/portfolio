@@ -1,241 +1,295 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { motion, useReducedMotion } from 'framer-motion'
 import { PROJECTS } from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
+import Reveal from '../components/motion/Reveal'
+import SplitText from '../components/motion/SplitText'
+import Counter from '../components/motion/Counter'
+import Parallax from '../components/motion/Parallax'
+import Magnetic from '../components/motion/Magnetic'
+import { ArrowRight, ArrowUpRight } from '../components/icons'
+import TechLogo from '../components/TechLogo'
+import { TECH_ICONS, TECH_GROUPS, type TechIcon } from '../data/tech-icons'
+import { SOFT_SKILLS } from '../data/soft-skills'
+import { EASE } from '../motion/variants'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
+import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
 import './Home.scss'
 
-declare const __BUILD_DATE__: string;
+declare const __BUILD_DATE__: string
 
 const getDaysSinceUpdate = (dateString: string) => {
   try {
-    const buildDate = new Date(dateString);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - buildDate.getTime());
-    return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const buildDate = new Date(dateString)
+    const diffTime = Math.abs(Date.now() - buildDate.getTime())
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24))
   } catch {
-    return 0;
+    return 0
   }
-};
+}
 
-/* ── Featured project IDs (hand-picked, in order) ─────────────────────────── */
+/* ── Projets mis en avant (choisis à la main, dans l'ordre) ─────────────── */
 const FEATURED_IDS = ['stegano', 'bdd-streaming', 'rl-wp']
 const FEATURED = FEATURED_IDS
   .map(id => PROJECTS.find(p => p.id === id))
   .filter(Boolean) as typeof PROJECTS
 
-/* ── Skills ───────────────────────────────────────────────────────────────── */
-const SOFT_SKILLS = [
-  {
-    key: 'curiosity',
-    color: 'blue',
-    path: 'M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z',
-  },
-  {
-    key: 'adaptability',
-    color: 'teal',
-    path: 'M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 0 1-15.357-2m15.357 2H15',
-  },
-  {
-    key: 'collaboration',
-    color: 'pink',
-    path: 'M12 4.354a4 4 0 1 1 0 5.292M15 21H3v-1a6 6 0 0 1 12 0v1zm0 0h6v-1a6 6 0 0 0-9-5.197M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z',
-  },
-  {
-    key: 'proactivity',
-    color: 'yellow',
-    path: 'M13 10V3L4 14h7v7l9-11h-7z',
-  },
-] as const
+/* ── Bandeau technos ───────────────────────────────────────────────────── */
+// Le bandeau reste décoratif : front d'un côté, tout le reste de l'autre.
+// Le groupe « extra » n'existe que pour le filtre projets, il n'apparaît pas ici.
+const SHOWN = TECH_ICONS.filter(t => t.group !== 'extra')
+const STACK_ROW_A = SHOWN.filter(t => t.group === 'frontend' || t.group === 'backend')
+const STACK_ROW_B = SHOWN.filter(t => t.group === 'data' || t.group === 'tools')
 
-const DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
+const TECH_COUNT = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length
 
-type SkillItem = { name: string; icon: string; url: string; invert?: boolean }
-type SkillGroup = { category: string; color: 'blue' | 'teal' | 'yellow' | 'pink'; items: SkillItem[] }
-
-const HARD_SKILLS: SkillGroup[] = [
-  {
-    category: 'Frontend', color: 'blue' as const,
-    items: [
-      { name: 'React',      icon: 'react/react-original',           url: 'https://react.dev' },
-      { name: 'Vue 3',      icon: 'vuejs/vuejs-original',           url: 'https://vuejs.org' },
-      { name: 'Angular',    icon: 'angular/angular-original',       url: 'https://angular.dev' },
-      { name: 'TypeScript', icon: 'typescript/typescript-original', url: 'https://www.typescriptlang.org' },
-      { name: 'SCSS',       icon: 'sass/sass-original',             url: 'https://sass-lang.com' },
-    ],
-  },
-  {
-    category: 'Backend', color: 'teal' as const,
-    items: [
-      { name: 'Node.js',     icon: 'nodejs/nodejs-original',   url: 'https://nodejs.org' },
-      { name: 'Express',     icon: 'express/express-original', url: 'https://expressjs.com', invert: true },
-      { name: 'NestJS',      icon: 'nestjs/nestjs-original',   url: 'https://nestjs.com' },
-      { name: 'Java',        icon: 'java/java-original',       url: 'https://www.java.com' },
-      { name: 'Spring Boot', icon: 'spring/spring-original',   url: 'https://spring.io' },
-    ],
-  },
-  {
-    category: 'Data', color: 'yellow' as const,
-    items: [
-      { name: 'MySQL',      icon: 'mysql/mysql-original',           url: 'https://www.mysql.com' },
-      { name: 'PostgreSQL', icon: 'postgresql/postgresql-original', url: 'https://www.postgresql.org' },
-      { name: 'SQLite',     icon: 'sqlite/sqlite-original',         url: 'https://www.sqlite.org' }
-    ],
-  },
-  {
-    category: 'Outils', color: 'pink' as const,
-    items: [
-      { name: 'VS Code',  icon: 'vscode/vscode-original',     url: 'https://code.visualstudio.com' },
-      { name: 'IntelliJ', icon: 'intellij/intellij-original', url: 'https://www.jetbrains.com/idea' },
-      { name: 'WebStorm', icon: 'webstorm/webstorm-original', url: 'https://www.jetbrains.com/webstorm' },
-      { name: 'Git',      icon: 'git/git-original',           url: 'https://git-scm.com' },
-      { name: 'GitHub',   icon: 'github/github-original',     url: 'https://github.com',   invert: true },
-      { name: 'GitLab',   icon: 'gitlab/gitlab-original',     url: 'https://gitlab.com' },
-      { name: 'Docker',   icon: 'docker/docker-original',     url: 'https://www.docker.com' },
-      { name: 'Figma',    icon: 'figma/figma-original',       url: 'https://www.figma.com' },
-    ],
-  },
-]
+const Marquee = ({ items, reverse = false }: { items: TechIcon[]; reverse?: boolean }) => (
+  <div className="marquee" aria-hidden="true">
+    <div className={`marquee__track${reverse ? ' marquee__track--reverse' : ''}`}>
+      {/* Le contenu est doublé : la boucle se referme sans saut visible. */}
+      {[...items, ...items].map((tech, i) => (
+        <span className="marquee__item" key={`${tech.slug}-${i}`}>
+          <TechLogo tech={tech} size={28} className="marquee__logo" />
+          {tech.label}
+          <span className="marquee__sep">◆</span>
+        </span>
+      ))}
+    </div>
+  </div>
+)
 
 const Home = () => {
   const { t } = useTranslation()
-  const daysSinceUpdate = typeof __BUILD_DATE__ !== 'undefined' ? getDaysSinceUpdate(__BUILD_DATE__) : 0;
+  const reduced = useReducedMotion()
+  const days = typeof __BUILD_DATE__ !== 'undefined' ? getDaysSinceUpdate(__BUILD_DATE__) : 0
 
   return (
     <main className="page page--home">
 
-      {/* ── Hero ──────────────────────────────────────────── */}
-      <section className="home__hero">
-        <div className="home__hero-content">
-          <span className="home__badge">
-            <span className="home__badge-dot" />
-            {t('home.badge')}
-          </span>
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <section className="hero">
+        <div className="hero__text">
+          <motion.span
+            className="hero__label"
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE.outExpo, delay: 0.1 }}
+          >
+            <span className="hero__label-line" />
+            {t('home.hero_label')}
+          </motion.span>
 
-          <h1 className="home__title">
-            {t('home.greeting')}{' '}
-            <span className="home__name">{t('home.name')}</span>
+          <p className="hero__greeting">
+            <SplitText text={t('home.greeting')} delay={0.2} step={0.03} />
+          </p>
+
+          <h1 className="hero__title">
+            <span className="hero__title-line">
+              <SplitText text="Dorian" by="char" delay={0.32} step={0.035} />
+            </span>
+            {/* Un seul fragment animé : le dégradé doit se déployer sur le mot
+                entier, pas se répéter lettre par lettre. */}
+            <span className="hero__title-line hero__title-line--accent">
+              <SplitText text="Jacolin" delay={0.5} />
+            </span>
           </h1>
 
-          <p className="home__role">{t('home.role')}</p>
-          <p className="home__tagline">{t('home.tagline')}</p>
+          <motion.div
+            className="hero__meta"
+            initial={reduced ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE.outExpo, delay: 0.8 }}
+          >
+            <p className="hero__role">{t('home.role')}</p>
+            <p className="hero__tagline">{t('home.tagline')}</p>
 
-          <div className="home__ctas">
-            <Link to="/projects" className="home__btn home__btn--primary">
-              {t('home.cta_projects')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </Link>
-            <Link to="/about" className="home__btn home__btn--ghost">
-              {t('home.cta_about')}
-            </Link>
-          </div>
+            <span className="status-badge hero__status">
+              <span className="status-badge__dot" />
+              {t('home.badge')}
+            </span>
+
+            <div className="hero__ctas">
+              <Magnetic>
+                <Link to="/projects" className="btn btn--primary">
+                  {t('home.cta_projects')}
+                  <ArrowRight />
+                </Link>
+              </Magnetic>
+              <Magnetic strength={0.18}>
+                <Link to="/about" className="btn btn--ghost">
+                  {t('home.cta_about')}
+                </Link>
+              </Magnetic>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="home__hero-visual">
-          <div className="home__avatar-ring">
-            <img src={photoMe} alt="Dorian Jacolin" className="home__avatar" />
-          </div>
-        </div>
-      </section>
+        {/* Portrait, décalé au scroll */}
+        <motion.div
+          className="hero__visual"
+          initial={reduced ? false : { opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: EASE.outExpo, delay: 0.45 }}
+        >
+          <Parallax distance={-38} className="hero__portrait-wrap">
+            <div className="hero__portrait">
+              <img src={photoMe} alt="Dorian Jacolin" />
+              <span className="hero__portrait-glow" aria-hidden="true" />
+            </div>
+          </Parallax>
 
-      {/* ── Stats ─────────────────────────────────────────── */}
-      <section className="home__stats" aria-label="Stats">
-        <div className="home__stat">
-          <span className="home__stat-number">{PROJECTS.length}</span>
-          <span className="home__stat-label">{t('home.stats_projects')}</span>
-        </div>
-        <div className="home__stat">
-          <span className="home__stat-number">
-            {Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length}+
+          <span className="hero__frame" aria-hidden="true" />
+
+          <span className="hero__sticker" aria-hidden="true">
+            <img src={dodoSprite} alt="" />
           </span>
-          <span className="home__stat-label">{t('home.stats_techs')}</span>
-        </div>
-        <div className="home__stat">
-          <span className="home__stat-number">{daysSinceUpdate}</span>
-          <span className="home__stat-label">{t('home.stats_update')}</span>
-        </div>
+        </motion.div>
+
+        {/* Indice de défilement */}
+        <motion.div
+          className="hero__scroll"
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3, duration: 0.6 }}
+          aria-hidden="true"
+        >
+          <span className="hero__scroll-label">{t('home.scroll')}</span>
+          <span className="hero__scroll-rail"><span className="hero__scroll-dot" /></span>
+        </motion.div>
       </section>
 
-      {/* ── Featured projects ─────────────────────────────── */}
-      <section className="home__featured">
-        <div className="home__section-header">
-          <h2>{t('home.featured_title')}</h2>
-          <p className="text-muted">{t('home.featured_subtitle')}</p>
-        </div>
+      {/* ── Chiffres ───────────────────────────────────────────────────── */}
+      <section className="stats" aria-label={t('home.stats_eyebrow')}>
+        <Reveal className="stats__grid" direction="up">
+          <div className="stats__item">
+            <span className="stats__number"><Counter to={PROJECTS.length} /></span>
+            <span className="stats__label">{t('home.stats_projects')}</span>
+          </div>
+          <div className="stats__item">
+            <span className="stats__number"><Counter to={TECH_COUNT} suffix="+" /></span>
+            <span className="stats__label">{t('home.stats_techs')}</span>
+          </div>
+          <div className="stats__item">
+            <span className="stats__number"><Counter to={days} /></span>
+            <span className="stats__label">{t('home.stats_update')}</span>
+          </div>
+        </Reveal>
+      </section>
 
-        <div className="home__projects-grid">
-          {FEATURED.map(project => (
-            <ProjectCard key={project.id} project={project} />
+      {/* ── Projets en avant ───────────────────────────────────────────── */}
+      <section className="home-section">
+        <Reveal className="section-head">
+          <span className="eyebrow">{t('home.featured_eyebrow')}</span>
+          <h2><SplitText text={t('home.featured_title')} onScroll delay={0.05} /></h2>
+          <p>{t('home.featured_subtitle')}</p>
+        </Reveal>
+
+        <div className="home-section__grid">
+          {FEATURED.map((project, i) => (
+            <Reveal key={project.id} direction="up" delay={i * 0.1} amount={0.15}>
+              <ProjectCard project={project} index={i} />
+            </Reveal>
           ))}
         </div>
 
-        <Link to="/projects" className="home__link">
-          {t('home.featured_all')}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </Link>
+        <Reveal direction="in" delay={0.1}>
+          <Link to="/projects" className="arrow-link home-section__more">
+            {t('home.featured_all')}
+            <ArrowRight size={14} />
+          </Link>
+        </Reveal>
       </section>
 
-      {/* ── Skills ────────────────────────────────────────── */}
-      <section className="home__skills">
-        <div className="home__section-header">
+      {/* ── Compétences ────────────────────────────────────────────────── */}
+      <section className="home-section home-section--skills">
+        <Reveal className="section-head">
+          <span className="eyebrow">{t('home.stack_eyebrow')}</span>
           <h2>{t('home.skills_title')}</h2>
-          <p className="text-muted">{t('home.skills_subtitle')}</p>
+          <p>{t('home.skills_subtitle')}</p>
+        </Reveal>
+
+        <div className="stack-band">
+          <Marquee items={STACK_ROW_A} />
+          <Marquee items={STACK_ROW_B} reverse />
         </div>
 
-        <div className="home__skills-grid">
-          <div className="home__soft">
-            {SOFT_SKILLS.map(skill => (
-              <div key={skill.key} className={`home__soft-card home__soft-card--${skill.color}`}>
-                <svg className="home__soft-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d={skill.path} />
-                </svg>
-                <div>
-                  <p className="home__soft-name">{t(`home.soft_${skill.key}_label`)}</p>
-                  <p className="home__soft-desc">{t(`home.soft_${skill.key}_desc`)}</p>
-                </div>
-              </div>
+        <div className="skills">
+          {/* ── Savoir-être ───────────────────────────────────────────── */}
+          <ul className="skills__soft">
+            {SOFT_SKILLS.map((skill, i) => (
+              <Reveal as="li" key={skill.key} delay={i * 0.06} amount={0.3}>
+                <article className={`soft-card soft-card--${skill.color}`}>
+                  <span className="soft-card__icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d={skill.path} />
+                    </svg>
+                  </span>
+                  <h3 className="soft-card__name">{t(`home.soft_${skill.key}_label`)}</h3>
+                  <p className="soft-card__desc">{t(`home.soft_${skill.key}_desc`)}</p>
+                </article>
+              </Reveal>
             ))}
-          </div>
+          </ul>
 
-          <div className="home__hard">
-            {HARD_SKILLS.map(group => (
-              <div key={group.category} className="home__hard-group">
-                <span className={`home__hard-label home__hard-label--${group.color}`}>{group.category}</span>
-                <div className="home__hard-chips">
-                  {group.items.map(item => (
-                    <a
-                      key={item.name}
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`home__chip home__chip--${group.color}`}
+          {/* ── Savoir-faire, par catégorie ───────────────────────────── */}
+          <div className="skills__hard">
+            {TECH_GROUPS.map(group => (
+              <section className={`skill-group skill-group--${group.color}`} key={group.id}>
+                <h3 className="skill-group__title">{t(`home.skills_cat_${group.id}`)}</h3>
+
+                <ul className="stack-list">
+                  {SHOWN.filter(tech => tech.group === group.id).map((tech, i) => (
+                    <Reveal
+                      key={tech.slug}
+                      as="li"
+                      direction="up"
+                      amount={0.4}
+                      delay={Math.min(i, 8) * 0.035}
                     >
-                      <img
-                        src={`${DI}/${item.icon}.svg`}
-                        alt=""
-                        className={`home__chip-icon${item.invert ? ' home__chip-icon--invert' : ''}`}
-                        width="16"
-                        height="16"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
+                      {/* La couleur de marque n'est révélée qu'au survol : au
+                          repos la ligne reste dans la palette du site. */}
+                      <a
+                        className="stack-chip"
+                        href={tech.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${tech.label} — ${t('home.stack_link')}`}
+                        style={{ '--brand': tech.brand } as React.CSSProperties}
+                      >
+                        <TechLogo tech={tech} size={18} />
+                        {tech.label}
+                        {/* Flèche toujours présente mais transparente : la faire
+                            apparaître en changeant la largeur décalerait la ligne. */}
+                        <ArrowUpRight size={12} className="stack-chip__out" />
+                      </a>
+                    </Reveal>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </section>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ───────────────────────────────────────────── */}
-      <section className="home__cta-section">
-        <h2>{t('home.cta_title')}</h2>
-        <p>{t('home.cta_text')}</p>
-        <Link to="/contact" className="home__btn home__btn--primary">
-          {t('home.cta_contact')}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </Link>
+      {/* ── Appel à l'action ───────────────────────────────────────────── */}
+      <section className="home-cta">
+        <Reveal direction="scale">
+          <div className="home-cta__box">
+            <span className="eyebrow">{t('home.cta_eyebrow')}</span>
+            <h2 className="home-cta__title">
+              <SplitText text={t('home.cta_title')} onScroll />
+            </h2>
+            <p className="home-cta__text">{t('home.cta_text')}</p>
+            <Magnetic>
+              <Link to="/contact" className="btn btn--primary">
+                {t('home.cta_contact')}
+                <ArrowRight />
+              </Link>
+            </Magnetic>
+            <img src={dodoSprite} alt="" className="home-cta__dodo" aria-hidden="true" />
+          </div>
+        </Reveal>
       </section>
 
     </main>

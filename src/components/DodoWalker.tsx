@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import './DodoWalker.scss'
 import DodoGame from './DodoGame'
+import { lockScroll, unlockScroll } from '../motion/lenis'
 
 import left0  from '../assets/dodo-frame/walk_left_0.png'
 import left1  from '../assets/dodo-frame/walk_left_1.png'
@@ -82,6 +84,13 @@ const DodoWalker = () => {
   useEffect(() => { pausedRef.current = paused },       [paused])
   useEffect(() => { pauseLeftRef.current = pauseLeft }, [pauseLeft])
   useEffect(() => { isRainbowRef.current = isRainbow }, [isRainbow])
+
+  // Gèle le scroll de la page tant que le jeu est ouvert
+  useEffect(() => {
+    if (!gameOpen) return
+    lockScroll()
+    return () => unlockScroll()
+  }, [gameOpen])
 
   // Konami Code listener
   useEffect(() => {
@@ -212,6 +221,10 @@ const DodoWalker = () => {
 
   return (
     <>
+      {/* La navbar applique un backdrop-filter : il crée un bloc conteneur pour
+          les descendants `fixed`. Les surcouches plein écran passent donc par
+          un portail sur <body> pour ne pas être rognées par la pilule. */}
+      {isRainbow && createPortal(<div className="konami-flash" aria-hidden="true" />, document.body)}
       <div className="dodo-walker" ref={containerRef} aria-hidden="true">
 
         {/* Trail ghosts */}
@@ -254,7 +267,7 @@ const DodoWalker = () => {
           }}
         />
       </div>
-      {gameOpen && <DodoGame onClose={() => setGameOpen(false)} />}
+      {gameOpen && createPortal(<DodoGame onClose={() => setGameOpen(false)} />, document.body)}
     </>
   )
 }

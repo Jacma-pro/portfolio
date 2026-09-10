@@ -3,7 +3,10 @@
     "home": "Accueil",
     "about": "À propos",
     "projects": "Projets",
-    "contact": "Contact"
+    "contact": "Contact",
+    "aria": "Navigation principale",
+    "open_menu": "Ouvrir le menu",
+    "close_menu": "Fermer le menu"
   },
   "home": {
     "greeting": "Salut, moi c'est",
@@ -31,7 +34,20 @@
     "soft_proactivity_desc": "Je cherche les solutions avant de poser les questions.",
     "cta_title": "Envie de me contacter ?",
     "cta_text": "Ma boîte mail est toujours ouverte.",
-    "cta_contact": "Me contacter"
+    "cta_contact": "Me contacter",
+    "scroll": "Défiler",
+    "hero_label": "Portfolio 2026",
+    "stats_eyebrow": "En chiffres",
+    "featured_eyebrow": "Sélection",
+    "stack_eyebrow": "Boîte à outils",
+    "stack_subtitle": "Ce avec quoi je construis, en alternance comme en projet personnel.",
+    "cta_eyebrow": "Parlons-en",
+    "view_project": "Voir le projet",
+    "stack_link": "Site officiel",
+    "skills_cat_frontend": "Frontend",
+    "skills_cat_backend": "Backend",
+    "skills_cat_data": "Data",
+    "skills_cat_tools": "Outils"
   },
   "about": {
     "title": "À propos",
@@ -62,7 +78,9 @@
     "future_title": "Et maintenant ?",
     "future": "Mon parcours n'est pas encore très long, mais chaque étape m'a confirmé que j'étais au bon endroit. Pour la suite, je me vois continuer à progresser comme développeur web fullstack, construire des projets qui ont du sens, et surtout garder ce lien avec les gens pour bien comprendre leurs besoins. Devenir chef de projet, consultant technique, ou autre chose : je ne sais pas encore exactement, et j'assume totalement ce flou.",
     "future_2": "L'Intelligence Artificielle a évidemment fait son apparition dans mon quotidien de développeur, que ce soit pour débugger plus efficacement, coder plus vite ou débloquer de nouvelles idées. C'est vrai que la vitesse à laquelle tout ce domaine évolue peut paraître anxiogène, mais je le perçois surtout comme une formidable opportunité. À l'heure actuelle, je considère que c'est un virage indispensable, qu'il faut réussir à exploiter plutôt que subir.",
-    "future_cta": "En attendant, l'important c'est de rencontrer de nouvelles personnes et de collaborer. Si mon profil t'intéresse, n'hésite pas à m'écrire !"
+    "future_cta": "En attendant, l'important c'est de rencontrer de nouvelles personnes et de collaborer. Si mon profil t'intéresse, n'hésite pas à m'écrire !",
+    "eyebrow": "À propos",
+    "nav_label": "Sections de la page"
   },
   "projects": {
     "title": "Projets",
@@ -80,7 +98,9 @@
       "label": "Filtrer par catégorie et technologie",
       "all": "Tous",
       "techs": "Technologies",
-      "search": "Rechercher un projet..."
+      "search": "Rechercher un projet...",
+      "clear": "Tout réinitialiser",
+      "search_label": "Rechercher un projet"
     },
     "detail": {
       "techs": "Technologies",
@@ -97,7 +117,11 @@
       "gallery_less": "Voir moins",
       "learnings_title": "Ce que j'ai appris",
       "links_title": "Liens",
-      "gallery_placeholder": "Les captures d'écran arrivent bientôt…"
+      "gallery_placeholder": "Les captures d'écran arrivent bientôt…",
+      "eyebrow": "Étude de cas",
+      "summary": "En bref",
+      "next": "Projet suivant",
+      "category": "Catégorie"
     },
     "items": {
       "test": {
@@ -278,7 +302,12 @@
         ],
         "learnings": "J'ai appris deux choses cruciales. Techniquement : le design UI/UX n'est pas hors-sol. Concevoir des pages web, c'est avant tout concevoir des systèmes de composants compatibles avec la rigidité d'un CMS. Et humainement : refuser le 'Lorem Ipsum' et injecter sa passion (le gaming) dans un devoir académique change tout. Quand le sujet te tient à cœur, tu ne comptes pas les heures de détails, et la qualité finale du projet s'en ressent immédiatement."
       }
-    }
+    },
+    "eyebrow": "Réalisations",
+    "empty": "Aucun projet ne correspond à cette recherche.",
+    "empty_hint": "Essaie un autre mot-clé ou retire un filtre.",
+    "results_one": "{{count}} projet",
+    "results_other": "{{count}} projets"
   },
   "contact": {
     "title": "Contact",
@@ -300,7 +329,8 @@
       "send": "Envoyer le message",
       "sent": "Envoyé !",
       "success": "Merci ! Ton client mail devrait s'ouvrir dans quelques instants."
-    }
+    },
+    "eyebrow": "Prise de contact"
   },
   "footer": {
     "nav_title": "Navigation",

@@ -1,177 +1,197 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { AnimatePresence, motion } from 'framer-motion'
 import { PROJECTS, type Category } from '../data/projects'
+import { Search, Close, ChevronDown, Code } from './icons'
+import TechLogo from './TechLogo'
+import { iconForTech } from '../data/tech-icons'
+import { EASE } from '../motion/variants'
 import './ProjectFilter.scss'
 
 const ALL_CATEGORIES: Category[] = ['front', 'back', 'mockup']
 
-const ALL_TECHS = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).sort((a, b) => a.localeCompare(b))
-
-const DI = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
-
-const TECH_ICONS: Record<string, { icon: string; invert?: boolean }> = {
-  'Angular':      { icon: 'angular/angular-original' },
-  'CSS3':         { icon: 'css3/css3-original' },
-  'Docker':       { icon: 'docker/docker-original' },
-  'Express.js':   { icon: 'express/express-original', invert: true },
-  'Figma':        { icon: 'figma/figma-original' },
-  'HTML5':        { icon: 'html5/html5-original' },
-  'Java':         { icon: 'java/java-original' },
-  'JavaScript':   { icon: 'javascript/javascript-original' },
-  'MySQL':        { icon: 'mysql/mysql-original' },
-  'NestJS':       { icon: 'nestjs/nestjs-original' },
-  'Node.js':      { icon: 'nodejs/nodejs-original' },
-  'PHP':          { icon: 'php/php-original' },
-  'PostgreSQL':   { icon: 'postgresql/postgresql-original' },
-  'React':        { icon: 'react/react-original' },
-  'React 19':     { icon: 'react/react-original' },
-  'SCSS':         { icon: 'sass/sass-original' },
-  'Spring Boot':  { icon: 'spring/spring-original' },
-  'SQLite':       { icon: 'sqlite/sqlite-original' },
-  'SQLite3':      { icon: 'sqlite/sqlite-original' },
-  'Strapi':       { icon: 'strapi/strapi-original' },
-  'Strapi v5':    { icon: 'strapi/strapi-original' },
-  'Supabase':     { icon: 'supabase/supabase-original' },
-  'TypeScript':   { icon: 'typescript/typescript-original' },
-  'Vite':         { icon: 'vitejs/vitejs-original' },
-  'Vue 3':        { icon: 'vuejs/vuejs-original' },
+/**
+ * Logo d'une techno de projet. Toutes n'ont pas de marque derrière elles
+ * (LSB, LocalStorage, MCD/MLD/MPD…) : celles-là reçoivent des chevrons.
+ */
+const TechMark = ({ tech }: { tech: string }) => {
+  const icon = iconForTech(tech)
+  return icon
+    ? <TechLogo tech={icon} size={15} className="filters__option-icon" />
+    : <Code size={15} className="filters__option-icon filters__option-icon--generic" />
 }
-
-const FallbackIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="project-filter-tech__icon project-filter-tech__icon--fallback" aria-hidden="true">
-    <polyline points="16 18 22 12 16 6" />
-    <polyline points="8 6 2 12 8 18" />
-  </svg>
-)
-
-const TechIcon = ({ tech }: { tech: string }) => {
-  const [failed, setFailed] = useState(false)
-  const iconInfo = TECH_ICONS[tech]
-
-  if (!iconInfo || failed) return <FallbackIcon />
-
-  return (
-    <img
-      src={`${DI}/${iconInfo.icon}.svg`}
-      alt=""
-      width="16"
-      height="16"
-      aria-hidden="true"
-      className={`project-filter-tech__icon${iconInfo.invert ? ' project-filter-tech__icon--invert' : ''}`}
-      onError={() => setFailed(true)}
-    />
-  )
-}
+const ALL_TECHS = Array.from(new Set(PROJECTS.flatMap(p => p.techs)))
+  .sort((a, b) => a.localeCompare(b))
 
 interface Props {
-  active: Category[]
-  onChange: (cats: Category[]) => void
+  activeCats: Category[]
+  onChangeCats: (cats: Category[]) => void
   activeTechs: string[]
   onChangeTechs: (techs: string[]) => void
-  searchQuery: string
-  onSearchChange: (query: string) => void
+  query: string
+  onQueryChange: (query: string) => void
+  resultCount: number
+  isFiltered: boolean
+  onClear: () => void
 }
 
-const ProjectFilter = ({ active, onChange, activeTechs, onChangeTechs, searchQuery, onSearchChange }: Props) => {
+const ProjectFilter = ({
+  activeCats,
+  onChangeCats,
+  activeTechs,
+  onChangeTechs,
+  query,
+  onQueryChange,
+  resultCount,
+  isFiltered,
+  onClear,
+}: Props) => {
   const { t } = useTranslation()
-  const [isTechDropdownOpen, setIsTechDropdownOpen] = useState(false)
+  const [techOpen, setTechOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  const isAllCategories = active.length === 0 || active.length === ALL_CATEGORIES.length
+  const showsEverything = activeCats.length === 0 || activeCats.length === ALL_CATEGORIES.length
 
-  const handleAllCategories = () => onChange([])
-
-  const handleToggleCategory = (cat: Category) => {
-    if (active.includes(cat)) {
-      const next = active.filter(c => c !== cat)
-      onChange(next.length === 0 ? [] : next)
-    } else {
-      const next = [...active, cat]
-      onChange(next.length === ALL_CATEGORIES.length ? [] : next)
-    }
+  const toggleCategory = (cat: Category) => {
+    const next = activeCats.includes(cat)
+      ? activeCats.filter(c => c !== cat)
+      : [...activeCats, cat]
+    // Tout sélectionner revient à ne rien filtrer.
+    onChangeCats(next.length === ALL_CATEGORIES.length ? [] : next)
   }
 
-  const handleToggleTech = (tech: string) => {
-    if (activeTechs.includes(tech)) {
-      onChangeTechs(activeTechs.filter(t => t !== tech))
-    } else {
-      onChangeTechs([...activeTechs, tech])
-    }
+  const toggleTech = (tech: string) => {
+    onChangeTechs(
+      activeTechs.includes(tech)
+        ? activeTechs.filter(x => x !== tech)
+        : [...activeTechs, tech],
+    )
   }
 
+  // Fermeture du menu technos au clic extérieur et à Échap
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsTechDropdownOpen(false)
+    if (!techOpen) return
+
+    const onPointerDown = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setTechOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setTechOpen(false) }
+
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [techOpen])
 
   return (
-    <div className="project-filter-container">
-      <div className="project-filter-search">
-        <input
-          type="text"
-          placeholder={t('projects.filter.search')}
-          value={searchQuery}
-          onChange={e => onSearchChange(e.target.value)}
-          className="project-filter-search__input"
-        />
-      </div>
+    <div className="filters">
+      <div className="filters__bar">
 
-      <div className="project-filter" role="group" aria-label={t('projects.filter.label')}>
-        <button
-          type="button"
-          className={`project-filter__btn${isAllCategories ? ' project-filter__btn--active' : ''}`}
-          onClick={handleAllCategories}
-          aria-pressed={isAllCategories}
-        >
-          {t('projects.filter.all')}
-        </button>
-
-        {ALL_CATEGORIES.map(cat => {
-          const isActive = active.includes(cat)
-          return (
+        {/* ── Recherche ────────────────────────────────────────────── */}
+        <div className="filters__search">
+          <Search size={16} className="filters__search-icon" />
+          <input
+            type="search"
+            className="filters__search-input"
+            placeholder={t('projects.filter.search')}
+            aria-label={t('projects.filter.search_label')}
+            value={query}
+            onChange={e => onQueryChange(e.target.value)}
+          />
+          {query && (
             <button
-              key={cat}
               type="button"
-              className={`project-filter__btn project-filter__btn--${cat}${isActive && !isAllCategories ? ' project-filter__btn--active' : ''}`}
-              onClick={() => handleToggleCategory(cat)}
-              aria-pressed={isActive && !isAllCategories}
+              className="filters__search-clear"
+              onClick={() => onQueryChange('')}
+              aria-label={t('projects.filter.clear')}
             >
-              {t(`projects.categories.${cat}`)}
+              <Close size={14} />
             </button>
-          )
-        })}
+          )}
+        </div>
+
+        {/* ── Catégories ───────────────────────────────────────────── */}
+        <div className="filters__cats" role="group" aria-label={t('projects.filter.label')}>
+          <button
+            type="button"
+            className={`filters__chip${showsEverything ? ' filters__chip--on' : ''}`}
+            onClick={() => onChangeCats([])}
+            aria-pressed={showsEverything}
+          >
+            {t('projects.filter.all')}
+          </button>
+
+          {ALL_CATEGORIES.map(cat => {
+            const on = activeCats.includes(cat) && !showsEverything
+            return (
+              <button
+                key={cat}
+                type="button"
+                data-category={cat}
+                className={`filters__chip${on ? ' filters__chip--on' : ''}`}
+                onClick={() => toggleCategory(cat)}
+                aria-pressed={on}
+              >
+                {t(`projects.categories.${cat}`)}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* ── Technologies ─────────────────────────────────────────── */}
+        <div className="filters__tech" ref={dropdownRef}>
+          <button
+            type="button"
+            className={`filters__chip filters__tech-toggle${activeTechs.length ? ' filters__chip--on' : ''}`}
+            onClick={() => setTechOpen(v => !v)}
+            aria-expanded={techOpen}
+          >
+            {t('projects.filter.techs')}
+            {activeTechs.length > 0 && (
+              <span className="filters__tech-count">{activeTechs.length}</span>
+            )}
+            <ChevronDown size={14} className={`filters__tech-arrow${techOpen ? ' filters__tech-arrow--up' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {techOpen && (
+              <motion.div
+                className="filters__dropdown"
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.2, ease: EASE.outQuart }}
+              >
+                {ALL_TECHS.map(tech => (
+                  <label key={tech} className="filters__option">
+                    <input
+                      type="checkbox"
+                      checked={activeTechs.includes(tech)}
+                      onChange={() => toggleTech(tech)}
+                    />
+                    <span className="filters__option-box" aria-hidden="true" />
+                    <TechMark tech={tech} />
+                    <span className="filters__option-label">{tech}</span>
+                  </label>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
-      <div className="project-filter-tech" ref={dropdownRef}>
-        <button
-          type="button"
-          className={`project-filter__btn project-filter-tech__toggle${activeTechs.length > 0 ? ' project-filter__btn--active' : ''}`}
-          onClick={() => setIsTechDropdownOpen(!isTechDropdownOpen)}
-          aria-expanded={isTechDropdownOpen}
-        >
-          {t('projects.filter.techs')} {activeTechs.length > 0 && `(${activeTechs.length})`}
-          <span className="project-filter-tech__arrow">{isTechDropdownOpen ? '▲' : '▼'}</span>
-        </button>
-        
-        {isTechDropdownOpen && (
-          <div className="project-filter-tech__dropdown">
-            {ALL_TECHS.map(tech => (
-              <label key={tech} className="project-filter-tech__option">
-                <input
-                  type="checkbox"
-                  checked={activeTechs.includes(tech)}
-                  onChange={() => handleToggleTech(tech)}
-                />
-                <TechIcon tech={tech} />
-                <span className="project-filter-tech__label">{tech}</span>
-              </label>
-            ))}
-          </div>
+      {/* ── Bilan ────────────────────────────────────────────────────── */}
+      <div className="filters__summary">
+        <span className="filters__count">{t('projects.results', { count: resultCount })}</span>
+        {isFiltered && (
+          <button type="button" className="filters__reset" onClick={onClear}>
+            <Close size={12} />
+            {t('projects.filter.clear')}
+          </button>
         )}
       </div>
     </div>

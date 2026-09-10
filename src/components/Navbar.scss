@@ -1,219 +1,296 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
-
-$navbar-bp: 700px;
+@use '../styles/motion/motion' as *;
 
 .navbar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 0 5rem;
-  height: 80px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: fixed;
+  top: 0.9rem;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+  pointer-events: none; // seul l'intérieur capte les clics
 
-  @media (max-width: $navbar-bp) {
-    grid-template-columns: 1fr auto;
-    padding: 0 1rem;
+  &__inner {
+    pointer-events: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 62px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 0.6rem 0 0.7rem;
+    border-radius: var(--r-full);
+    border: 1px solid $border-color;
+    background: rgba(10, 13, 18, 0.55);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    overflow: hidden; // garde le dodo à l'intérieur de la pilule
+    @include transition(background-color, border-color, box-shadow);
   }
 
+  &--scrolled &__inner {
+    background: rgba(10, 13, 18, 0.82);
+    border-color: $border-strong;
+    box-shadow: 0 14px 44px -22px rgba(0, 0, 0, 0.9);
+  }
+
+  /* ── Logo ─────────────────────────────────────────────────────────── */
   &__logo {
-    justify-self: start;
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
-    text-decoration: none;
-    position: relative;
-    z-index: 1;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    padding: 0.25rem 0.4rem;
+    border-radius: var(--r-full);
+    @include transition(transform);
 
-    &-sprite {
-      width: 34px;
-      height: 34px;
+    &:hover .navbar__logo-badge {
+      border-color: rgba($dodo-blue, 0.8);
+      box-shadow: 0 0 22px -4px rgba($dodo-blue, 0.7);
     }
 
-    &-name {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.15;
-      font-weight: $fw-bold;
-      color: $dodo-blue;
-      letter-spacing: 0.03em;
-      margin-left: 0.5rem;
-      white-space: nowrap;
-
-      span:first-child {
-        font-size: var(--fs-md);
-        color: var(--text-primary);
-      }
-      span:last-child {
-        text-align: left;
-        font-size: var(--fs-base);
-      }
+    &:hover .navbar__logo-sprite {
+      transform: translateY(-2px) rotate(-6deg);
     }
   }
 
-  // ── Desktop links ────────────────────────────────────────────────────────
+  &__logo-badge {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid $border-strong;
+    background: rgba($dodo-blue, 0.08);
+    @include transition(border-color, box-shadow);
+  }
+
+  &__logo-sprite {
+    width: 24px;
+    height: 24px;
+    image-rendering: pixelated;
+    @include transition(transform);
+  }
+
+  &__logo-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    font-family: var(--font-display);
+    font-weight: $fw-bold;
+    font-size: 0.82rem;
+    letter-spacing: $ls-tight;
+  }
+
+  &__logo-first { color: $text-primary; }
+  &__logo-last  { color: $dodo-blue; }
+
+  /* ── Liens ────────────────────────────────────────────────────────── */
   &__links {
+    position: relative;
+    z-index: 2;
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 0.15rem;
     list-style: none;
+    margin: 0 auto;
+
+    @media (max-width: 860px) {
+      display: none;
+    }
+  }
+
+  &__link {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--r-full);
+    font-size: 0.875rem;
+    font-weight: $fw-medium;
+    color: $text-secondary;
+    @include transition(color);
+
+    &:hover { color: $text-primary; }
+
+    &--active { color: $dodo-blue; }
+  }
+
+  &__link-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__pill {
+    position: absolute;
+    inset: 0;
     z-index: 1;
-
-    a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: var(--fs-base);
-      font-weight: $fw-medium;
-      transition: color 0.2s ease;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-
-      &:hover {
-        color: var(--text-primary);
-      }
-
-      &.active {
-        color: var(--accent-primary);
-        border-bottom-color: var(--accent-primary);
-      }
-    }
-
-    // ── Mobile drawer ───────────────────────────────────────────────────
-    @media (max-width: $navbar-bp) {
-      position: fixed;
-      inset: 0;
-      top: 60px;
-      flex-direction: column;
-      gap: 0;
-      background: var(--bg-secondary);
-      padding: 1rem 0;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 99;
-      overflow-y: auto;
-
-      &--open {
-        transform: translateX(0);
-      }
-
-      li {
-        width: 100%;
-      }
-
-      a {
-        display: block;
-        padding: 1rem 1.5rem;
-        font-size: var(--fs-md);
-        border-bottom: none;
-
-        &.active {
-          background: rgba($dodo-blue, 0.08);
-          border-bottom: none;
-          border-left: 3px solid var(--accent-primary);
-        }
-      }
-    }
+    border-radius: var(--r-full);
+    background: rgba($dodo-blue, 0.12);
+    border: 1px solid rgba($dodo-blue, 0.28);
   }
 
-  // ── Right group (lang + burger) ──────────────────────────────────────────
-  &__right-group {
-    justify-self: end;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  /* ── Bloc droit ───────────────────────────────────────────────────── */
+  &__right {
     position: relative;
-    z-index: 101;
-  }
-
-  // ── Lang button ──────────────────────────────────────────────────────────
-  &__lang {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, opacity 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
-    z-index: 3;
+    z-index: 2;
     display: flex;
     align-items: center;
-    color: var(--text-primary);
-    font-size: var(--fs-sm);
-    font-weight: $fw-semibold;
+    gap: 0.4rem;
+    margin-left: auto;
+    flex-shrink: 0;
+
+    @media (min-width: 861px) {
+      margin-left: 0;
+    }
+  }
+
+  &__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 40px;
+    min-width: 44px;
+    padding: 0 0.7rem;
+    border-radius: var(--r-full);
+    border: 1px solid $border-color;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    @include transition(border-color, background-color, color);
 
     &:hover {
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-    }
-
-    &-flag {
-      width: 20px;
-    }
-    &-code {
-      margin-left: 0.5rem;
+      border-color: rgba($dodo-blue, 0.5);
+      background: rgba($dodo-blue, 0.08);
     }
   }
 
-  // ── Burger button ────────────────────────────────────────────────────────
+  &__lang-flag {
+    width: 18px;
+    height: 13px;
+    border-radius: 2px;
+    object-fit: cover;
+  }
+
+  &__lang-code {
+    @include font-mono;
+    font-size: 0.7rem;
+    font-weight: $fw-medium;
+    color: $text-secondary;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Burger ───────────────────────────────────────────────────────── */
   &__burger {
     display: none;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 5px;
-    background: none;
-    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    border: 1px solid $border-color;
+    background: rgba(255, 255, 255, 0.02);
     cursor: pointer;
-    padding: 6px;
-    width: 36px;
-    height: 36px;
-    z-index: 101;
 
-    @media (max-width: $navbar-bp) {
+    @media (max-width: 860px) {
       display: flex;
     }
+
+    &:hover { border-color: rgba($dodo-blue, 0.5); }
   }
 
   &__burger-line {
     display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--text-primary);
+    width: 17px;
+    height: 1.5px;
     border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    background: $text-primary;
+    @include transition(transform, opacity, background-color);
   }
 
-  &__burger--active &__burger-line {
-    &:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    &:nth-child(2) {
-      opacity: 0;
-    }
-    &:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-  }
+  &__burger--active {
+    border-color: rgba($dodo-blue, 0.6);
 
-  // ── Overlay ──────────────────────────────────────────────────────────────
-  &__overlay {
-    display: none;
+    .navbar__burger-line {
+      background: $dodo-blue;
 
-    @media (max-width: $navbar-bp) {
-      display: block;
-      position: fixed;
-      inset: 0;
-      top: 60px;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 98;
-      animation: overlay-fade-in 0.25s ease;
+      &:first-child { transform: translateY(3.25px) rotate(45deg); }
+      &:last-child  { transform: translateY(-3.25px) rotate(-45deg); }
     }
   }
 }
 
-@keyframes overlay-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+/* ── Menu plein écran ───────────────────────────────────────────────── */
+.navmenu {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 6rem var(--gutter) 3rem;
+  background: rgba(7, 9, 13, 0.97);
+  backdrop-filter: blur(20px);
+
+  &__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 12vw, 4rem);
+    font-weight: $fw-extrabold;
+    letter-spacing: $ls-tighter;
+    line-height: 1.1;
+    color: $text-primary;
+    @include transition(color, transform);
+
+    &:hover,
+    &:focus-visible {
+      color: $dodo-blue;
+      transform: translateX(8px);
+    }
+
+    &--active {
+      color: $dodo-blue;
+    }
+  }
+
+  &__index {
+    @include font-mono;
+    font-size: 0.7rem;
+    color: $text-faint;
+    letter-spacing: 0.12em;
+  }
+
+  &__foot {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid $border-soft;
+    @include font-mono;
+    font-size: 0.78rem;
+    color: $text-muted;
+  }
+
+  &__dodo {
+    width: 26px;
+    height: 26px;
+    image-rendering: pixelated;
+  }
 }
