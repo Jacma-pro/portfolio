@@ -17,6 +17,7 @@ const STACK = [
   ['SQLite',      'siSqlite'],
   ['Strapi',      'siStrapi'],
   ['Git',         'siGit'],
+  ['Claude Code', 'siClaudecode'],
 ]
 
 // Luminance relative (WCAG) : sert à repérer les marques trop sombres pour

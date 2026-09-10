@@ -35,10 +35,11 @@ const FEATURED = FEATURED_IDS
   .filter(Boolean) as typeof PROJECTS
 
 /* ── Bandeau technos ───────────────────────────────────────────────────── */
-// Front d'un côté, back et outillage de l'autre : les deux lignes défilent en
-// sens opposés.
-const STACK_ROW_A = TECH_ICONS.slice(0, 7)
-const STACK_ROW_B = TECH_ICONS.slice(7)
+// Les deux lignes défilent en sens opposés. La frontière suit l'ordre de
+// TECH_ICONS : front et design d'abord, back et outillage ensuite.
+const FRONT_COUNT = 7
+const STACK_ROW_A = TECH_ICONS.slice(0, FRONT_COUNT)
+const STACK_ROW_B = TECH_ICONS.slice(FRONT_COUNT)
 
 const TECH_COUNT = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length
 
