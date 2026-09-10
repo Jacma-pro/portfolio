@@ -22,7 +22,11 @@ interface Props {
 const C_SKY_TOP   = '#070a10'
 const C_SKY_BOT   = '#0d1622'
 const C_STAR      = '#2b3a45'
-const C_DUNE      = '#111b26'
+const C_DUNE_FAR  = '#0e1620'
+const C_DUNE_MID  = '#131f2b'
+const C_DUNE_NEAR = '#182836'
+const C_MOON      = '#cfe9f5'
+const C_MESA      = '#0c141d'
 const C_GROUND    = '#69e3ff'
 const C_GRIT      = '#1d2531'
 const C_CACTUS    = '#6FC3A9'
@@ -61,6 +65,8 @@ const SHAPES: ObstacleShape[] = [
 interface Obstacle {
   x:     number
   shape: ObstacleShape
+  /** Tiré au hasard à l'apparition : ne sert qu'à varier le dessin. */
+  seed:  number
 }
 
 /** Pastille de fond, défilant plus lentement que le sol (parallaxe). */
@@ -75,13 +81,71 @@ const makeStars = (): Star[] =>
     depth: 0.12 + Math.random() * 0.3,
   }))
 
-/** Silhouette de dunes, une par plan, dessinée en dents de scie. */
-const drawDunes = (ctx: CanvasRenderingContext2D, offset: number) => {
-  ctx.fillStyle = C_DUNE
+/**
+ * Décor. Le dodo court sur place : toute la sensation de vitesse vient de ces
+ * plans qui défilent à des vitesses différentes. Du plus lent au plus rapide :
+ * lune (fixe) → mesas → dunes lointaines → dunes proches → sol.
+ */
+
+/** Lune posée en haut à gauche, avec son halo. */
+const drawMoon = (ctx: CanvasRenderingContext2D) => {
+  const mx = 96
+  const my = 44
+  const grd = ctx.createRadialGradient(mx, my, 4, mx, my, 42)
+  grd.addColorStop(0, 'rgba(207, 233, 245, 0.30)')
+  grd.addColorStop(1, 'rgba(207, 233, 245, 0)')
+  ctx.fillStyle = grd
+  ctx.beginPath()
+  ctx.arc(mx, my, 42, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.fillStyle = C_MOON
+  ctx.beginPath()
+  ctx.arc(mx, my, 13, 0, Math.PI * 2)
+  ctx.fill()
+
+  // cratères : quelques disques à peine plus sombres
+  ctx.fillStyle = 'rgba(120, 150, 168, 0.55)'
+  for (const [dx, dy, r] of [[-4, -3, 3], [4, 2, 2], [-1, 5, 1.6]] as const) {
+    ctx.beginPath()
+    ctx.arc(mx + dx, my + dy, r, 0, Math.PI * 2)
+    ctx.fill()
+  }
+}
+
+/** Mesas anguleuses, le plan le plus lointain. */
+const drawMesas = (ctx: CanvasRenderingContext2D, offset: number) => {
+  ctx.fillStyle = C_MESA
   ctx.beginPath()
   ctx.moveTo(0, GROUND_Y)
-  for (let x = 0; x <= CW; x += 20) {
-    const y = GROUND_Y - 26 - Math.sin((x + offset) / 90) * 12 - Math.sin((x + offset) / 37) * 5
+  for (let x = 0; x <= CW; x += 8) {
+    const t = (x + offset) / 260
+    // paliers marqués : des plateaux plutôt que des collines
+    const step = Math.floor((Math.sin(t) + Math.sin(t * 1.7)) * 2.2)
+    ctx.lineTo(x, GROUND_Y - 46 - step * 7)
+  }
+  ctx.lineTo(CW, GROUND_Y)
+  ctx.closePath()
+  ctx.fill()
+}
+
+/** Une couche de dunes arrondies. */
+const drawDunes = (
+  ctx: CanvasRenderingContext2D,
+  offset: number,
+  color: string,
+  height: number,
+  wavelength: number,
+) => {
+  ctx.fillStyle = color
+  ctx.beginPath()
+  ctx.moveTo(0, GROUND_Y)
+  for (let x = 0; x <= CW; x += 12) {
+    const y =
+      GROUND_Y -
+      height -
+      Math.sin((x + offset) / wavelength) * (height * 0.45) -
+      Math.sin((x + offset) / (wavelength * 0.38)) * (height * 0.18)
     ctx.lineTo(x, y)
   }
   ctx.lineTo(CW, GROUND_Y)
@@ -89,11 +153,31 @@ const drawDunes = (ctx: CanvasRenderingContext2D, offset: number) => {
   ctx.fill()
 }
 
+/** Touffes d'herbe sèche au premier plan, défilant plus vite que le sol. */
+const drawScrub = (ctx: CanvasRenderingContext2D, offset: number) => {
+  ctx.strokeStyle = 'rgba(111, 195, 169, 0.14)'
+  ctx.lineWidth = 1
+  for (let i = 0; i < 9; i++) {
+    // pas irrégulier : un espacement constant dessinait une frise de « V »
+    const spacing = 97 + ((i * 43) % 61)
+    const bx = ((i * spacing + offset * 1.3) % (CW + 60) + CW + 60) % (CW + 60) - 30
+    const h = 3 + ((i * 5) % 4)
+    const y = GROUND_Y + 12
+    ctx.beginPath()
+    ctx.moveTo(bx, y)
+    ctx.lineTo(bx - 2, y - h)
+    ctx.moveTo(bx, y)
+    ctx.lineTo(bx + 1.5, y - h + 1)
+    ctx.stroke()
+  }
+}
+
 type Phase = 'idle' | 'playing' | 'dead'
 
 // ── Helper: draw ONE obstacle ─────────────────────────────────────────────────
-// Les géométries ne bougent pas : les collisions se calculent sur les mêmes
-// rectangles, seul le rendu change.
+// Les géométries ne bougent pas : les collisions se calculent sur ces mêmes
+// rectangles. Tout le dessin reste donc strictement à l'intérieur — un cactus
+// qui déborderait de sa boîte serait injuste pour le joueur.
 function drawObstacle(ctx: CanvasRenderingContext2D, obs: Obstacle) {
   const rects = [
     { x: obs.x, y: GROUND_Y - obs.shape.h, w: obs.shape.w, h: obs.shape.h },
@@ -102,16 +186,72 @@ function drawObstacle(ctx: CanvasRenderingContext2D, obs: Obstacle) {
     })),
   ]
 
+  // teinte légèrement variable d'un cactus à l'autre
+  const tint = 0.86 + obs.seed * 0.28
+  const body = `rgb(${Math.round(0x6f * tint)}, ${Math.round(0xc3 * tint)}, ${Math.round(0xa9 * tint)})`
+
   ctx.save()
   ctx.shadowColor = C_CACTUS
-  ctx.shadowBlur = 12
-  ctx.fillStyle = C_CACTUS
-  for (const r of rects) ctx.fillRect(r.x, r.y, r.w, r.h)
+  ctx.shadowBlur = 10
+
+  // Arrondi volontairement faible et plafonné : proportionnel, le tronc large
+  // du cactus double devenait un galet.
+  const radiusOf = (r: { w: number; h: number }) => Math.min(r.w / 2, r.h / 2, 5)
+
+  for (const r of rects) {
+    ctx.fillStyle = body
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, radiusOf(r))
+    ctx.fill()
+  }
   ctx.restore()
 
-  // arête supérieure plus claire : donne du volume sans changer la silhouette
-  ctx.fillStyle = C_CACTUS_HI
-  for (const r of rects) ctx.fillRect(r.x, r.y, r.w, 2)
+  for (const r of rects) {
+    const radius = radiusOf(r)
+
+    // flanc droit dans l'ombre : donne du volume au cylindre
+    ctx.save()
+    ctx.beginPath()
+    ctx.roundRect(r.x, r.y, r.w, r.h, radius)
+    ctx.clip()
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.28)'
+    ctx.fillRect(r.x + r.w * 0.62, r.y, r.w * 0.38, r.h)
+
+    // nervures verticales
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.16)'
+    ctx.lineWidth = 1
+    for (let i = 1; i < 3; i++) {
+      const gx = Math.round(r.x + (r.w * i) / 3) + 0.5
+      ctx.beginPath()
+      ctx.moveTo(gx, r.y + 2)
+      ctx.lineTo(gx, r.y + r.h - 2)
+      ctx.stroke()
+    }
+    ctx.restore()
+
+    // arête éclairée à gauche
+    ctx.fillStyle = C_CACTUS_HI
+    ctx.beginPath()
+    ctx.roundRect(r.x + 1, r.y + 2, Math.max(1.5, r.w * 0.16), Math.max(2, r.h - 5), 1)
+    ctx.fill()
+
+    // épines : de simples traits, seulement sur les segments assez hauts
+    // Épines tracées vers l'intérieur : elles ne doivent jamais dépasser de la
+    // boîte, sinon le joueur verrait une collision là où il n'y en a pas.
+    if (r.h > 20) {
+      ctx.strokeStyle = 'rgba(214, 245, 233, 0.45)'
+      ctx.lineWidth = 1
+      for (let y = r.y + 7; y < r.y + r.h - 5; y += 9) {
+        const yy = Math.round(y) + 0.5
+        ctx.beginPath()
+        ctx.moveTo(r.x + 0.5, yy)
+        ctx.lineTo(r.x + 3, yy - 2)
+        ctx.moveTo(r.x + r.w - 0.5, yy + 4)
+        ctx.lineTo(r.x + r.w - 3, yy + 2)
+        ctx.stroke()
+      }
+    }
+  }
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -199,16 +339,29 @@ const DodoGame = ({ onClose }: Props) => {
     ctx.fillStyle = sky
     ctx.fillRect(0, 0, CW, CH)
 
-    // étoiles, trois plans de parallaxe
     const off = groundOffsetRef.current
+
+    // étoiles, chacune sur son propre plan
     ctx.fillStyle = C_STAR
     for (const st of starsRef.current) {
       const sx = ((st.x + off * st.depth) % CW + CW) % CW
       ctx.fillRect(sx, st.y, st.r, st.r)
     }
 
-    // dunes lointaines
-    drawDunes(ctx, -off * 0.35)
+    drawMoon(ctx)
+
+    // lueur d'horizon, juste au-dessus du sol
+    const haze = ctx.createLinearGradient(0, GROUND_Y - 70, 0, GROUND_Y)
+    haze.addColorStop(0, 'rgba(105, 227, 255, 0)')
+    haze.addColorStop(1, 'rgba(105, 227, 255, 0.09)')
+    ctx.fillStyle = haze
+    ctx.fillRect(0, GROUND_Y - 70, CW, 70)
+
+    // reliefs, du plus lointain au plus proche
+    drawMesas(ctx, -off * 0.18)
+    drawDunes(ctx, -off * 0.34, C_DUNE_FAR, 34, 130)
+    drawDunes(ctx, -off * 0.55, C_DUNE_MID, 24, 95)
+    drawDunes(ctx, -off * 0.78, C_DUNE_NEAR, 14, 70)
 
     // gravier défilant
     ctx.fillStyle = C_GRIT
@@ -227,8 +380,16 @@ const DodoGame = ({ onClose }: Props) => {
     ctx.fillRect(0, GROUND_Y, CW, 2)
     ctx.restore()
 
+    drawScrub(ctx, off)
+
     // obstacles
     for (const obs of obstaclesRef.current) drawObstacle(ctx, obs)
+
+    // À l'arrêt, un léger balancement vertical : le dodo respire au lieu
+    // d'être posé comme une image.
+    const idleBob = phaseRef.current === 'idle'
+      ? Math.sin(frameCountRef.current / 13) * 2.5
+      : 0
 
     // ombre au sol : elle rétrécit à mesure que le dodo s'élève
     const lift = dodoYRef.current
@@ -246,7 +407,7 @@ const DodoGame = ({ onClose }: Props) => {
     const flash = dead && Math.floor(deadFlashRef.current / 6) % 2 === 1
     if (!flash) {
       const sprite = imgsRef.current[spriteIdxRef.current]
-      const drawY  = GROUND_Y - DODO_H - dodoYRef.current
+      const drawY  = GROUND_Y - DODO_H - dodoYRef.current + idleBob
       if (sprite?.complete) ctx.drawImage(sprite, DODO_X, drawY, DODO_W, DODO_H)
     }
 
@@ -297,6 +458,16 @@ const DodoGame = ({ onClose }: Props) => {
     let rafId: number
 
     const loop = () => {
+      // Écran d'accueil : rien n'est en jeu, mais la scène doit vivre — le
+      // décor dérive doucement et le dodo piétine sur place.
+      if (phaseRef.current === 'idle') {
+        frameCountRef.current++
+        groundOffsetRef.current -= 1.1
+        if (frameCountRef.current % 16 === 0) {
+          spriteIdxRef.current = (spriteIdxRef.current + 1) % 3
+        }
+      }
+
       if (phaseRef.current === 'playing') {
         frameCountRef.current++
         speedRef.current     += 0.002
@@ -327,6 +498,7 @@ const DodoGame = ({ onClose }: Props) => {
           obstaclesRef.current.push({
             x:     CW + 10,
             shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+            seed:  Math.random(),
           })
           nextObsInRef.current = Math.floor(
             Math.max(45, 90 - scoreRef.current * 0.08) + Math.random() * 50,
