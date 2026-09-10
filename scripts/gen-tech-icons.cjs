@@ -1,24 +1,44 @@
 const si = require('simple-icons')
 const fs = require('fs')
 
-// Libellé affiché (celui de Dorian) → slug Simple Icons
-const STACK = [
-  ['React',       'siReact'],
-  ['TypeScript',  'siTypescript'],
-  ['Vue 3',       'siVuedotjs'],
-  ['Angular',     'siAngular'],
-  ['SCSS',        'siSass'],
-  ['Vite',        'siVite'],
-  ['Figma',       'siFigma'],
-  ['Node.js',     'siNodedotjs'],
-  ['Express',     'siExpress'],
-  ['Spring Boot', 'siSpringboot'],
-  ['MySQL',       'siMysql'],
-  ['SQLite',      'siSqlite'],
-  ['Strapi',      'siStrapi'],
-  ['Git',         'siGit'],
-  ['Claude Code', 'siClaudecode'],
-]
+// Libellé affiché (celui de Dorian) → slug Simple Icons, groupé par nature.
+// L'ordre de ce tableau est l'ordre d'affichage.
+const GROUPS = {
+  dev: [
+    ['React',       'siReact'],
+    ['TypeScript',  'siTypescript'],
+    ['Vue 3',       'siVuedotjs'],
+    ['Angular',     'siAngular'],
+    ['SCSS',        'siSass'],
+    ['Vite',        'siVite'],
+    ['Node.js',     'siNodedotjs'],
+    ['Express',     'siExpress'],
+    ['Spring Boot', 'siSpringboot'],
+    ['Maven',       'siApachemaven'],
+  ],
+  data: [
+    ['PostgreSQL',  'siPostgresql'],
+    ['MySQL',       'siMysql'],
+    ['SQLite',      'siSqlite'],
+    ['Supabase',    'siSupabase'],
+    ['Strapi',      'siStrapi'],
+    ['DBeaver',     'siDbeaver'],
+    ['Grafana',     'siGrafana'],
+  ],
+  tools: [
+    ['Git',         'siGit'],
+    ['GitLab',      'siGitlab'],
+    ['Jenkins',     'siJenkins'],
+    ['Jira',        'siJira'],
+    ['Confluence',  'siConfluence'],
+    ['Swagger',     'siSwagger'],
+    ['Figma',       'siFigma'],
+    ['Claude Code', 'siClaudecode'],
+  ],
+}
+
+const STACK = Object.entries(GROUPS).flatMap(([group, items]) =>
+  items.map(([label, key]) => ({ label, key, group })))
 
 // Luminance relative (WCAG) : sert à repérer les marques trop sombres pour
 // être lisibles sur le fond sombre du site.
@@ -57,7 +77,7 @@ const lighten = (hex, targetL = 0.62) => {
   return '#' + rgb.map(v => Math.round((v + m) * 255).toString(16).padStart(2, '0')).join('')
 }
 
-const entries = STACK.map(([label, key]) => {
+const entries = STACK.map(({ label, key, group }) => {
   const icon = si[key]
   if (!icon) throw new Error('icône introuvable : ' + key)
   const lum = luminance(icon.hex)
@@ -65,13 +85,14 @@ const entries = STACK.map(([label, key]) => {
   // Angular, Express, SQLite… ont une teinte de marque quasi noire : illisible
   // sur fond sombre. On l'éclaircit au lieu de la remplacer.
   const brand = tooDark ? lighten(icon.hex) : `#${icon.hex}`
-  return { label, slug: icon.slug, title: icon.title, brand, path: icon.path, dark: tooDark, source: icon.hex }
+  return { label, group, slug: icon.slug, title: icon.title, brand, path: icon.path, dark: tooDark, source: icon.hex }
 })
 
 const body = entries.map(e =>
   `  {
     label: ${JSON.stringify(e.label)},
     slug: ${JSON.stringify(e.slug)},
+    group: ${JSON.stringify(e.group)},
     // ${e.title}${e.dark ? ` — teinte officielle #${e.source} trop sombre sur fond noir, éclaircie` : ''}
     brand: ${JSON.stringify(e.brand)},
     path: ${JSON.stringify(e.path)},
@@ -90,10 +111,17 @@ const out = `/**
  * qu'à désigner la technologie.
  */
 
+/** Nature de l'outil — sert à regrouper l'affichage. */
+export type TechGroup = 'dev' | 'data' | 'tools'
+
+/** Ordre d'affichage des groupes. Les libellés vivent dans les traductions. */
+export const TECH_GROUPS: TechGroup[] = ['dev', 'data', 'tools']
+
 export interface TechIcon {
   /** Libellé affiché — pas toujours le nom officiel de la marque (ex. « Vue 3 »). */
   label: string
   slug: string
+  group: TechGroup
   /** Couleur officielle de la marque, ou couleur de repli si elle est illisible sur fond sombre. */
   brand: string
   /** Tracé SVG, sur une grille 24×24. */

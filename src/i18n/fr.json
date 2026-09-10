@@ -31,9 +31,12 @@
     "stats_eyebrow": "En chiffres",
     "featured_eyebrow": "Sélection",
     "stack_eyebrow": "Boîte à outils",
-    "stack_subtitle": "Les technologies avec lesquelles je travaille au quotidien.",
+    "stack_subtitle": "Ce avec quoi je construis, en alternance comme en projet personnel.",
     "cta_eyebrow": "Parlons-en",
-    "view_project": "Voir le projet"
+    "view_project": "Voir le projet",
+    "stack_group_dev": "Développement",
+    "stack_group_data": "Données & visualisation",
+    "stack_group_tools": "Outils & méthodes"
   },
   "about": {
     "title": "À propos",

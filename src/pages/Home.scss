@@ -382,12 +382,38 @@
   }
 }
 
+/* Trois blocs : Développement / Données / Outils */
+.stack-groups {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.6rem, 3.5vw, 2.4rem);
+  margin-top: clamp(2rem, 4vw, 2.8rem);
+}
+
+.stack-group {
+  &__title {
+    @include font-label;
+    color: $text-muted;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+
+    // filet qui prolonge le titre jusqu'au bord du bloc
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, $border-color, transparent);
+    }
+  }
+}
+
 .stack-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.5rem;
   list-style: none;
-  margin-top: 2rem;
 }
 
 /* Puce technologie : logo + libellé. La teinte officielle de la marque

@@ -10,7 +10,7 @@ import Parallax from '../components/motion/Parallax'
 import Magnetic from '../components/motion/Magnetic'
 import { ArrowRight } from '../components/icons'
 import TechLogo from '../components/TechLogo'
-import { TECH_ICONS, type TechIcon } from '../data/tech-icons'
+import { TECH_ICONS, TECH_GROUPS, type TechIcon } from '../data/tech-icons'
 import { EASE } from '../motion/variants'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
 import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
@@ -35,11 +35,10 @@ const FEATURED = FEATURED_IDS
   .filter(Boolean) as typeof PROJECTS
 
 /* ── Bandeau technos ───────────────────────────────────────────────────── */
-// Les deux lignes défilent en sens opposés. La frontière suit l'ordre de
-// TECH_ICONS : front et design d'abord, back et outillage ensuite.
-const FRONT_COUNT = 7
-const STACK_ROW_A = TECH_ICONS.slice(0, FRONT_COUNT)
-const STACK_ROW_B = TECH_ICONS.slice(FRONT_COUNT)
+// Le bandeau reste décoratif : une ligne pour le développement, une pour tout
+// le reste, les deux défilant en sens opposés.
+const STACK_ROW_A = TECH_ICONS.filter(t => t.group === 'dev')
+const STACK_ROW_B = TECH_ICONS.filter(t => t.group !== 'dev')
 
 const TECH_COUNT = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length
 
@@ -213,27 +212,38 @@ const Home = () => {
           <Marquee items={STACK_ROW_B} reverse />
         </div>
 
-        <ul className="stack-list" aria-label={t('home.stack_title')}>
-          {TECH_ICONS.map((tech, i) => (
-            <Reveal
-              key={tech.slug}
-              as="li"
-              direction="up"
-              amount={0.4}
-              delay={Math.min(i, 10) * 0.04}
-            >
-              {/* La couleur de marque n'est révélée qu'au survol : au repos la
-                  ligne reste dans la palette du site. */}
-              <span
-                className="stack-chip"
-                style={{ '--brand': tech.brand } as React.CSSProperties}
-              >
-                <TechLogo tech={tech} size={18} />
-                {tech.label}
-              </span>
-            </Reveal>
+        {/* Regroupé par nature : une liste plate de 25 puces se lirait comme
+            « des choses que j'ai touchées » plutôt que comme une façon de
+            travailler. */}
+        <div className="stack-groups">
+          {TECH_GROUPS.map(group => (
+            <section className="stack-group" key={group}>
+              <h3 className="stack-group__title">{t(`home.stack_group_${group}`)}</h3>
+
+              <ul className="stack-list">
+                {TECH_ICONS.filter(tech => tech.group === group).map((tech, i) => (
+                  <Reveal
+                    key={tech.slug}
+                    as="li"
+                    direction="up"
+                    amount={0.4}
+                    delay={Math.min(i, 8) * 0.04}
+                  >
+                    {/* La couleur de marque n'est révélée qu'au survol : au
+                        repos la ligne reste dans la palette du site. */}
+                    <span
+                      className="stack-chip"
+                      style={{ '--brand': tech.brand } as React.CSSProperties}
+                    >
+                      <TechLogo tech={tech} size={18} />
+                      {tech.label}
+                    </span>
+                  </Reveal>
+                ))}
+              </ul>
+            </section>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* ── Appel à l'action ───────────────────────────────────────────── */}
