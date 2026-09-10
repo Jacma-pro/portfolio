@@ -26,9 +26,12 @@ const GROUPS = {
     ['Grafana',     'siGrafana'],
   ],
   tools: [
+    // Versionnage → intégration → gestion → doc → design → assistant
     ['Git',         'siGit'],
+    ['GitHub',      'siGithub'],
     ['GitLab',      'siGitlab'],
     ['Jenkins',     'siJenkins'],
+    ['Docker',      'siDocker'],
     ['Jira',        'siJira'],
     ['Confluence',  'siConfluence'],
     ['Swagger',     'siSwagger'],
