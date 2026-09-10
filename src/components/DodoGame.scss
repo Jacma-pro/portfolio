@@ -84,14 +84,39 @@
     }
   }
 
+  // Écran d'arcade : le canvas, plus un voile de scanlines et une vignette
+  &__screen {
+    position: relative;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    border: 1px solid $border-color;
+    box-shadow:
+      inset 0 0 60px -20px rgba($dodo-blue, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.18) 0px,
+          rgba(0, 0, 0, 0.18) 1px,
+          transparent 1px,
+          transparent 3px
+        ),
+        radial-gradient(ellipse 80% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+    }
+  }
+
   &__canvas {
     display: block;
     image-rendering: pixelated;
     width: min(800px, 88vw);
     max-width: 800px;
     height: auto;
-    border-radius: var(--r-sm);
-    border: 1px solid $border-color;
     background: $bg-void;
   }
 
@@ -102,6 +127,9 @@
     margin: 0;
     letter-spacing: 0.08em;
     text-align: center;
+    // hauteur réservée : la consigne n'existe qu'en cours de partie, sans ça
+    // la boîte se redimensionnerait à chaque changement d'état
+    min-height: 1.2em;
   }
 }
 
