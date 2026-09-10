@@ -1,251 +1,235 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
+@use '../styles/motion/motion' as *;
 
-// ── Header ────────────────────────────────────────────────────────────────────
-.contact__header {
-  margin-bottom: 3rem;
-
-  h1 {
-    margin-bottom: 0.5rem;
-  }
-
-  .text-muted {
-    margin-bottom: 1rem;
-  }
+.page--contact {
+  padding-top: clamp(7rem, 14vh, 10rem);
 }
 
-.contact__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--fs-xs);
-  font-weight: $fw-semibold;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: $dodo-pink;
-  background: rgba($dodo-pink, 0.08);
-  border: 1px solid rgba($dodo-pink, 0.25);
-  border-radius: 999px;
-  padding: 0.3rem 0.85rem;
-  margin-bottom: 1rem;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: $dodo-pink;
-    animation: badge-pulse 2.2s ease-in-out infinite;
-  }
-}
-
-@keyframes badge-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.35; transform: scale(0.85); }
-}
-
-// ── Body ─────────────────────────────────────────────────────────
-.contact__body {
+.contact {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
   align-items: start;
 
-  @media (max-width: 720px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
   }
 
-  @media (max-width: 480px) {
-    gap: 1.5rem;
-  }
-}
+  /* ── Colonne gauche ───────────────────────────────────────────────── */
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 
-// ── Section titles ─────────────────────────────────────────────────────────────
-.contact__section-title {
-  font-size: var(--fs-base);
-  font-weight: $fw-semibold;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-// ── Cards ─────────────────────────────────────────────────────────────────────
-.contact__cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.contact__card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-
-  &--email:hover {
-    border-color: $dodo-pink;
-    color: $dodo-pink;
-    box-shadow: 0 6px 20px rgba($dodo-pink, 0.12);
-  }
-
-  &--github:hover {
-    border-color: $dodo-teal;
-    color: $dodo-teal;
-    box-shadow: 0 6px 20px rgba($dodo-teal, 0.12);
-  }
-
-  &--linkedin:hover {
-    border-color: $dodo-blue;
-    color: $dodo-blue;
-    box-shadow: 0 6px 20px rgba($dodo-blue, 0.12);
-  }
-}
-
-.contact__card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-
-  .contact__card--email & {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary)
-  }
-  .contact__card--email:hover & {
-    color: $dodo-pink;
-  }
-
-  .contact__card--github & {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary);
-  }
-  .contact__card--github:hover & {
-    color: $dodo-teal;
-  }
-
-  .contact__card--linkedin & {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary);
-  }
-
-  .contact__card--linkedin:hover & {
-    color: $dodo-blue;
-  }
-}
-
-.contact__card-label {
-  display: block;
-  font-size: var(--fs-xs);
-  font-weight: $fw-semibold;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
-  margin-bottom: 0.15rem;
-}
-
-.contact__card-value {
-  display: block;
-  font-size: var(--fs-sm);
-  font-weight: $fw-medium;
-  color: var(--text-primary);
-}
-
-// ── Form ──────────────────────────────────────────────────────────────────────
-.contact__form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.contact__field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-
-  label {
-    font-size: var(--fs-sm);
-    font-weight: $fw-semibold;
-    color: var(--text-primary);
-  }
-
-  input,
-  textarea {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: var(--font-primary);
-    font-size: var(--fs-base);
-    padding: 0.65rem 1rem;
-    outline: none;
-    resize: vertical;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-    &::placeholder {
-      color: var(--text-muted);
-    }
-
-    &:focus {
-      border-color: $dodo-pink;
-      box-shadow: 0 0 0 3px rgba($dodo-pink, 0.1);
+    @media (min-width: 901px) {
+      position: sticky;
+      top: 7rem;
     }
   }
+
+  &__title {
+    @include font-hero-title;
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    color: $text-primary;
+  }
+
+  &__subtitle {
+    @include font-subtitle;
+    color: $text-secondary;
+    max-width: 40ch;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    width: 100%;
+    margin-top: 1.4rem;
+  }
+
+  &__links-title {
+    @include font-label;
+    color: $text-muted;
+    margin-bottom: 0.4rem;
+  }
+
+  &__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    @include font-mono;
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    color: $text-faint;
+    margin-top: 0.8rem;
+  }
 }
 
-.contact__submit {
-  align-self: flex-end;
-  background: $dodo-blue;
-  border: none;
-  border-radius: 8px;
-  color: #121212;
-  cursor: pointer;
-  font-family: var(--font-primary);
-  font-size: var(--fs-sm);
-  font-weight: $fw-bold;
-  letter-spacing: 0.05em;
-  padding: 0.7rem 1.75rem;
-  text-transform: uppercase;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+/* ── Carte de lien ────────────────────────────────────────────────────── */
+.contact-card {
+  --accent: #{$dodo-blue};
 
-  @media (max-width: 480px) {
-    align-self: stretch;
-    padding: 0.85rem 1.5rem;
+  &[data-variant='github']   { --accent: #{$text-primary}; }
+  &[data-variant='linkedin'] { --accent: #{$dodo-teal}; }
+
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid $border-color;
+  background: rgba(255, 255, 255, 0.018);
+  @include transition(transform, border-color, background-color);
+
+  &:hover,
+  &:focus-visible {
+    transform: translateX(4px);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+
+    .contact-card__arrow { opacity: 1; transform: none; }
+    .contact-card__icon  { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
   }
 
-  &:hover:not(:disabled) {
-    background: $dodo-blue;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgba($dodo-blue, 0.3);
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--r-sm);
+    border: 1px solid $border-color;
+    background: rgba(255, 255, 255, 0.02);
+    color: $text-secondary;
+    @include transition(color, border-color);
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  &__label {
+    @include font-label;
+    font-size: 0.62rem;
+    color: $text-faint;
+  }
+
+  &__value {
+    font-size: 0.88rem;
+    color: $text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    margin-left: auto;
+    flex-shrink: 0;
+    color: var(--accent);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    @include transition(opacity, transform);
   }
 }
 
-.contact__feedback {
-  font-size: var(--fs-sm);
-  padding: 0.65rem 1rem;
-  border-radius: 8px;
+/* ── Formulaire ───────────────────────────────────────────────────────── */
+.contact-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+  border-radius: var(--r-xl);
+  border: 1px solid $border-color;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%, rgba($dodo-blue, 0.1), transparent 60%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(10px);
 
-  &--success {
-    color: $dodo-blue;
-    background: rgba($dodo-blue, 0.08);
-    border: 1px solid rgba($dodo-blue, 0.2);
+  &__dodo {
+    position: absolute;
+    top: -8px;
+    right: 1.4rem;
+    width: 46px;
+    height: 46px;
+    image-rendering: pixelated;
+    opacity: 0.28;
+    pointer-events: none;
+
+    @include motion-safe {
+      animation: float-slow 6.5s $ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    @include font-h2;
+    color: $text-primary;
+    margin-bottom: 0.2rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.42rem;
+
+    label {
+      @include font-label;
+      color: $text-muted;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.8rem 0.95rem;
+      border-radius: var(--r-md);
+      border: 1px solid $border-color;
+      background: rgba(7, 9, 13, 0.5);
+      color: $text-primary;
+      font-size: 0.92rem;
+      font-family: var(--font-primary);
+      @include transition(border-color, background-color, box-shadow);
+
+      &::placeholder { color: $text-faint; }
+
+      &:hover { border-color: $border-strong; }
+
+      &:focus {
+        outline: none;
+        border-color: rgba($dodo-blue, 0.6);
+        background: rgba($dodo-blue, 0.04);
+        box-shadow: 0 0 0 3px rgba($dodo-blue, 0.12);
+      }
+    }
+
+    input { min-height: 48px; }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+  }
+
+  &__submit {
+    align-self: flex-start;
+    margin-top: 0.3rem;
+  }
+
+  &__feedback {
+    @include font-caption;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--r-md);
+    border: 1px solid rgba($dodo-teal, 0.35);
+    background: rgba($dodo-teal, 0.08);
+    color: $dodo-teal;
   }
 }

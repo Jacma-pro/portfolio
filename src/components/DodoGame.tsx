@@ -141,11 +141,11 @@ const DodoGame = ({ onClose }: Props) => {
     if (!ctx) return
 
     // sky
-    ctx.fillStyle = '#0f0f1a'
+    ctx.fillStyle = '#070a10'
     ctx.fillRect(0, 0, CW, CH)
 
     // scrolling ground pebbles
-    ctx.fillStyle = '#2a2a3a'
+    ctx.fillStyle = '#1d2531'
     for (let i = 0; i < 25; i++) {
       const bx = ((i * 37 + groundOffsetRef.current) % CW + CW) % CW
       ctx.fillRect(bx, GROUND_Y + 6, 4, 2)
@@ -168,8 +168,8 @@ const DodoGame = ({ onClose }: Props) => {
     }
 
     // score HUD
-    ctx.fillStyle = '#888888'
-    ctx.font      = '700 16px monospace'
+    ctx.fillStyle = '#6b7688'
+    ctx.font      = '700 15px "JetBrains Mono", monospace'
     ctx.textAlign = 'right'
     const hiStr  = String(highScoreRef.current).padStart(5, '0')
     const scStr  = String(Math.floor(scoreRef.current)).padStart(5, '0')
@@ -178,15 +178,16 @@ const DodoGame = ({ onClose }: Props) => {
     // overlays
     ctx.textAlign = 'center'
     if (phaseRef.current === 'idle') {
-      ctx.fillStyle = '#E0E0E0'
-      ctx.font      = '700 18px monospace'
+      ctx.fillStyle = '#edf2f7'
+      ctx.font      = '500 17px "JetBrains Mono", monospace'
       ctx.fillText(translate('game.idle'), CW / 2, CH / 2 - 10)
     }
     if (phaseRef.current === 'dead') {
-      ctx.fillStyle = '#E0E0E0'
-      ctx.font      = '700 26px monospace'
+      ctx.fillStyle = '#69e3ff'
+      ctx.font      = '700 26px "JetBrains Mono", monospace'
       ctx.fillText(translate('game.gameover'), CW / 2, CH / 2 - 26)
-      ctx.font      = '16px monospace'
+      ctx.fillStyle = '#a8b3c4'
+      ctx.font      = '15px "JetBrains Mono", monospace'
       ctx.fillText(translate('game.dead'), CW / 2, CH / 2 + 8)
     }
   }, [])

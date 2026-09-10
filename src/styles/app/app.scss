@@ -1,51 +1,381 @@
+@use '../base/tokens'; // émet les variables CSS + les keyframes globales
 @use '../colors/colors' as *;
 @use '../fonts/font' as *;
+@use '../motion/motion' as *;
 
-* {
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; // Lenis pilote le scroll
+}
+
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: $bg-primary;
+  color: $text-primary;
   font-family: var(--font-primary);
   font-size: var(--fs-base);
   font-weight: $fw-regular;
+  line-height: $lh-loose;
   min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-// Layout principal
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: rgba($dodo-blue, 0.28);
+  color: $text-primary;
+}
+
+/* Focus visible cohérent partout */
+:focus-visible {
+  outline: 2px solid $dodo-blue;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Barre de scroll */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: $bg-void; }
+::-webkit-scrollbar-thumb {
+  background: $border-strong;
+  border-radius: 999px;
+  border: 2px solid $bg-void;
+
+  &:hover { background: rgba($dodo-blue, 0.5); }
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────── */
 .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  isolation: isolate;
 }
 
-// Pages
-.page {
+/* Le contenu de route occupe l'espace restant entre navbar et footer. */
+.layout__content {
   flex: 1;
-  padding: 3rem 2rem;
-  max-width: 960px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
 
-  h1 { @include font-h1; margin-bottom: 1rem; color: var(--text-primary); }
-  h2 { @include font-h2; margin-bottom: 0.75rem; color: var(--text-primary); }
-  h3 { @include font-h3; margin-bottom: 0.5rem; color: var(--text-primary); }
-  p  { @include font-body; }
+/* Décor de fond : aurores + grille + grain. Purement décoratif. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: $bg-primary;
 
-  @media (max-width: 640px) {
-    padding: 2rem 1.25rem;
-    h1 { font-size: var(--fs-xl); }
-    h2 { font-size: var(--fs-lg); }
+  &__aurora {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.32;
+    will-change: transform;
+
+    &--a {
+      width: 46vw;
+      height: 46vw;
+      top: -14vw;
+      left: -8vw;
+      background: radial-gradient(circle, rgba($dodo-blue, 0.85), transparent 68%);
+      @include motion-safe { animation: drift 26s $ease-in-out infinite; }
+    }
+
+    &--b {
+      width: 38vw;
+      height: 38vw;
+      top: 30vh;
+      right: -12vw;
+      background: radial-gradient(circle, rgba($dodo-pink, 0.6), transparent 68%);
+      opacity: 0.22;
+      @include motion-safe { animation: drift 34s $ease-in-out infinite reverse; }
+    }
+
+    &--c {
+      width: 42vw;
+      height: 42vw;
+      bottom: -16vw;
+      left: 22vw;
+      background: radial-gradient(circle, rgba($dodo-teal, 0.5), transparent 70%);
+      opacity: 0.18;
+      @include motion-safe { animation: drift 40s $ease-in-out infinite; }
+    }
+  }
+
+  &__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+    background-size: 68px 68px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+  }
+
+  /* Grain SVG inline — évite une requête réseau */
+  &__grain {
+    position: absolute;
+    inset: -50%;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  &__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 90% 70% at 50% 40%, transparent 40%, rgba($bg-void, 0.75) 100%);
   }
 }
 
-.text-muted {
-  @include font-body;
-  color: var(--text-muted);
+/* ── Conteneur de page ─────────────────────────────────────────────────── */
+.page {
+  flex: 1;
+  width: 100%;
+  padding: clamp(6rem, 12vh, 9rem) var(--gutter) clamp(5rem, 10vh, 8rem);
+  max-width: var(--max-w);
+  margin: 0 auto;
 }
 
+.page--wide {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
 
+/* ── Primitives partagées ──────────────────────────────────────────────── */
+
+/* Petit label mono en capitales, avec tiret — la signature du site */
+.eyebrow {
+  @include font-label;
+  color: $dodo-blue;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  &::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+}
+
+/* En-tête de section : label + titre + sous-titre */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  max-width: 62ch;
+
+  h2 {
+    @include font-h1;
+    color: $text-primary;
+  }
+
+  p {
+    @include font-subtitle;
+    color: $text-secondary;
+  }
+}
+
+/* Boutons */
+.btn {
+  @include transition(transform, background-color, border-color, color, box-shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-full);
+  font-family: var(--font-primary);
+  font-size: var(--fs-sm);
+  font-weight: $fw-semibold;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+
+  svg { flex-shrink: 0; }
+
+  &--primary {
+    background: $dodo-blue;
+    color: $bg-void;
+    box-shadow: 0 6px 30px -8px rgba($dodo-blue, 0.7);
+
+    &:hover,
+    &:focus-visible {
+      background: $dodo-blue-soft;
+      box-shadow: 0 10px 44px -10px rgba($dodo-blue, 0.9);
+    }
+  }
+
+  &--ghost {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: $border-strong;
+    color: $text-primary;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($dodo-blue, 0.6);
+      background: rgba($dodo-blue, 0.07);
+      color: $dodo-blue;
+    }
+  }
+
+  &--outline {
+    border-color: rgba($dodo-blue, 0.4);
+    color: $dodo-blue;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba($dodo-blue, 0.1);
+      border-color: $dodo-blue;
+    }
+  }
+}
+
+/* Lien fléché discret */
+.arrow-link {
+  @include transition(color, gap);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $dodo-blue;
+  font-size: var(--fs-sm);
+  font-weight: $fw-semibold;
+  cursor: pointer;
+
+  svg { @include transition(transform); }
+
+  &:hover,
+  &:focus-visible {
+    color: $dodo-blue-soft;
+    svg { transform: translateX(4px); }
+  }
+}
+
+/* Puce techno */
+.chip {
+  @include font-mono;
+  @include transition(background-color, border-color, color);
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba($dodo-blue, 0.22);
+  background: rgba($dodo-blue, 0.06);
+  color: rgba($dodo-blue, 0.92);
+  white-space: nowrap;
+}
+
+/* Badge de disponibilité avec point pulsé */
+.status-badge {
+  @include font-label;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.9rem 0.42rem 0.75rem;
+  border-radius: var(--r-full);
+  border: 1px solid rgba($dodo-teal, 0.3);
+  background: rgba($dodo-teal, 0.08);
+  color: $dodo-teal;
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 10px currentColor;
+    flex-shrink: 0;
+    @include motion-safe { animation: pulse-dot 2.4s $ease-in-out infinite; }
+  }
+}
+
+/* Filet de séparation qui s'estompe */
+.rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, $border-strong 20%, $border-strong 80%, transparent);
+}
+
+/* ── Utilitaires ───────────────────────────────────────────────────────── */
+.text-muted {
+  color: $text-muted;
+}
+
+.mono {
+  @include font-mono;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Texte en dégradé cyan → rose, réservé aux mots-clés */
+.grad-text {
+  background: linear-gradient(100deg, $dodo-blue 0%, $dodo-blue-soft 35%, $dodo-pink 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Respect global de prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

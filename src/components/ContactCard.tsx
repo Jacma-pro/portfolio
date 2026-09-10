@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react'
+import { ArrowUpRight } from './icons'
 
 interface ContactCardProps {
   href: string
   icon: ReactNode
   label: string
   value: string
-  variant?: 'default' | 'email'| 'github' | 'linkedin'
+  variant?: 'default' | 'email' | 'github' | 'linkedin'
   external?: boolean
 }
 
@@ -16,22 +17,22 @@ const ContactCard = ({
   value,
   variant = 'default',
   external = false,
-}: ContactCardProps) => {
-  const modifierClass = variant !== 'default' ? ` contact__card--${variant}` : ''
+}: ContactCardProps) => (
+  <a
+    href={href}
+    className="contact-card"
+    data-variant={variant}
+    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+  >
+    <span className="contact-card__icon">{icon}</span>
 
-  return (
-    <a
-      href={href}
-      className={`contact__card${modifierClass}`}
-      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-    >
-      <span className="contact__card-icon">{icon}</span>
-      <div>
-        <span className="contact__card-label">{label}</span>
-        <span className="contact__card-value">{value}</span>
-      </div>
-    </a>
-  )
-}
+    <span className="contact-card__body">
+      <span className="contact-card__label">{label}</span>
+      <span className="contact-card__value">{value}</span>
+    </span>
+
+    <ArrowUpRight size={16} className="contact-card__arrow" />
+  </a>
+)
 
 export default ContactCard

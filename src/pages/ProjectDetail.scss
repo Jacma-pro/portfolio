@@ -1,23 +1,98 @@
 @use '../styles/colors/colors' as *;
 @use '../styles/fonts/font' as *;
+@use '../styles/motion/motion' as *;
 
-.project-detail {
-  max-width: 800px;
+.page--detail {
+  padding-top: clamp(6.5rem, 13vh, 9rem);
+}
 
-  @media (max-width: 640px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.detail {
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0 0.9rem 0 0.7rem;
+    margin-bottom: 2rem;
+    border-radius: var(--r-full);
+    border: 1px solid $border-color;
+    font-size: 0.82rem;
+    color: $text-secondary;
+    @include transition(color, border-color, background-color);
+
+    svg { @include transition(transform); }
+
+    &:hover,
+    &:focus-visible {
+      color: $dodo-blue;
+      border-color: rgba($dodo-blue, 0.45);
+      background: rgba($dodo-blue, 0.06);
+
+      svg { transform: translateX(-3px); }
+    }
   }
 
-  &__back {
-    display: inline-block;
-    margin-bottom: 2rem;
-    color: $dodo-blue;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-family: $font-mono;
-    transition: opacity 0.15s;
+  &__missing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: clamp(3rem, 10vw, 6rem) 0;
+  }
 
-    &:hover { opacity: 0.7; }
+  /* ── Projet suivant ───────────────────────────────────────────────── */
+  &__next {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: clamp(3rem, 8vw, 5rem);
+    padding: clamp(1.5rem, 4vw, 2.2rem);
+    border-radius: var(--r-lg);
+    border: 1px solid $border-color;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.008));
+    @include transition(border-color, background-color, transform);
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba($dodo-blue, 0.45);
+      background: rgba($dodo-blue, 0.06);
+
+      .detail__next-arrow { transform: translateX(6px); }
+      .detail__next-title { color: $dodo-blue; }
+    }
+  }
+
+  &__next-label {
+    @include font-label;
+    color: $text-faint;
+    flex-shrink: 0;
+  }
+
+  &__next-title {
+    @include font-h3;
+    color: $text-primary;
+    margin-left: auto;
+    text-align: right;
+    @include transition(color);
+  }
+
+  &__next-arrow {
+    flex-shrink: 0;
+    color: $dodo-blue;
+    @include transition(transform);
+  }
+
+  @media (max-width: 620px) {
+    &__next {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    &__next-title {
+      margin-left: 0;
+      text-align: left;
+    }
   }
 }

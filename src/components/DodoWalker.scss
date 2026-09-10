@@ -1,16 +1,14 @@
 @use '../styles/colors/colors' as *;
-@use '../styles/fonts/font' as *;
+@use '../styles/motion/motion' as *;
 
+/* Le dodo se balade librement à l'intérieur de la pilule de navigation.
+   Le conteneur ne capte pas les clics : seul le sprite est cliquable. */
 .dodo-walker {
-  // Occupe tout l'espace entre le logo et les liens (position relative pour le sprite absolu)
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px; // même hauteur que la navbar
-  pointer-events: none; // ne bloque pas les clics sur les liens
+  inset: 0;
+  pointer-events: none;
   overflow: hidden;
-  z-index: 0;
+  z-index: 1;
 
   @media (max-width: 700px) {
     display: none;
@@ -19,11 +17,20 @@
   &__sprite {
     position: absolute;
     top: 0;
-    transition: left 0.12s linear, top 0.12s linear;
     pointer-events: auto;
     cursor: pointer;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px rgba($dodo-blue, 0.35));
+    transition: left 0.12s linear, top 0.12s linear, filter var(--dur-base) var(--ease-out-quart),
+      opacity var(--dur-base) var(--ease-out-quart);
+
+    &:hover {
+      opacity: 1;
+      filter: drop-shadow(0 0 12px rgba($dodo-blue, 0.9)) brightness(1.15);
+    }
 
     &--rainbow {
+      opacity: 1;
       animation: rainbow-hue 0.8s linear infinite;
     }
   }
@@ -37,6 +44,25 @@
 }
 
 @keyframes rainbow-hue {
-  0%   { filter: hue-rotate(0deg)   brightness(1.3) saturate(1.5) drop-shadow(0 0 3px hsl(0,   100%, 65%)); }
-  100% { filter: hue-rotate(360deg) brightness(1.3) saturate(1.5) drop-shadow(0 0 3px hsl(360, 100%, 65%)); }
+  0%   { filter: hue-rotate(0deg)   brightness(1.3) saturate(1.5) drop-shadow(0 0 6px hsl(0,   100%, 65%)); }
+  100% { filter: hue-rotate(360deg) brightness(1.3) saturate(1.5) drop-shadow(0 0 6px hsl(360, 100%, 65%)); }
+}
+
+/* Konami : l'écran entier prend une pulsation colorée pendant que le dodo file. */
+.konami-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba($dodo-pink, 0.22), transparent 70%);
+
+  @include motion-safe {
+    animation: konami-tint 2.6s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes konami-tint {
+  0%, 100% { opacity: 0.35; filter: hue-rotate(0deg); }
+  50%      { opacity: 0.9;  filter: hue-rotate(180deg); }
 }

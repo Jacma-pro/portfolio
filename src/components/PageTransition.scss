@@ -1,0 +1,42 @@
+@use '../styles/colors/colors' as *;
+
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: $z-transition;
+  pointer-events: none;
+  overflow: hidden;
+
+  &__panel {
+    position: absolute;
+    inset: 0;
+    // Entièrement opaque : c'est derrière ce panneau que la route bascule.
+    // La teinte cyan vient du dégradé lui-même, pas d'une transparence.
+    background: linear-gradient(100deg, $bg-void 0%, #0d1a22 58%, #16404f 100%);
+    border-right: 2px solid rgba($dodo-blue, 0.9);
+    box-shadow: 24px 0 80px -20px rgba($dodo-blue, 0.55);
+    will-change: transform;
+  }
+
+  &__runner {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -34px;
+    will-change: transform;
+  }
+
+  &__sprite {
+    width: 68px;
+    height: 68px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 14px rgba($dodo-blue, 0.85));
+  }
+
+  @media (max-width: 640px) {
+    &__sprite {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}

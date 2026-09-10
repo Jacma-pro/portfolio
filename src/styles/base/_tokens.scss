@@ -1,0 +1,127 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  Variables CSS globales — émises une seule fois, depuis app.scss.
+//  Les partials _colors / _font / _motion n'exposent que des variables Sass
+//  et des mixins : les importer ailleurs ne produit aucun CSS.
+// ─────────────────────────────────────────────────────────────────────────────
+
+@use '../colors/colors' as *;
+@use '../fonts/font' as *;
+@use '../motion/motion' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+// ── Export CSS variables ────────────────────────────────────────────────────
+:root {
+  color-scheme: dark;
+
+  --bg-void:      #{$bg-void};
+  --bg-primary:   #{$bg-primary};
+  --bg-secondary: #{$bg-secondary};
+  --bg-elevated:  #{$bg-elevated};
+  --bg-overlay:   #{$bg-overlay};
+
+  --text-primary:   #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-muted:     #{$text-muted};
+  --text-faint:     #{$text-faint};
+
+  --border-color:  #{$border-color};
+  --border-soft:   #{$border-soft};
+  --border-strong: #{$border-strong};
+
+  --accent-primary:   #{$accent-primary};
+  --accent-secondary: #{$accent-secondary};
+
+  --dodo-blue:      #{$dodo-blue};
+  --dodo-blue-deep: #{$dodo-blue-deep};
+  --dodo-blue-dim:  #{$dodo-blue-dim};
+  --dodo-blue-soft: #{$dodo-blue-soft};
+  --dodo-teal:      #{$dodo-teal};
+  --dodo-pink:      #{$dodo-pink};
+  --dodo-yellow:    #{$dodo-yellow};
+  --dodo-orange:    #{$dodo-orange};
+
+  --cat-front:  #{$cat-front};
+  --cat-back:   #{$cat-back};
+  --cat-mockup: #{$cat-mockup};
+
+  // Lueurs réutilisables
+  --glow-blue: 0 0 40px rgba(105, 227, 255, 0.25);
+  --glow-pink: 0 0 40px rgba(244, 156, 187, 0.20);
+
+  // Rayons
+  --r-sm:  6px;
+  --r-md:  12px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-full: 999px;
+
+  // Gouttière de page
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --max-w:  1240px;
+  --max-w-narrow: 760px;
+}
+
+// --- Export CSS variables ---
+:root {
+  --font-display: #{$font-display};
+  --font-primary: #{$font-primary};
+  --font-mono:    #{$font-mono};
+
+  --fs-xs:   #{$fs-xs};
+  --fs-sm:   #{$fs-sm};
+  --fs-base: #{$fs-base};
+  --fs-md:   #{$fs-md};
+  --fs-lg:   #{$fs-lg};
+  --fs-xl:   #{$fs-xl};
+  --fs-2xl:  #{$fs-2xl};
+  --fs-3xl:  #{$fs-3xl};
+  --fs-4xl:  #{$fs-4xl};
+
+  --fw-light:     #{$fw-light};
+  --fw-regular:   #{$fw-regular};
+  --fw-medium:    #{$fw-medium};
+  --fw-semibold:  #{$fw-semibold};
+  --fw-bold:      #{$fw-bold};
+  --fw-extrabold: #{$fw-extrabold};
+}
+
+:root {
+  --ease-out-expo:  #{$ease-out-expo};
+  --ease-out-quart: #{$ease-out-quart};
+  --ease-in-out:    #{$ease-in-out};
+  --ease-spring:    #{$ease-spring};
+
+  --dur-fast:   #{$dur-fast};
+  --dur-base:   #{$dur-base};
+  --dur-slow:   #{$dur-slow};
+  --dur-slower: #{$dur-slower};
+}
+
+/* ── Keyframes partagées ─────────────────────────────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -18px, 0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.82); }
+}
+
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(4%, -6%, 0) scale(1.08); }
+  66%  { transform: translate3d(-5%, 4%, 0) scale(0.96); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes scan-sweep {
+  from { transform: translate3d(-100%, 0, 0); }
+  to   { transform: translate3d(300%, 0, 0); }
+}
