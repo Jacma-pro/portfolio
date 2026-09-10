@@ -18,6 +18,18 @@ interface Props {
 // I just want to be clear about it, because I don't want to give the wrong impression about my skills,
 // and I want to be honest about the fact that I used an AI tool to help me with this part of the code.
 
+// ── Palette (alignée sur les tokens du site) ─────────────────────────────────
+const C_SKY_TOP   = '#070a10'
+const C_SKY_BOT   = '#0d1622'
+const C_STAR      = '#2b3a45'
+const C_DUNE      = '#111b26'
+const C_GROUND    = '#69e3ff'
+const C_GRIT      = '#1d2531'
+const C_CACTUS    = '#6FC3A9'
+const C_CACTUS_HI = '#a6e3ce'
+const C_HUD_DIM   = '#6b7688'
+const C_HUD_LIVE  = '#69e3ff'
+
 // ── Canvas dimensions ────────────────────────────────────────────────────────
 const CW         = 800
 const CH         = 230
@@ -51,22 +63,55 @@ interface Obstacle {
   shape: ObstacleShape
 }
 
+/** Pastille de fond, défilant plus lentement que le sol (parallaxe). */
+interface Star { x: number; y: number; r: number; depth: number }
+
+const makeStars = (): Star[] =>
+  Array.from({ length: 60 }, () => ({
+    x: Math.random() * CW,
+    y: Math.random() * (GROUND_Y - 30),
+    r: Math.random() < 0.8 ? 1 : 2,
+    // trois plans : plus l'étoile est petite, plus elle défile lentement
+    depth: 0.12 + Math.random() * 0.3,
+  }))
+
+/** Silhouette de dunes, une par plan, dessinée en dents de scie. */
+const drawDunes = (ctx: CanvasRenderingContext2D, offset: number) => {
+  ctx.fillStyle = C_DUNE
+  ctx.beginPath()
+  ctx.moveTo(0, GROUND_Y)
+  for (let x = 0; x <= CW; x += 20) {
+    const y = GROUND_Y - 26 - Math.sin((x + offset) / 90) * 12 - Math.sin((x + offset) / 37) * 5
+    ctx.lineTo(x, y)
+  }
+  ctx.lineTo(CW, GROUND_Y)
+  ctx.closePath()
+  ctx.fill()
+}
+
 type Phase = 'idle' | 'playing' | 'dead'
 
 // ── Helper: draw ONE obstacle ─────────────────────────────────────────────────
+// Les géométries ne bougent pas : les collisions se calculent sur les mêmes
+// rectangles, seul le rendu change.
 function drawObstacle(ctx: CanvasRenderingContext2D, obs: Obstacle) {
-  ctx.fillStyle = '#6FC3A9'
-  // trunk
-  ctx.fillRect(obs.x, GROUND_Y - obs.shape.h, obs.shape.w, obs.shape.h)
-  // arms
-  for (const arm of obs.shape.arms) {
-    ctx.fillRect(
-      obs.x + arm.dx,
-      GROUND_Y - obs.shape.h + arm.dy,
-      arm.w,
-      arm.h,
-    )
-  }
+  const rects = [
+    { x: obs.x, y: GROUND_Y - obs.shape.h, w: obs.shape.w, h: obs.shape.h },
+    ...obs.shape.arms.map(a => ({
+      x: obs.x + a.dx, y: GROUND_Y - obs.shape.h + a.dy, w: a.w, h: a.h,
+    })),
+  ]
+
+  ctx.save()
+  ctx.shadowColor = C_CACTUS
+  ctx.shadowBlur = 12
+  ctx.fillStyle = C_CACTUS
+  for (const r of rects) ctx.fillRect(r.x, r.y, r.w, r.h)
+  ctx.restore()
+
+  // arête supérieure plus claire : donne du volume sans changer la silhouette
+  ctx.fillStyle = C_CACTUS_HI
+  for (const r of rects) ctx.fillRect(r.x, r.y, r.w, 2)
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -95,6 +140,13 @@ const DodoGame = ({ onClose }: Props) => {
   const [displayScore, setDisplayScore] = useState(0)
   const [displayHi,    setDisplayHi]    = useState(() => parseInt(localStorage.getItem('dodo-hiscore') ?? '0'))
   const [finalScore,   setFinalScore]   = useState(0)
+
+  // ── Décor de fond ─────────────────────────────────────────────────────────
+  const starsRef = useRef<Star[]>([])
+  useEffect(() => {
+    // généré dans un effet : Math.random() pendant le rendu ne serait pas pur
+    starsRef.current = makeStars()
+  }, [])
 
   // ── Preload sprite images ──────────────────────────────────────────────────
   const imgsRef = useRef<HTMLImageElement[]>([])
@@ -140,23 +192,54 @@ const DodoGame = ({ onClose }: Props) => {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // sky
-    ctx.fillStyle = '#070a10'
+    // ciel en dégradé
+    const sky = ctx.createLinearGradient(0, 0, 0, GROUND_Y)
+    sky.addColorStop(0, C_SKY_TOP)
+    sky.addColorStop(1, C_SKY_BOT)
+    ctx.fillStyle = sky
     ctx.fillRect(0, 0, CW, CH)
 
-    // scrolling ground pebbles
-    ctx.fillStyle = '#1d2531'
+    // étoiles, trois plans de parallaxe
+    const off = groundOffsetRef.current
+    ctx.fillStyle = C_STAR
+    for (const st of starsRef.current) {
+      const sx = ((st.x + off * st.depth) % CW + CW) % CW
+      ctx.fillRect(sx, st.y, st.r, st.r)
+    }
+
+    // dunes lointaines
+    drawDunes(ctx, -off * 0.35)
+
+    // gravier défilant
+    ctx.fillStyle = C_GRIT
     for (let i = 0; i < 25; i++) {
-      const bx = ((i * 37 + groundOffsetRef.current) % CW + CW) % CW
+      const bx = ((i * 37 + off) % CW + CW) % CW
       ctx.fillRect(bx, GROUND_Y + 6, 4, 2)
     }
 
-    // ground line
-    ctx.fillStyle = '#6FC3A9'
+    // sol : bande sombre puis ligne lumineuse
+    ctx.fillStyle = C_SKY_TOP
+    ctx.fillRect(0, GROUND_Y + 2, CW, CH - GROUND_Y - 2)
+    ctx.save()
+    ctx.shadowColor = C_GROUND
+    ctx.shadowBlur = 14
+    ctx.fillStyle = C_GROUND
     ctx.fillRect(0, GROUND_Y, CW, 2)
+    ctx.restore()
 
     // obstacles
     for (const obs of obstaclesRef.current) drawObstacle(ctx, obs)
+
+    // ombre au sol : elle rétrécit à mesure que le dodo s'élève
+    const lift = dodoYRef.current
+    const shadowScale = Math.max(0.35, 1 - lift / 110)
+    ctx.save()
+    ctx.globalAlpha = 0.32 * shadowScale
+    ctx.fillStyle = '#000000'
+    ctx.beginPath()
+    ctx.ellipse(DODO_X + DODO_W / 2, GROUND_Y + 1, 24 * shadowScale, 4 * shadowScale, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
 
     // dodo sprite (flash when dead)
     const dead  = phaseRef.current === 'dead'
@@ -167,28 +250,45 @@ const DodoGame = ({ onClose }: Props) => {
       if (sprite?.complete) ctx.drawImage(sprite, DODO_X, drawY, DODO_W, DODO_H)
     }
 
-    // score HUD
-    ctx.fillStyle = '#6b7688'
-    ctx.font      = '700 15px "JetBrains Mono", monospace'
+    // HUD : le record reste en retrait, le score courant ressort
+    ctx.font      = '500 14px "JetBrains Mono", monospace'
     ctx.textAlign = 'right'
-    const hiStr  = String(highScoreRef.current).padStart(5, '0')
-    const scStr  = String(Math.floor(scoreRef.current)).padStart(5, '0')
-    ctx.fillText(`HI ${hiStr}  ${scStr}`, CW - 20, 28)
+    const hiStr = String(highScoreRef.current).padStart(5, '0')
+    const scStr = String(Math.floor(scoreRef.current)).padStart(5, '0')
+    ctx.fillStyle = C_HUD_DIM
+    ctx.fillText(`HI ${hiStr}`, CW - 92, 28)
+    ctx.fillStyle = C_HUD_LIVE
+    ctx.font      = '700 15px "JetBrains Mono", monospace'
+    ctx.fillText(scStr, CW - 20, 28)
 
-    // overlays
+    // surcouches — un voile assombri garde le texte lisible sur le décor
     ctx.textAlign = 'center'
-    if (phaseRef.current === 'idle') {
-      ctx.fillStyle = '#edf2f7'
-      ctx.font      = '500 17px "JetBrains Mono", monospace'
-      ctx.fillText(translate('game.idle'), CW / 2, CH / 2 - 10)
+    const veil = () => {
+      // assez sombre pour le texte, assez clair pour qu'on voie encore la scène
+      ctx.fillStyle = 'rgba(7, 10, 16, 0.55)'
+      ctx.fillRect(0, 0, CW, CH)
     }
+
+    if (phaseRef.current === 'idle') {
+      // Le titre « DODO RUN » est déjà au-dessus du canvas : on ne l'y répète pas.
+      veil()
+      ctx.fillStyle = '#edf2f7'
+      ctx.font      = '500 16px "JetBrains Mono", monospace'
+      ctx.fillText(translate('game.idle'), CW / 2, CH / 2 + 4)
+    }
+
     if (phaseRef.current === 'dead') {
-      ctx.fillStyle = '#69e3ff'
-      ctx.font      = '700 26px "JetBrains Mono", monospace'
-      ctx.fillText(translate('game.gameover'), CW / 2, CH / 2 - 26)
+      veil()
+      ctx.save()
+      ctx.shadowColor = C_HUD_LIVE
+      ctx.shadowBlur = 18
+      ctx.fillStyle = C_HUD_LIVE
+      ctx.font      = '700 28px "JetBrains Mono", monospace'
+      ctx.fillText(translate('game.gameover'), CW / 2, CH / 2 - 22)
+      ctx.restore()
       ctx.fillStyle = '#a8b3c4'
-      ctx.font      = '15px "JetBrains Mono", monospace'
-      ctx.fillText(translate('game.dead'), CW / 2, CH / 2 + 8)
+      ctx.font      = '14px "JetBrains Mono", monospace'
+      ctx.fillText(translate('game.dead'), CW / 2, CH / 2 + 14)
     }
   }, [])
 
@@ -317,17 +417,21 @@ const DodoGame = ({ onClose }: Props) => {
           </div>
         )}
 
-        <canvas
-          ref={canvasRef}
-          width={CW}
-          height={CH}
-          className="dodo-game__canvas"
-        />
+        {/* Le conteneur porte les scanlines : un <canvas> ne peut pas avoir
+            de pseudo-élément. */}
+        <div className="dodo-game__screen">
+          <canvas
+            ref={canvasRef}
+            width={CW}
+            height={CH}
+            className="dodo-game__canvas"
+          />
+        </div>
 
+        {/* Les états idle et dead affichent déjà leur consigne dans le canvas :
+            la répéter ici la ferait apparaître deux fois à l'écran. */}
         <p className="dodo-game__hint">
-          {phase === 'idle'    && t('game.idle')}
-          {phase === 'playing' && t('game.playing')}
-          {phase === 'dead'    && t('game.dead')}
+          {phase === 'playing' ? t('game.playing') : '\u00A0'}
         </p>
       </div>
     </div>
