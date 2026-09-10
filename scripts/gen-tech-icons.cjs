@@ -3,16 +3,35 @@ const fs = require('fs')
 
 // Libellé affiché (celui de Dorian) → slug Simple Icons, groupé par nature.
 // L'ordre de ce tableau est l'ordre d'affichage.
+// Simple Icons ne distribue pas le logo de Visual Studio Code (marque
+// Microsoft). Faute de tracé officiel, on utilise des chevrons génériques :
+// c'est un pictogramme, pas le logo de la marque, et c'est assumé comme tel.
+const MANUAL = {
+  vscode: {
+    slug: 'vscode',
+    title: 'VS Code',
+    hex: '007ACC',
+    generic: true,
+    path: 'M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6z',
+  },
+}
+
 const GROUPS = {
-  dev: [
+  frontend: [
     ['React',       'siReact'],
-    ['TypeScript',  'siTypescript'],
     ['Vue 3',       'siVuedotjs'],
     ['Angular',     'siAngular'],
+    ['TypeScript',  'siTypescript'],
     ['SCSS',        'siSass'],
     ['Vite',        'siVite'],
+  ],
+  backend: [
     ['Node.js',     'siNodedotjs'],
     ['Express',     'siExpress'],
+    ['NestJS',      'siNestjs'],
+    // Simple Icons ne porte pas Java (marque Oracle) : le logo OpenJDK en tient
+    // lieu, c'est l'implémentation de référence.
+    ['Java',        'siOpenjdk'],
     ['Spring Boot', 'siSpringboot'],
     ['Maven',       'siApachemaven'],
   ],
@@ -26,7 +45,9 @@ const GROUPS = {
     ['Grafana',     'siGrafana'],
   ],
   tools: [
-    // Versionnage → intégration → gestion → doc → design → assistant
+    ['VS Code',     MANUAL.vscode],
+    ['IntelliJ',    'siIntellijidea'],
+    ['WebStorm',    'siWebstorm'],
     ['Git',         'siGit'],
     ['GitHub',      'siGithub'],
     ['GitLab',      'siGitlab'],
@@ -38,6 +59,14 @@ const GROUPS = {
     ['Figma',       'siFigma'],
     ['Claude Code', 'siClaudecode'],
   ],
+}
+
+/** Couleur dodo portant chaque catégorie. */
+const GROUP_COLORS = {
+  frontend: 'blue',
+  backend: 'teal',
+  data: 'yellow',
+  tools: 'pink',
 }
 
 const STACK = Object.entries(GROUPS).flatMap(([group, items]) =>
@@ -55,6 +84,8 @@ const URLS = {
   vite:         'https://vite.dev',
   nodedotjs:    'https://nodejs.org',
   express:      'https://expressjs.com',
+  nestjs:       'https://nestjs.com',
+  openjdk:      'https://www.java.com',
   springboot:   'https://spring.io/projects/spring-boot',
   apachemaven:  'https://maven.apache.org',
   postgresql:   'https://www.postgresql.org',
@@ -64,6 +95,9 @@ const URLS = {
   strapi:       'https://strapi.io',
   dbeaver:      'https://dbeaver.io',
   grafana:      'https://grafana.com',
+  vscode:       'https://code.visualstudio.com',
+  intellijidea: 'https://www.jetbrains.com/idea',
+  webstorm:     'https://www.jetbrains.com/webstorm',
   git:          'https://git-scm.com',
   github:       'https://github.com',
   gitlab:       'https://about.gitlab.com',
@@ -114,7 +148,7 @@ const lighten = (hex, targetL = 0.62) => {
 }
 
 const entries = STACK.map(({ label, key, group }) => {
-  const icon = si[key]
+  const icon = typeof key === 'string' ? si[key] : key
   if (!icon) throw new Error('icône introuvable : ' + key)
   const lum = luminance(icon.hex)
   const tooDark = lum < 0.06
@@ -123,7 +157,10 @@ const entries = STACK.map(({ label, key, group }) => {
   const brand = tooDark ? lighten(icon.hex) : `#${icon.hex}`
   const url = URLS[icon.slug]
   if (!url) throw new Error('URL manquante pour ' + icon.slug)
-  return { label, group, slug: icon.slug, title: icon.title, brand, url, path: icon.path, dark: tooDark, source: icon.hex }
+  return {
+    label, group, slug: icon.slug, title: icon.title, brand, url,
+    path: icon.path, dark: tooDark, source: icon.hex, generic: !!icon.generic,
+  }
 })
 
 const body = entries.map(e =>
@@ -131,7 +168,7 @@ const body = entries.map(e =>
     label: ${JSON.stringify(e.label)},
     slug: ${JSON.stringify(e.slug)},
     group: ${JSON.stringify(e.group)},
-    url: ${JSON.stringify(e.url)},
+    url: ${JSON.stringify(e.url)},${e.generic ? '\n    // pictogramme générique : pas de logo de marque disponible\n    generic: true,' : ''}
     // ${e.title}${e.dark ? ` — teinte officielle #${e.source} trop sombre sur fond noir, éclaircie` : ''}
     brand: ${JSON.stringify(e.brand)},
     path: ${JSON.stringify(e.path)},
@@ -150,11 +187,19 @@ const out = `/**
  * qu'à désigner la technologie.
  */
 
-/** Nature de l'outil — sert à regrouper l'affichage. */
-export type TechGroup = 'dev' | 'data' | 'tools'
+/** Catégorie de compétence — reprend le découpage de la section Compétences. */
+export type TechGroup = 'frontend' | 'backend' | 'data' | 'tools'
 
-/** Ordre d'affichage des groupes. Les libellés vivent dans les traductions. */
-export const TECH_GROUPS: TechGroup[] = ['dev', 'data', 'tools']
+/** Couleur dodo portant chaque catégorie. */
+export type GroupColor = 'blue' | 'teal' | 'yellow' | 'pink'
+
+/** Ordre d'affichage. Les libellés visibles vivent dans les traductions. */
+export const TECH_GROUPS: { id: TechGroup; color: GroupColor }[] = [
+  { id: 'frontend', color: 'blue' },
+  { id: 'backend', color: 'teal' },
+  { id: 'data', color: 'yellow' },
+  { id: 'tools', color: 'pink' },
+]
 
 export interface TechIcon {
   /** Libellé affiché — pas toujours le nom officiel de la marque (ex. « Vue 3 »). */
@@ -167,6 +212,8 @@ export interface TechIcon {
   brand: string
   /** Tracé SVG, sur une grille 24×24. */
   path: string
+  /** Vrai quand aucun logo de marque n'existe et qu'on affiche un pictogramme. */
+  generic?: boolean
 }
 
 export const TECH_ICONS: TechIcon[] = [
@@ -178,3 +225,5 @@ fs.mkdirSync('scripts', { recursive: true })
 fs.writeFileSync('src/data/tech-icons.ts', out)
 console.log('écrit : src/data/tech-icons.ts —', entries.length, 'icônes')
 console.log('remplacées (trop sombres) :', entries.filter(e => e.dark).map(e => e.label).join(', ') || 'aucune')
+console.log('pictogrammes génériques :', entries.filter(e => e.generic).map(e => e.label).join(', ') || 'aucun')
+console.log('couleurs de catégorie :', JSON.stringify(GROUP_COLORS))
