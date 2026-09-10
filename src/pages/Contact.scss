@@ -139,7 +139,6 @@
 
 /* ── Formulaire ───────────────────────────────────────────────────────── */
 .contact-form {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
@@ -151,21 +150,6 @@
     radial-gradient(ellipse 80% 60% at 0% 0%, rgba($dodo-blue, 0.1), transparent 60%),
     linear-gradient(165deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
   backdrop-filter: blur(10px);
-
-  &__dodo {
-    position: absolute;
-    top: -8px;
-    right: 1.4rem;
-    width: 46px;
-    height: 46px;
-    image-rendering: pixelated;
-    opacity: 0.28;
-    pointer-events: none;
-
-    @include motion-safe {
-      animation: float-slow 6.5s $ease-in-out infinite;
-    }
-  }
 
   &__title {
     @include font-h2;

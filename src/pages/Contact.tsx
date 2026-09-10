@@ -6,7 +6,6 @@ import Reveal from '../components/motion/Reveal'
 import SplitText from '../components/motion/SplitText'
 import { Mail, GitHub, LinkedIn, MapPin, ArrowRight } from '../components/icons'
 import { EASE } from '../motion/variants'
-import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
 import './Contact.scss'
 
 type FormStatus = 'idle' | 'sent'
@@ -86,8 +85,6 @@ const Contact = () => {
         {/* ── Formulaire ───────────────────────────────────────────── */}
         <Reveal direction="left" className="contact__form-wrap" amount={0.1}>
           <form className="contact-form" onSubmit={handleSubmit}>
-            <img src={dodoSprite} alt="" className="contact-form__dodo" aria-hidden="true" />
-
             <h2 className="contact-form__title">{t('contact.form.title')}</h2>
 
             <div className="contact-form__field">
