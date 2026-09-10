@@ -356,6 +356,12 @@
     }
   }
 
+  &__logo {
+    flex-shrink: 0;
+    margin-right: 0.7rem;
+    opacity: 0.55;
+  }
+
   &__item {
     display: inline-flex;
     align-items: center;
@@ -382,6 +388,44 @@
   gap: 0.55rem;
   list-style: none;
   margin-top: 2rem;
+}
+
+/* Puce technologie : logo + libellé. La teinte officielle de la marque
+   (--brand, posée en style inline) n'apparaît qu'au survol, pour que la ligne
+   au repos reste dans la palette cyan du site. */
+.stack-chip {
+  @include font-mono;
+  @include transition(color, border-color, background-color, transform);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--r-sm);
+  border: 1px solid $border-color;
+  background: rgba(255, 255, 255, 0.025);
+  color: $text-secondary;
+  white-space: nowrap;
+  cursor: default;
+
+  svg {
+    flex-shrink: 0;
+    // au repos le logo est un cran plus discret que le libellé
+    color: $text-muted;
+    @include transition(color, transform);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    color: $text-primary;
+    border-color: color-mix(in srgb, var(--brand) 45%, transparent);
+    background: color-mix(in srgb, var(--brand) 9%, transparent);
+
+    svg {
+      color: var(--brand);
+      transform: scale(1.12);
+    }
+  }
 }
 
 /* ───────────────────────────────────────────────────────────────────────

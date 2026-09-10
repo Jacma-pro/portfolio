@@ -4,6 +4,16 @@ import { EASE, DUR } from '../../motion/variants'
 
 type Direction = 'up' | 'in' | 'left' | 'right' | 'scale'
 
+/** Balises autorisées — un <div> dans un <ul> serait du HTML invalide. */
+const TAGS = {
+  div: motion.div,
+  li: motion.li,
+  span: motion.span,
+  section: motion.section,
+}
+
+type Tag = keyof typeof TAGS
+
 const OFFSET: Record<Direction, Record<string, number>> = {
   up:    { y: 26 },
   in:    {},
@@ -22,6 +32,8 @@ interface Props {
   className?: string
   /** Rejoue l'animation à chaque passage. Par défaut : une seule fois. */
   repeat?: boolean
+  /** Balise rendue. `div` par défaut. */
+  as?: Tag
 }
 
 /** Enveloppe un bloc et le fait apparaître quand il entre dans le viewport. */
@@ -32,8 +44,10 @@ const Reveal = ({
   amount = 0.25,
   className,
   repeat = false,
+  as = 'div',
 }: Props) => {
   const reduced = useReducedMotion()
+  const Component = TAGS[as]
 
   // Le délai est porté par la variante : une transition définie au niveau
   // d'une variante l'emporte sur la prop `transition`.
@@ -54,7 +68,7 @@ const Reveal = ({
       }
 
   return (
-    <motion.div
+    <Component
       className={className}
       variants={variants}
       initial="hidden"
@@ -62,7 +76,7 @@ const Reveal = ({
       viewport={{ once: !repeat, amount }}
     >
       {children}
-    </motion.div>
+    </Component>
   )
 }
 

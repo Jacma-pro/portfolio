@@ -9,6 +9,8 @@ import Counter from '../components/motion/Counter'
 import Parallax from '../components/motion/Parallax'
 import Magnetic from '../components/motion/Magnetic'
 import { ArrowRight } from '../components/icons'
+import TechLogo from '../components/TechLogo'
+import { TECH_ICONS, type TechIcon } from '../data/tech-icons'
 import { EASE } from '../motion/variants'
 import photoMe from '../assets/aboutme/photo/me.jpeg'
 import dodoSprite from '../assets/dodo-frame/walk_right_0.png'
@@ -33,18 +35,21 @@ const FEATURED = FEATURED_IDS
   .filter(Boolean) as typeof PROJECTS
 
 /* ── Bandeau technos ───────────────────────────────────────────────────── */
-const STACK_ROW_A = ['React', 'TypeScript', 'Vue 3', 'Angular', 'SCSS', 'Vite', 'Figma']
-const STACK_ROW_B = ['Node.js', 'Express', 'Spring Boot', 'MySQL', 'SQLite', 'Strapi', 'Git']
+// Front d'un côté, back et outillage de l'autre : les deux lignes défilent en
+// sens opposés.
+const STACK_ROW_A = TECH_ICONS.slice(0, 7)
+const STACK_ROW_B = TECH_ICONS.slice(7)
 
 const TECH_COUNT = Array.from(new Set(PROJECTS.flatMap(p => p.techs))).length
 
-const Marquee = ({ items, reverse = false }: { items: string[]; reverse?: boolean }) => (
+const Marquee = ({ items, reverse = false }: { items: TechIcon[]; reverse?: boolean }) => (
   <div className="marquee" aria-hidden="true">
     <div className={`marquee__track${reverse ? ' marquee__track--reverse' : ''}`}>
       {/* Le contenu est doublé : la boucle se referme sans saut visible. */}
-      {[...items, ...items].map((item, i) => (
-        <span className="marquee__item" key={`${item}-${i}`}>
-          {item}
+      {[...items, ...items].map((tech, i) => (
+        <span className="marquee__item" key={`${tech.slug}-${i}`}>
+          <TechLogo tech={tech} size={28} className="marquee__logo" />
+          {tech.label}
           <span className="marquee__sep">◆</span>
         </span>
       ))}
@@ -208,8 +213,24 @@ const Home = () => {
         </div>
 
         <ul className="stack-list" aria-label={t('home.stack_title')}>
-          {[...STACK_ROW_A, ...STACK_ROW_B].map(tech => (
-            <li key={tech} className="chip">{tech}</li>
+          {TECH_ICONS.map((tech, i) => (
+            <Reveal
+              key={tech.slug}
+              as="li"
+              direction="up"
+              amount={0.4}
+              delay={Math.min(i, 10) * 0.04}
+            >
+              {/* La couleur de marque n'est révélée qu'au survol : au repos la
+                  ligne reste dans la palette du site. */}
+              <span
+                className="stack-chip"
+                style={{ '--brand': tech.brand } as React.CSSProperties}
+              >
+                <TechLogo tech={tech} size={18} />
+                {tech.label}
+              </span>
+            </Reveal>
           ))}
         </ul>
       </section>
