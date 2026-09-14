@@ -216,21 +216,28 @@ const Home = () => {
 
         <div className="skills">
           {/* ── Savoir-être ───────────────────────────────────────────── */}
-          <ul className="skills__soft">
-            {SOFT_SKILLS.map((skill, i) => (
-              <Reveal as="li" key={skill.key} delay={i * 0.06} amount={0.3}>
-                <article className={`soft-card soft-card--${skill.color}`}>
-                  <span className="soft-card__icon" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={skill.path} />
-                    </svg>
-                  </span>
-                  <h3 className="soft-card__name">{t(`home.soft_${skill.key}_label`)}</h3>
-                  <p className="soft-card__desc">{t(`home.soft_${skill.key}_desc`)}</p>
-                </article>
-              </Reveal>
-            ))}
-          </ul>
+          <section className="skills__soft">
+            <h3 className="skill-group__title">{t('home.soft_title')}</h3>
+
+            <ul className="soft-list">
+              {SOFT_SKILLS.map((skill, i) => (
+                <Reveal as="li" key={skill.key} delay={i * 0.06} amount={0.3}>
+                  <article className={`soft-item soft-item--${skill.color}`}>
+                    <p className="soft-item__story">{t(`home.soft_${skill.key}_story`)}</p>
+                    <div className="soft-item__meta">
+                      <span className="soft-item__tag">{t(`home.soft_${skill.key}_label`)}</span>
+                      {skill.project && (
+                        <Link to={`/projects/${skill.project}`} className="soft-item__link">
+                          {t('home.soft_proof')}
+                          <ArrowRight size={12} />
+                        </Link>
+                      )}
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </ul>
+          </section>
 
           {/* ── Savoir-faire, par catégorie ───────────────────────────── */}
           <div className="skills__hard">
