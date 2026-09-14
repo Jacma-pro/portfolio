@@ -13,7 +13,7 @@ import About from './pages/About'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 import Contact from './pages/Contact'
-import { scrollToTop } from './motion/lenis'
+import { scrollToTop, scrollToId } from './motion/lenis'
 
 /**
  * Instant où l'on bascule de route : le rideau couvre entièrement l'écran
@@ -38,10 +38,12 @@ const App = () => {
   }, [location, delayed.pathname, reduced])
 
   // Remonte en haut quand la page affichée change (donc pendant que le rideau
-  // couvre l'écran) : la nouvelle page n'apparaît jamais au milieu.
+  // couvre l'écran) : la nouvelle page n'apparaît jamais au milieu. Si l'URL
+  // vise une ancre (/about#workflow), on s'y place directement à la place.
   useEffect(() => {
-    scrollToTop(true)
-  }, [shown.pathname])
+    const id = shown.hash.slice(1)
+    if (!id || !scrollToId(id, true)) scrollToTop(true)
+  }, [shown.pathname, shown.hash])
 
   return (
     <div className="layout">

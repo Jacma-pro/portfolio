@@ -226,9 +226,9 @@ const Home = () => {
                     <p className="soft-item__story">{t(`home.soft_${skill.key}_story`)}</p>
                     <div className="soft-item__meta">
                       <span className="soft-item__tag">{t(`home.soft_${skill.key}_label`)}</span>
-                      {skill.project && (
-                        <Link to={`/projects/${skill.project}`} className="soft-item__link">
-                          {t('home.soft_proof')}
+                      {skill.proof && (
+                        <Link to={skill.proof.to} className="soft-item__link">
+                          {t(`home.soft_proof_${skill.proof.kind}`)}
                           <ArrowRight size={12} />
                         </Link>
                       )}

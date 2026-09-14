@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getLenis } from '../motion/lenis'
+import { scrollToId } from '../motion/lenis'
 import './AboutNav.scss'
 
 const SECTIONS = [
@@ -13,16 +13,6 @@ const SECTIONS = [
   { id: 'outside',    labelKey: 'about.outside_title' },
   { id: 'future',     labelKey: 'about.future_title' },
 ]
-
-const scrollTo = (id: string) => {
-  const el = document.getElementById(id)
-  if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY - 96
-  // Lenis pilote le scroll : passer par window.scrollTo se battrait avec lui.
-  const lenis = getLenis()
-  if (lenis) lenis.scrollTo(top, { duration: 1 })
-  else window.scrollTo({ top, behavior: 'smooth' })
-}
 
 const AboutNav = () => {
   const { t } = useTranslation()
@@ -51,7 +41,7 @@ const AboutNav = () => {
           <li key={id}>
             <button
               className={`about-nav__item${activeId === id ? ' about-nav__item--active' : ''}`}
-              onClick={() => scrollTo(id)}
+              onClick={() => scrollToId(id)}
               title={t(labelKey)}
             >
               <span className="about-nav__dot" aria-hidden="true" />
